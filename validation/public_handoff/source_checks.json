@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-03",
+  "scope": "Exported only exact Git index without private validation/images/data; original computer Python environment, not a second-computer acceptance.",
+  "exported_files": 148,
+  "frozen_files_checked": 112,
+  "controls": {
+    "tests_run": 118,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "success": true,
+    "scope": "现有模块规则和编排控制检查；真实网站与图片审核另见联调证据"
+  },
+  "network_generation_or_model_calls": 0,
+  "private_data_needed_for_control_checks": false,
+  "technical_retry": "First isolated run had a Windows WinError 5 on temporary-file rename in one test (118 tests, 0 failures, 1 error); unchanged rerun completed successfully. No frozen source changed."
+}

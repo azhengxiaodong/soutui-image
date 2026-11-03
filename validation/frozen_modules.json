@@ -1,0 +1,1140 @@
+{
+  "schema_version": 1,
+  "modules": {
+    "A": {
+      "status": "verified",
+      "evidence": [
+        "validation/stage_a/result.json",
+        "validation/stage_a/desktop_result.json"
+      ],
+      "files": {
+        "src/soutui_image/__init__.py": "4808d1ec7517efe9992394dbd82e2c03a017c9b7353542ef65ee24e3e96a0cb8",
+        "src/soutui_image/stage_a_inputs.py": "b6c4859d3a88294207f45610e719a05d33f3cea684170a044eeffc8d88e6141c",
+        "tests/test_stage_a_inputs.py": "05673acff70cf5a8771201e62c8baee14dc628bacf7f176d07e1292ea625f041",
+        "run_stage_a.py": "787e10e389f466e3f9a6c21da8851a8478af790edfcb6b8b8cc94f62a8823916"
+      }
+    },
+    "B": {
+      "status": "verified",
+      "evidence": [
+        "validation/stage_b/result.json",
+        "validation/stage_b/verified_run/project_1084307568457.json",
+        "validation/updates/U_H/gui_resume/result.json",
+        "validation/updates/U_H/runtime_021/result.json",
+        "validation/updates/U_H/actual_gui_021/smoke.json",
+        "validation/updates/U_H/portable_021/result.json",
+        "validation/updates/U_PROGRAM_021/result.json",
+        "validation/updates/published_client_021/result.json"
+      ],
+      "files": {
+        "src/soutui_image/browser_ui.py": "b023aa3bb59e8a525ae30a29b057b5cc4f9d241aa32352ae9a046418a6696faa",
+        "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+        "src/soutui_image/stage_b_projects.py": "5215104147c09d88f82b98a3efb881130f8c9834c29cca444bc5238667d27e3c",
+        "run_stage_b.py": "77eae7a6ac79866b0bddfe88712c63e5735acfd9c2c21abefd9e6c363dc16832",
+        "tests/test_stage_b_projects.py": "472e56bd5bd3aa642c8d665de8b84bf54ded1bb7979630f362366365f669ad5a",
+        "pyproject.toml": "bac4a7088e6029e3b417ca0e473bc8ee897e029825558e7e57ef64dcb7fe8716"
+      },
+      "revisions": [
+        {
+          "reason": "用户明确允许私有规则自动更新接入及重新验收；保留独立复核、600秒和三轮补生",
+          "previous_files": {
+            "src/soutui_image/browser_ui.py": "b023aa3bb59e8a525ae30a29b057b5cc4f9d241aa32352ae9a046418a6696faa",
+            "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+            "src/soutui_image/stage_b_projects.py": "5215104147c09d88f82b98a3efb881130f8c9834c29cca444bc5238667d27e3c",
+            "run_stage_b.py": "77eae7a6ac79866b0bddfe88712c63e5735acfd9c2c21abefd9e6c363dc16832",
+            "tests/test_stage_b_projects.py": "472e56bd5bd3aa642c8d665de8b84bf54ded1bb7979630f362366365f669ad5a",
+            "pyproject.toml": "d7abcd91619e2a1f843a73aeb8915dc943d923334b5a9313f5877c145313c839"
+          },
+          "evidence": [
+            "validation/updates/U_H/gui_resume/result.json",
+            "validation/updates/U_H/runtime_021/result.json",
+            "validation/updates/U_H/actual_gui_021/smoke.json",
+            "validation/updates/U_H/portable_021/result.json",
+            "validation/updates/U_PROGRAM_021/result.json",
+            "validation/updates/published_client_021/result.json"
+          ],
+          "prior_baseline": "validation\\updates\\final_frozen_before.json"
+        }
+      ],
+      "revision_limits": "仅pyproject版本和签名依赖声明变化，B源码字节不变；依赖打包与exe导入通过，本轮未重复网站上传验证",
+      "revalidation_20261103": {
+        "reason": "用户授权轻微差异、整体镜像、裁切裤长标准调整及独立检查并行",
+        "scope": "最终规则图二通过/图三拒绝；前一阶段图一与两张历史人工回归另按原版本登记；控制检查118项及本机exe清零启动",
+        "evidence": "validation/current_quality/release_acceptance.json"
+      }
+    },
+    "C": {
+      "status": "verified",
+      "evidence": [
+        "validation/stage_c/api_result.json",
+        "validation/stage_c/api_first_run.json",
+        "validation/stage_c/api_rerun.json"
+      ],
+      "files": {
+        "src/soutui_image/web_session.py": "88871cb3cce72bc3f9f81370c19c309aea5d87f4f932b34422cbaaa263776d41",
+        "src/soutui_image/stage_c_web_plan.py": "c2f6b833e8c647ae3d0625ef6080714ad58f2cc914df5ca66176b01fe136ffff",
+        "run_stage_c.py": "354fb8954ff91d34314574c2f0850292707b1e7617e82aa5c88218d65eebea15",
+        "tools/connect_existing_browser.py": "bbad4db5bf65cef1c7cf3706a78e11b63efe6c54cde95f7223bf7dfb441688d1",
+        "tools/probe_web_favorites.py": "1eb333a85c99f94db9d75d0eac8c0e7b969d23445a45fe893503d10408c22d6b",
+        "tests/test_stage_c_web_plan.py": "238d9199df7cbd0fec390715fb027cad8cdd92ad207639fca7169d2dcdc7b52e",
+        "tests/test_web_session.py": "2593f3aa54fe822ee6fd41b556532f52403df5c3886835ead345cd6a1d7a9497"
+      }
+    },
+    "B_API": {
+      "status": "verified",
+      "evidence": [
+        "validation/stage_b_api/first_upload.json",
+        "validation/stage_b_api/result.json"
+      ],
+      "files": {
+        "src/soutui_image/web_transport.py": "3e743c3f4b85b2a5985f5c1ebbf243ec32252e035111e71b96254f6c14edce20",
+        "src/soutui_image/stage_b_web_upload.py": "3b36058417ae61cd99ee0618d36bbd37ee20afd0013e31b5674c2491f4b158c5",
+        "run_stage_b_api.py": "a60f525517ab58f7b57aaf044afcd3c915a714672dcc8948ca7a1181b0e79e5b",
+        "tests/test_stage_b_web_upload.py": "3fbdff20feeb863ccae6e7ef9948c7fd6fdfd9ad4e42ff6ac8b7eb76eaee077f",
+        "tests/test_web_transport.py": "7622e911012529624eafd852976611850edb25d6bf9aed70d5f6e3797f457e7a"
+      }
+    },
+    "D": {
+      "status": "verified",
+      "evidence": [
+        "validation/stage_d/result.json",
+        "validation/stage_d/live_group01.json",
+        "validation/quality_v2/batch_verified/result.json",
+        "validation/quality_v2/g_prefix_live/result.json",
+        "validation/integration/code_checks.json",
+        "validation/updates/U_PIPELINE/prefix/result.json",
+        "validation/updates/U_PIPELINE/actual_batch/result.json"
+      ],
+      "files": {
+        "run_stage_d.py": "be84e36b4ca99479cf6ed5f083517a07d08d26d34d2f2d2ab5417f327d789801",
+        "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+        "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+        "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
+        "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+        "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
+        "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+        "src/soutui_image/review_record_validation.py": "818b30a8cfcfe41d3f0274743634b8fe75aa30ecd2d097a6f6971eb1fa24e763",
+        "src/soutui_image/stage_d_web_generation.py": "7d6657b4529ed430e2a7df46199f41b83cf28ba2f04b82169ecbc40c7fcbcb19",
+        "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+        "tests/test_quality_bridge.py": "d278e4566583a4079d267632e1df88613d6fd3bb994b888b47ad2fe3d2220b05",
+        "tests/test_stage_d_generation.py": "8c3b56a956dc9fed4bacffec0c0b654be3378b422bf32d8ab777d31013b3c810",
+        "tools/validate_quality_batch.py": "bf071705d6904f7c562ae9c0f8af2dc7ad8c85280cb0c4523b66274c0715e89b",
+        "src/soutui_image/review_schedule.py": "a07be55d4ed948be16ac73489ae6c983b94adef1d61c957dc959496658f9631f",
+        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69"
+      },
+      "revisions": [
+        {
+          "date": "2026-10-29T13:27:07.351815+00:00",
+          "reason": "用户要求修正袖口、门襟扣位及裤长漏判并更新实际软件包",
+          "authorization": "用户要求处理好并继续，延续既有Sol审核；最后7张及对应原图/裁剪另获明确云端Sol外发授权。Astra不用于35张批量",
+          "previous_files": {
+            "src/soutui_image/stage_d_web_generation.py": "ec6c0b0f7a8d2193754b11e274ad8aa9fe74f9d50b2d62f99239f3bbf2dd7aa4",
+            "run_stage_d.py": "be84e36b4ca99479cf6ed5f083517a07d08d26d34d2f2d2ab5417f327d789801",
+            "tests/test_stage_d_generation.py": "8c3b56a956dc9fed4bacffec0c0b654be3378b422bf32d8ab777d31013b3c810"
+          },
+          "prior_baseline": "validation\\history\\frozen_before_quality_release_20261029.json",
+          "evidence": [
+            "validation/quality_v2/batch_verified/result.json",
+            "validation/quality_v2/g_prefix_live/result.json"
+          ]
+        },
+        {
+          "reason": "用户明确允许私有规则上下文接入；旧合格图和三轮补生不变",
+          "previous_files": {
+            "run_stage_d.py": "be84e36b4ca99479cf6ed5f083517a07d08d26d34d2f2d2ab5417f327d789801",
+            "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+            "src/soutui_image/review_button_edges.py": "502fea1a2ef81ba82e96eea67472e09e4459496e741b60cf1701254b0bd855c3",
+            "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
+            "src/soutui_image/review_detail_locator.py": "fc00c3794a78414fc2022147d298b422726b7fbf156b1b043959c4ba13f1edfc",
+            "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
+            "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+            "src/soutui_image/review_record_validation.py": "0ebad23a5f55801c028c8ce44ab2f147e265386a08c79ad99adc7092ef6e552c",
+            "src/soutui_image/stage_d_web_generation.py": "f5ce5e3b4a80b3fc160a671005fd8656be5b1abceac060374058ae97df996c4a",
+            "src/soutui_image/stage_e_codex_review.py": "544301af921b8b32961078c2a584acfc87221c9f9e0fcef20a1ad1478e6bbb46",
+            "tests/test_quality_bridge.py": "d278e4566583a4079d267632e1df88613d6fd3bb994b888b47ad2fe3d2220b05",
+            "tests/test_stage_d_generation.py": "8c3b56a956dc9fed4bacffec0c0b654be3378b422bf32d8ab777d31013b3c810",
+            "tools/validate_quality_batch.py": "bf071705d6904f7c562ae9c0f8af2dc7ad8c85280cb0c4523b66274c0715e89b"
+          },
+          "evidence": [
+            "validation/updates/U_PIPELINE/prefix/result.json",
+            "validation/updates/U_PIPELINE/actual_batch/result.json"
+          ]
+        }
+      ],
+      "accepted_at": "2026-10-29T13:27:07.351815+00:00",
+      "scope": "旧规则计数门禁及原真实轮次只读回归，保留三轮上限；本次未新增网站提交",
+      "limits": "本次不新增生图。另一台真实电脑及两商品均完整九组未验收。模型仍可能漏判或误判，细微扣位独立诊断未稳定。",
+      "revalidation_20261103": {
+        "reason": "用户授权轻微差异、整体镜像、裁切裤长标准调整及独立检查并行",
+        "scope": "最终规则图二通过/图三拒绝；前一阶段图一与两张历史人工回归另按原版本登记；控制检查118项及本机exe清零启动",
+        "evidence": "validation/current_quality/release_acceptance.json"
+      }
+    },
+    "E": {
+      "status": "verified",
+      "evidence": [
+        "validation/stage_e/result.json",
+        "validation/stage_e/user_sample_results.json",
+        "validation/stage_e/live_group01_review.json",
+        "validation/stage_e_timeout600/result.json",
+        "validation/stage_e_timeout600/acceptance.json",
+        "validation/quality_v2/acceptance_policy5.json",
+        "validation/quality_v2/code_checks.json",
+        "validation/quality_v2/sol_suite_01/result.json",
+        "validation/quality_v2/review_resume_live/result.json",
+        "validation/quality_v2/batch_verified/result.json",
+        "validation/integration/code_checks.json",
+        "validation/updates/U_E_RUNTIME/result.json",
+        "validation/updates/U_PIPELINE/prefix/result.json",
+        "validation/updates/U_PIPELINE/actual_batch/result.json"
+      ],
+      "files": {
+        "run_stage_e.py": "f26b6e15cacc2730eaca62d6b91e83312a35dcdb57d843bf944959a801fd8e7f",
+        "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+        "src/soutui_image/quality_upgrade.py": "3014eba24736346135317cf1e1f83ff080bd10efd1fe0b61a3b302bcec7814f4",
+        "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+        "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
+        "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+        "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
+        "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+        "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+        "src/soutui_image/review_record_validation.py": "818b30a8cfcfe41d3f0274743634b8fe75aa30ecd2d097a6f6971eb1fa24e763",
+        "src/soutui_image/review_revision.py": "a1ab700f541a4baeb1104832ee4797fa02a14384bb1fa9212462fde8098388cf",
+        "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+        "src/soutui_image/stage_f_output_revision.py": "0894f06e9c37cb0b396d7986f199d170f8c683adc891f8096cfe55e794e31a8b",
+        "tests/test_quality_bridge.py": "d278e4566583a4079d267632e1df88613d6fd3bb994b888b47ad2fe3d2220b05",
+        "tests/test_quality_v2.py": "4573f1f4993808c81fbcd170c016a7d30a67b9ab0bf9fde97a3cb8847610000a",
+        "tests/test_review_checkpoints.py": "195e9a0e041414c5eb9f18cb5c9349d776d882d2fb105ecf091b70b10973c14b",
+        "tests/test_review_group_state.py": "f8ebb923d503d8096dff89ef68051ee2a9e2792af62bda372ed0b868f9d36487",
+        "tests/test_review_record_validation.py": "797f5427877d5e6597444a66fed7a78ec6e0e2544403227920452c1a3545591d",
+        "tests/test_review_revision.py": "f8ceaf3a59e970103e08b447c6c2f60217e3f25562042974676d6f0ef852383c",
+        "tests/test_stage_e_review.py": "0e799278919c8ae0b661762d95ece910ee96d7a977c0ba6713f09ae56914754f",
+        "tools/accept_current_scope.py": "19d16a6d0706f250337e8fdec60bb1d386dedd455b5036ec3d7cd984fa9269fd",
+        "tools/prepare_review_samples.py": "53aa6cdc432c3fcdc74776d3eb4983c797a5b0a62f30813867d9ae9a2fc808c7",
+        "tools/register_e_quality.py": "4c52e024cc6617b794dfdf6f0231849769e4225e164e16067fe30fe632443624",
+        "tools/validate_current_cases.py": "d6bb6dbdea94464807ede332e6670f5dba79c05983a6364d9444ca7913b53ac9",
+        "tools/validate_e_timeout600.py": "61f60d0d60e9e6b96c325d121319b493f5d01e38064e9ebec37759f4bf118a7d",
+        "tools/validate_positive_original.py": "2636c8f291efa883948ee8b665293ae975b240cbffd86a48c80c6a2721b79ee7",
+        "tools/validate_quality_batch.py": "bf071705d6904f7c562ae9c0f8af2dc7ad8c85280cb0c4523b66274c0715e89b",
+        "tools/validate_quality_v2.py": "fedefe288da2b4ae98737ab90beccbb82aa517d659c17551b3fb8a06904219df",
+        "tools/validate_review_resume.py": "c9ee06b8fc97482102aaee5932e5a0c541cb7fdee4d2f81867963c19f672626e",
+        "tools/validate_review_samples.py": "4c3c1cb169b4aa8025ba73eb95e528c6b45463a6a934a953a921b2857767842c",
+        "src/soutui_image/rule_runtime.py": "aa416a3c76c9d8806ea4acf766847d132d76f4873930656acb319926933374f5",
+        "tools/validate_external_rule_runtime.py": "94e82d3bcc1e384bf4de41616b2ee549d7069e9b1c5a8754ba92098cbf66d1d5",
+        "src/soutui_image/review_schedule.py": "a07be55d4ed948be16ac73489ae6c983b94adef1d61c957dc959496658f9631f",
+        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69"
+      },
+      "revisions": [
+        {
+          "date": "2026-10-28",
+          "reason": "_audit_once 默认 timeout 240 秒改为 600 秒",
+          "authorization": "用户明确同意延长并重新验收",
+          "previous_files": {
+            "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+            "src/soutui_image/stage_e_codex_review.py": "6826276ff9067cecbfa1fcd43ca913fb683411b2b5f339b92452092a57502a9d",
+            "src/soutui_image/review_group_state.py": "0d70025b0dcdacaac6e3ef0a47e17451a27996cd026d8720cfb1c1168bb9e9de",
+            "run_stage_e.py": "f26b6e15cacc2730eaca62d6b91e83312a35dcdb57d843bf944959a801fd8e7f",
+            "tools/prepare_review_samples.py": "53aa6cdc432c3fcdc74776d3eb4983c797a5b0a62f30813867d9ae9a2fc808c7",
+            "tools/validate_review_samples.py": "4c3c1cb169b4aa8025ba73eb95e528c6b45463a6a934a953a921b2857767842c",
+            "tests/test_stage_e_review.py": "0e799278919c8ae0b661762d95ece910ee96d7a977c0ba6713f09ae56914754f",
+            "tests/test_review_group_state.py": "f8ebb923d503d8096dff89ef68051ee2a9e2792af62bda372ed0b868f9d36487"
+          },
+          "prior_baseline": "validation/history/frozen_before_E_timeout600_authorized_20261028.json"
+        },
+        {
+          "date": "2026-10-29",
+          "reason": "用户报告袖口、门襟、扣位和裤长漏判；增加定位局部、四项检查和扣位分段复核",
+          "authorization": "用户的明确缺陷报告及三张样图的 Astra 对照审核授权；尚未扩展为整批 Astra 外发授权",
+          "previous_files": {
+            "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+            "src/soutui_image/stage_e_codex_review.py": "ef070c735d4da3113a01d5ed0b8ff3a305020e30153ef8bcbd5cfd7986083254",
+            "src/soutui_image/review_group_state.py": "0d70025b0dcdacaac6e3ef0a47e17451a27996cd026d8720cfb1c1168bb9e9de",
+            "run_stage_e.py": "f26b6e15cacc2730eaca62d6b91e83312a35dcdb57d843bf944959a801fd8e7f",
+            "tools/prepare_review_samples.py": "53aa6cdc432c3fcdc74776d3eb4983c797a5b0a62f30813867d9ae9a2fc808c7",
+            "tools/validate_review_samples.py": "4c3c1cb169b4aa8025ba73eb95e528c6b45463a6a934a953a921b2857767842c",
+            "tests/test_stage_e_review.py": "0e799278919c8ae0b661762d95ece910ee96d7a977c0ba6713f09ae56914754f",
+            "tests/test_review_group_state.py": "f8ebb923d503d8096dff89ef68051ee2a9e2792af62bda372ed0b868f9d36487",
+            "tools/validate_e_timeout600.py": "61f60d0d60e9e6b96c325d121319b493f5d01e38064e9ebec37759f4bf118a7d"
+          },
+          "prior_baseline": "validation/history/frozen_before_E_quality5_20261029.json",
+          "previous_source_snapshot": "validation/history/quality_v2_20261028/",
+          "evidence": "validation/quality_v2/acceptance_policy5.json"
+        },
+        {
+          "date": "2026-10-29T13:27:07.351815+00:00",
+          "reason": "用户要求修正袖口、门襟扣位及裤长漏判并更新实际软件包",
+          "authorization": "用户要求处理好并继续，延续既有Sol审核；最后7张及对应原图/裁剪另获明确云端Sol外发授权。Astra不用于35张批量",
+          "previous_files": {
+            "run_stage_e.py": "f26b6e15cacc2730eaca62d6b91e83312a35dcdb57d843bf944959a801fd8e7f",
+            "src/soutui_image/review_button_edges.py": "502fea1a2ef81ba82e96eea67472e09e4459496e741b60cf1701254b0bd855c3",
+            "src/soutui_image/review_detail_locator.py": "fc00c3794a78414fc2022147d298b422726b7fbf156b1b043959c4ba13f1edfc",
+            "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
+            "src/soutui_image/review_group_state.py": "0d70025b0dcdacaac6e3ef0a47e17451a27996cd026d8720cfb1c1168bb9e9de",
+            "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+            "src/soutui_image/review_record_validation.py": "0ebad23a5f55801c028c8ce44ab2f147e265386a08c79ad99adc7092ef6e552c",
+            "src/soutui_image/stage_e_codex_review.py": "eba47f12af815f05ebe534e06fb845739302a759ecefa0b329c89e7f1a663f69",
+            "tests/test_quality_v2.py": "d1b3d4ee4bf18f073c43e6805334fded0ec5f2df709acad673aabe1d2b226222",
+            "tests/test_review_group_state.py": "f8ebb923d503d8096dff89ef68051ee2a9e2792af62bda372ed0b868f9d36487",
+            "tests/test_review_record_validation.py": "797f5427877d5e6597444a66fed7a78ec6e0e2544403227920452c1a3545591d",
+            "tests/test_stage_e_review.py": "0e799278919c8ae0b661762d95ece910ee96d7a977c0ba6713f09ae56914754f",
+            "tools/accept_current_scope.py": "19d16a6d0706f250337e8fdec60bb1d386dedd455b5036ec3d7cd984fa9269fd",
+            "tools/prepare_review_samples.py": "53aa6cdc432c3fcdc74776d3eb4983c797a5b0a62f30813867d9ae9a2fc808c7",
+            "tools/register_e_quality.py": "4c52e024cc6617b794dfdf6f0231849769e4225e164e16067fe30fe632443624",
+            "tools/validate_current_cases.py": "d6bb6dbdea94464807ede332e6670f5dba79c05983a6364d9444ca7913b53ac9",
+            "tools/validate_e_timeout600.py": "61f60d0d60e9e6b96c325d121319b493f5d01e38064e9ebec37759f4bf118a7d",
+            "tools/validate_positive_original.py": "2636c8f291efa883948ee8b665293ae975b240cbffd86a48c80c6a2721b79ee7",
+            "tools/validate_quality_v2.py": "fedefe288da2b4ae98737ab90beccbb82aa517d659c17551b3fb8a06904219df",
+            "tools/validate_review_samples.py": "4c3c1cb169b4aa8025ba73eb95e528c6b45463a6a934a953a921b2857767842c"
+          },
+          "prior_baseline": "validation\\history\\frozen_before_quality_release_20261029.json",
+          "evidence": [
+            "validation/quality_v2/sol_suite_01/result.json",
+            "validation/quality_v2/review_resume_live/result.json",
+            "validation/quality_v2/batch_verified/result.json"
+          ]
+        },
+        {
+          "reason": "用户要求私有规则自动更新；文字与流程无损迁移到外部规则包",
+          "previous_files": {
+            "run_stage_e.py": "f26b6e15cacc2730eaca62d6b91e83312a35dcdb57d843bf944959a801fd8e7f",
+            "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+            "src/soutui_image/quality_upgrade.py": "cb7d7c6dffdc44d35a771110402e61d6c7805e506898dac4269155fded681620",
+            "src/soutui_image/review_button_edges.py": "502fea1a2ef81ba82e96eea67472e09e4459496e741b60cf1701254b0bd855c3",
+            "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
+            "src/soutui_image/review_detail_locator.py": "fc00c3794a78414fc2022147d298b422726b7fbf156b1b043959c4ba13f1edfc",
+            "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
+            "src/soutui_image/review_group_state.py": "22eb737eb713a80e40e305a10a63f12e89f72b6850435b4bd1afdff602798a03",
+            "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+            "src/soutui_image/review_record_validation.py": "0ebad23a5f55801c028c8ce44ab2f147e265386a08c79ad99adc7092ef6e552c",
+            "src/soutui_image/review_revision.py": "b88d4f652ed0dee042d39a001ae08cfe685b4a1d9bda00af5a5011d264fe5e8f",
+            "src/soutui_image/stage_e_codex_review.py": "544301af921b8b32961078c2a584acfc87221c9f9e0fcef20a1ad1478e6bbb46",
+            "src/soutui_image/stage_f_output_revision.py": "dee091fc79a76253ab63d973bdd2cd91f3a998adc96beccacf126e374c8ed326",
+            "tests/test_quality_bridge.py": "d278e4566583a4079d267632e1df88613d6fd3bb994b888b47ad2fe3d2220b05",
+            "tests/test_quality_v2.py": "d1b3d4ee4bf18f073c43e6805334fded0ec5f2df709acad673aabe1d2b226222",
+            "tests/test_review_checkpoints.py": "195e9a0e041414c5eb9f18cb5c9349d776d882d2fb105ecf091b70b10973c14b",
+            "tests/test_review_group_state.py": "f8ebb923d503d8096dff89ef68051ee2a9e2792af62bda372ed0b868f9d36487",
+            "tests/test_review_record_validation.py": "797f5427877d5e6597444a66fed7a78ec6e0e2544403227920452c1a3545591d",
+            "tests/test_review_revision.py": "f8ceaf3a59e970103e08b447c6c2f60217e3f25562042974676d6f0ef852383c",
+            "tests/test_stage_e_review.py": "0e799278919c8ae0b661762d95ece910ee96d7a977c0ba6713f09ae56914754f",
+            "tools/accept_current_scope.py": "19d16a6d0706f250337e8fdec60bb1d386dedd455b5036ec3d7cd984fa9269fd",
+            "tools/prepare_review_samples.py": "53aa6cdc432c3fcdc74776d3eb4983c797a5b0a62f30813867d9ae9a2fc808c7",
+            "tools/register_e_quality.py": "4c52e024cc6617b794dfdf6f0231849769e4225e164e16067fe30fe632443624",
+            "tools/validate_current_cases.py": "d6bb6dbdea94464807ede332e6670f5dba79c05983a6364d9444ca7913b53ac9",
+            "tools/validate_e_timeout600.py": "61f60d0d60e9e6b96c325d121319b493f5d01e38064e9ebec37759f4bf118a7d",
+            "tools/validate_positive_original.py": "2636c8f291efa883948ee8b665293ae975b240cbffd86a48c80c6a2721b79ee7",
+            "tools/validate_quality_batch.py": "bf071705d6904f7c562ae9c0f8af2dc7ad8c85280cb0c4523b66274c0715e89b",
+            "tools/validate_quality_v2.py": "fedefe288da2b4ae98737ab90beccbb82aa517d659c17551b3fb8a06904219df",
+            "tools/validate_review_resume.py": "c9ee06b8fc97482102aaee5932e5a0c541cb7fdee4d2f81867963c19f672626e",
+            "tools/validate_review_samples.py": "4c3c1cb169b4aa8025ba73eb95e528c6b45463a6a934a953a921b2857767842c"
+          },
+          "evidence": "validation/updates/U_E_RUNTIME/result.json"
+        },
+        {
+          "reason": "用户明确允许私有规则上下文接入；旧合格图和三轮补生不变",
+          "previous_files": {
+            "run_stage_e.py": "f26b6e15cacc2730eaca62d6b91e83312a35dcdb57d843bf944959a801fd8e7f",
+            "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+            "src/soutui_image/quality_upgrade.py": "cb7d7c6dffdc44d35a771110402e61d6c7805e506898dac4269155fded681620",
+            "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+            "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
+            "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+            "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
+            "src/soutui_image/review_group_state.py": "22eb737eb713a80e40e305a10a63f12e89f72b6850435b4bd1afdff602798a03",
+            "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+            "src/soutui_image/review_record_validation.py": "0ebad23a5f55801c028c8ce44ab2f147e265386a08c79ad99adc7092ef6e552c",
+            "src/soutui_image/review_revision.py": "b88d4f652ed0dee042d39a001ae08cfe685b4a1d9bda00af5a5011d264fe5e8f",
+            "src/soutui_image/stage_e_codex_review.py": "a68307d323a37eeb8d45957a8f34ba70ac1481e97feba82d56fcb048699c12c5",
+            "src/soutui_image/stage_f_output_revision.py": "dee091fc79a76253ab63d973bdd2cd91f3a998adc96beccacf126e374c8ed326",
+            "tests/test_quality_bridge.py": "d278e4566583a4079d267632e1df88613d6fd3bb994b888b47ad2fe3d2220b05",
+            "tests/test_quality_v2.py": "d1b3d4ee4bf18f073c43e6805334fded0ec5f2df709acad673aabe1d2b226222",
+            "tests/test_review_checkpoints.py": "195e9a0e041414c5eb9f18cb5c9349d776d882d2fb105ecf091b70b10973c14b",
+            "tests/test_review_group_state.py": "f8ebb923d503d8096dff89ef68051ee2a9e2792af62bda372ed0b868f9d36487",
+            "tests/test_review_record_validation.py": "797f5427877d5e6597444a66fed7a78ec6e0e2544403227920452c1a3545591d",
+            "tests/test_review_revision.py": "f8ceaf3a59e970103e08b447c6c2f60217e3f25562042974676d6f0ef852383c",
+            "tests/test_stage_e_review.py": "0e799278919c8ae0b661762d95ece910ee96d7a977c0ba6713f09ae56914754f",
+            "tools/accept_current_scope.py": "19d16a6d0706f250337e8fdec60bb1d386dedd455b5036ec3d7cd984fa9269fd",
+            "tools/prepare_review_samples.py": "53aa6cdc432c3fcdc74776d3eb4983c797a5b0a62f30813867d9ae9a2fc808c7",
+            "tools/register_e_quality.py": "4c52e024cc6617b794dfdf6f0231849769e4225e164e16067fe30fe632443624",
+            "tools/validate_current_cases.py": "d6bb6dbdea94464807ede332e6670f5dba79c05983a6364d9444ca7913b53ac9",
+            "tools/validate_e_timeout600.py": "61f60d0d60e9e6b96c325d121319b493f5d01e38064e9ebec37759f4bf118a7d",
+            "tools/validate_positive_original.py": "2636c8f291efa883948ee8b665293ae975b240cbffd86a48c80c6a2721b79ee7",
+            "tools/validate_quality_batch.py": "bf071705d6904f7c562ae9c0f8af2dc7ad8c85280cb0c4523b66274c0715e89b",
+            "tools/validate_quality_v2.py": "fedefe288da2b4ae98737ab90beccbb82aa517d659c17551b3fb8a06904219df",
+            "tools/validate_review_resume.py": "c9ee06b8fc97482102aaee5932e5a0c541cb7fdee4d2f81867963c19f672626e",
+            "tools/validate_review_samples.py": "4c3c1cb169b4aa8025ba73eb95e528c6b45463a6a934a953a921b2857767842c",
+            "src/soutui_image/rule_runtime.py": "aa416a3c76c9d8806ea4acf766847d132d76f4873930656acb319926933374f5",
+            "tools/validate_external_rule_runtime.py": "94e82d3bcc1e384bf4de41616b2ee549d7069e9b1c5a8754ba92098cbf66d1d5"
+          },
+          "evidence": [
+            "validation/updates/U_PIPELINE/prefix/result.json",
+            "validation/updates/U_PIPELINE/actual_batch/result.json"
+          ]
+        }
+      ],
+      "quality_scope": {
+        "policy_version": "2026-10-29.5",
+        "model": "gpt-6.1-sol",
+        "previous_35_outputs_rechecked": true,
+        "button_only_detection_verified": false,
+        "scope": "Sol三张用户样图整图校准，35张旧通过真实新版审核及阶段断点续跑；非独立准确率测试",
+        "limits": "本次不新增生图。另一台真实电脑及两商品均完整九组未验收。模型仍可能漏判或误判，细微扣位独立诊断未稳定。"
+      },
+      "accepted_at": "2026-10-29T13:27:07.351815+00:00",
+      "scope": "Sol三张用户样图整图校准，35张旧通过真实新版审核及阶段断点续跑；非独立准确率测试",
+      "limits": "本次不新增生图。另一台真实电脑及两商品均完整九组未验收。模型仍可能漏判或误判，细微扣位独立诊断未稳定。",
+      "revalidation_20261103": {
+        "reason": "用户授权轻微差异、整体镜像、裁切裤长标准调整及独立检查并行",
+        "scope": "最终规则图二通过/图三拒绝；前一阶段图一与两张历史人工回归另按原版本登记；控制检查118项及本机exe清零启动",
+        "evidence": "validation/current_quality/release_acceptance.json"
+      }
+    },
+    "F": {
+      "status": "verified",
+      "evidence": [
+        "validation/stage_f/first_save.json",
+        "validation/stage_f/result.json",
+        "validation/quality_v2/f_io_live/result.json",
+        "validation/quality_v2/batch_verified/result.json",
+        "validation/integration/code_checks.json",
+        "validation/updates/U_PIPELINE/prefix/result.json",
+        "validation/updates/U_PIPELINE/actual_batch/result.json"
+      ],
+      "files": {
+        "run_stage_f.py": "97ed1004c9a682a02ca944c6793f59c9174f18733f8933d36684085755838b4c",
+        "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+        "src/soutui_image/quality_upgrade.py": "3014eba24736346135317cf1e1f83ff080bd10efd1fe0b61a3b302bcec7814f4",
+        "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+        "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
+        "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+        "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
+        "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+        "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+        "src/soutui_image/review_record_validation.py": "818b30a8cfcfe41d3f0274743634b8fe75aa30ecd2d097a6f6971eb1fa24e763",
+        "src/soutui_image/review_revision.py": "a1ab700f541a4baeb1104832ee4797fa02a14384bb1fa9212462fde8098388cf",
+        "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+        "src/soutui_image/stage_f_output_revision.py": "0894f06e9c37cb0b396d7986f199d170f8c683adc891f8096cfe55e794e31a8b",
+        "src/soutui_image/stage_f_outputs.py": "cb93121563c1fd6bf3b54bbb2d81cdb9d8eace6c949c03f14549d1bf8bb90d17",
+        "tests/test_output_revision.py": "b369489b2cbf7c2909b47db2368926ef6a0f2d043a00195a98427b3b55ec615d",
+        "tests/test_stage_f_outputs.py": "65cc1ed11e3574e77e194bb740862c62af69b6e70f4481bfe7e69c8f6f81426b",
+        "tools/register_output_revision.py": "58982220a12d772d20e5d9775d0331186e285ce36388e498c4a4ad4bb2a49306",
+        "tools/validate_output_withdrawal.py": "95870429d010aab99e401012ff1c95ad08a33bcfeba517e00758ff1781541226",
+        "tools/validate_quality_batch.py": "bf071705d6904f7c562ae9c0f8af2dc7ad8c85280cb0c4523b66274c0715e89b",
+        "src/soutui_image/review_schedule.py": "a07be55d4ed948be16ac73489ae6c983b94adef1d61c957dc959496658f9631f",
+        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69"
+      },
+      "revisions": [
+        {
+          "date": "2026-10-29",
+          "reason": "质量规则升级：禁止旧通过继续累计；旧输出可恢复撤回本机待复核区",
+          "authorization": "用户要求修正漏判并处理完成，包含必要的旧保存状态修正",
+          "previous_files": {
+            "src/soutui_image/stage_f_outputs.py": "c660fdc8fb82494de95e3563e495048a3503207c8d7834d2845bf23925747a0c",
+            "run_stage_f.py": "97ed1004c9a682a02ca944c6793f59c9174f18733f8933d36684085755838b4c",
+            "tests/test_stage_f_outputs.py": "65cc1ed11e3574e77e194bb740862c62af69b6e70f4481bfe7e69c8f6f81426b"
+          },
+          "prior_baseline": "validation\\history\\frozen_before_F_quality5_20261029.json",
+          "evidence": "validation/quality_v2/f_io_live/result.json"
+        },
+        {
+          "date": "2026-10-29T13:27:07.351815+00:00",
+          "reason": "用户要求修正袖口、门襟扣位及裤长漏判并更新实际软件包",
+          "authorization": "用户要求处理好并继续，延续既有Sol审核；最后7张及对应原图/裁剪另获明确云端Sol外发授权。Astra不用于35张批量",
+          "previous_files": {
+            "run_stage_f.py": "97ed1004c9a682a02ca944c6793f59c9174f18733f8933d36684085755838b4c",
+            "src/soutui_image/review_record_validation.py": "0ebad23a5f55801c028c8ce44ab2f147e265386a08c79ad99adc7092ef6e552c",
+            "src/soutui_image/stage_f_output_revision.py": "dee091fc79a76253ab63d973bdd2cd91f3a998adc96beccacf126e374c8ed326",
+            "src/soutui_image/stage_f_outputs.py": "21e48004ebf6c6a070281adcfd01d239225a9d57bd5fa26306bf23d12682347b",
+            "tests/test_output_revision.py": "b369489b2cbf7c2909b47db2368926ef6a0f2d043a00195a98427b3b55ec615d",
+            "tests/test_stage_f_outputs.py": "65cc1ed11e3574e77e194bb740862c62af69b6e70f4481bfe7e69c8f6f81426b",
+            "tools/register_output_revision.py": "58982220a12d772d20e5d9775d0331186e285ce36388e498c4a4ad4bb2a49306",
+            "tools/validate_output_withdrawal.py": "95870429d010aab99e401012ff1c95ad08a33bcfeba517e00758ff1781541226"
+          },
+          "prior_baseline": "validation\\history\\frozen_before_quality_release_20261029.json",
+          "evidence": [
+            "validation/quality_v2/batch_verified/result.json"
+          ]
+        },
+        {
+          "reason": "用户明确允许私有规则上下文接入；旧合格图和三轮补生不变",
+          "previous_files": {
+            "run_stage_f.py": "97ed1004c9a682a02ca944c6793f59c9174f18733f8933d36684085755838b4c",
+            "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+            "src/soutui_image/quality_upgrade.py": "cb7d7c6dffdc44d35a771110402e61d6c7805e506898dac4269155fded681620",
+            "src/soutui_image/review_button_edges.py": "502fea1a2ef81ba82e96eea67472e09e4459496e741b60cf1701254b0bd855c3",
+            "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
+            "src/soutui_image/review_detail_locator.py": "fc00c3794a78414fc2022147d298b422726b7fbf156b1b043959c4ba13f1edfc",
+            "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
+            "src/soutui_image/review_group_state.py": "22eb737eb713a80e40e305a10a63f12e89f72b6850435b4bd1afdff602798a03",
+            "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+            "src/soutui_image/review_record_validation.py": "0ebad23a5f55801c028c8ce44ab2f147e265386a08c79ad99adc7092ef6e552c",
+            "src/soutui_image/review_revision.py": "b88d4f652ed0dee042d39a001ae08cfe685b4a1d9bda00af5a5011d264fe5e8f",
+            "src/soutui_image/stage_e_codex_review.py": "544301af921b8b32961078c2a584acfc87221c9f9e0fcef20a1ad1478e6bbb46",
+            "src/soutui_image/stage_f_output_revision.py": "dee091fc79a76253ab63d973bdd2cd91f3a998adc96beccacf126e374c8ed326",
+            "src/soutui_image/stage_f_outputs.py": "21e48004ebf6c6a070281adcfd01d239225a9d57bd5fa26306bf23d12682347b",
+            "tests/test_output_revision.py": "b369489b2cbf7c2909b47db2368926ef6a0f2d043a00195a98427b3b55ec615d",
+            "tests/test_stage_f_outputs.py": "65cc1ed11e3574e77e194bb740862c62af69b6e70f4481bfe7e69c8f6f81426b",
+            "tools/register_output_revision.py": "58982220a12d772d20e5d9775d0331186e285ce36388e498c4a4ad4bb2a49306",
+            "tools/validate_output_withdrawal.py": "95870429d010aab99e401012ff1c95ad08a33bcfeba517e00758ff1781541226",
+            "tools/validate_quality_batch.py": "bf071705d6904f7c562ae9c0f8af2dc7ad8c85280cb0c4523b66274c0715e89b"
+          },
+          "evidence": [
+            "validation/updates/U_PIPELINE/prefix/result.json",
+            "validation/updates/U_PIPELINE/actual_batch/result.json"
+          ]
+        }
+      ],
+      "revision_scope": {
+        "real_image_copies": 35,
+        "user_original_outputs_moved": true,
+        "whole_reaudit_completed": true,
+        "scope": "真实35张旧图按原字节留存、新版通过逐张恢复、九组映射与去重"
+      },
+      "accepted_at": "2026-10-29T13:27:07.351815+00:00",
+      "scope": "真实35张旧图按原字节留存、新版通过逐张恢复、九组映射与去重",
+      "limits": "本次不新增生图。另一台真实电脑及两商品均完整九组未验收。模型仍可能漏判或误判，细微扣位独立诊断未稳定。",
+      "revalidation_20261103": {
+        "reason": "用户授权轻微差异、整体镜像、裁切裤长标准调整及独立检查并行",
+        "scope": "最终规则图二通过/图三拒绝；前一阶段图一与两张历史人工回归另按原版本登记；控制检查118项及本机exe清零启动",
+        "evidence": "validation/current_quality/release_acceptance.json"
+      }
+    },
+    "DESKTOP_CONNECT": {
+      "status": "verified",
+      "scope": "现有 Edge 会话连接、仅本站读取、DPAPI 本机保存及真实文本/DIB 保护；其他格式与浏览器版本未单独验收",
+      "evidence": [
+        "validation/package_connection/clipboard_roundtrip.json",
+        "validation/package_connection/native_variant/connection_result.json",
+        "validation/package_connection/final_native/connection_result.json"
+      ],
+      "files": {
+        "src/soutui_image/browser_connection.py": "7a9c2fb8090e2222001eb2f1e2bd14088c5c19515dc485a8aea391659da7a968",
+        "src/soutui_image/session_bridge.py": "e879d3dabf86cd5371bf358927aa29fde7e9904547b996a9c4b73f686b6ae81a",
+        "src/soutui_image/clipboard_transfer.py": "9d485d85d4ad77443145e1b1cca28076888cd9908df6162b471799a4eb2d78b9",
+        "tools/validate_clipboard_transfer.py": "fb9c4c10f9d9b3eb9c6ceaf058a724e5215f8ff74fff898484883e5729a7d95f",
+        "src/soutui_image/browser_ui.py": "b023aa3bb59e8a525ae30a29b057b5cc4f9d241aa32352ae9a046418a6696faa",
+        "src/soutui_image/web_session.py": "88871cb3cce72bc3f9f81370c19c309aea5d87f4f932b34422cbaaa263776d41",
+        "tools/connect_existing_browser.py": "bbad4db5bf65cef1c7cf3706a78e11b63efe6c54cde95f7223bf7dfb441688d1"
+      }
+    },
+    "G_PIPELINE": {
+      "status": "verified",
+      "accepted_at": "2026-10-29T13:27:07.351815+00:00",
+      "scope": "35张旧通过升级、54张旧非通过证据保留、原任务及补生次数不改；前缀重复执行不新生图",
+      "limits": "本次不新增生图。另一台真实电脑及两商品均完整九组未验收。模型仍可能漏判或误判，细微扣位独立诊断未稳定。",
+      "evidence": [
+        "validation/integration/full_product_after_multi.json",
+        "validation/integration/multi_product_row01.json",
+        "validation/integration/code_checks.json",
+        "validation/pipeline_error_check/result.json",
+        "validation/quality_v2/g_prefix_live/result.json",
+        "validation/quality_v2/batch_verified/result.json",
+        "validation/updates/U_PIPELINE/prefix/result.json",
+        "validation/updates/U_PIPELINE/actual_batch/result.json",
+        "validation/updates/U_H/gui_resume/result.json",
+        "validation/updates/U_H/runtime_021/result.json",
+        "validation/updates/U_H/actual_gui_021/smoke.json",
+        "validation/updates/U_H/portable_021/result.json",
+        "validation/updates/U_PROGRAM_021/result.json",
+        "validation/updates/published_client_021/result.json"
+      ],
+      "files": {
+        "main.py": "5f52ace85a6d1652f31bea6604ae06dacf88be37ed74580f6f8e611cf2da32d7",
+        "run_pipeline.py": "8e5da4cafec658fef44710dc446ae2f58c15762f817cb3a9f5eb7655937c85a0",
+        "src/soutui_image/__init__.py": "4808d1ec7517efe9992394dbd82e2c03a017c9b7353542ef65ee24e3e96a0cb8",
+        "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+        "src/soutui_image/pipeline.py": "0111c422645b3e27f305e1a410a5b0b4e76bfd4cf677002b41fa15afa346fcbb",
+        "src/soutui_image/quality_upgrade.py": "3014eba24736346135317cf1e1f83ff080bd10efd1fe0b61a3b302bcec7814f4",
+        "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+        "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
+        "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+        "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
+        "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+        "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+        "src/soutui_image/review_record_validation.py": "818b30a8cfcfe41d3f0274743634b8fe75aa30ecd2d097a6f6971eb1fa24e763",
+        "src/soutui_image/review_revision.py": "a1ab700f541a4baeb1104832ee4797fa02a14384bb1fa9212462fde8098388cf",
+        "src/soutui_image/runtime_lock.py": "ead3ddf5d3726f335d8549bef16ef5483c7faa1a69a01499666f41e1137c8c19",
+        "src/soutui_image/stage_a_inputs.py": "b6c4859d3a88294207f45610e719a05d33f3cea684170a044eeffc8d88e6141c",
+        "src/soutui_image/stage_b_web_upload.py": "3b36058417ae61cd99ee0618d36bbd37ee20afd0013e31b5674c2491f4b158c5",
+        "src/soutui_image/stage_c_web_plan.py": "c2f6b833e8c647ae3d0625ef6080714ad58f2cc914df5ca66176b01fe136ffff",
+        "src/soutui_image/stage_d_web_generation.py": "7d6657b4529ed430e2a7df46199f41b83cf28ba2f04b82169ecbc40c7fcbcb19",
+        "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+        "src/soutui_image/stage_f_output_revision.py": "0894f06e9c37cb0b396d7986f199d170f8c683adc891f8096cfe55e794e31a8b",
+        "src/soutui_image/stage_f_outputs.py": "cb93121563c1fd6bf3b54bbb2d81cdb9d8eace6c949c03f14549d1bf8bb90d17",
+        "src/soutui_image/web_session.py": "88871cb3cce72bc3f9f81370c19c309aea5d87f4f932b34422cbaaa263776d41",
+        "src/soutui_image/web_transport.py": "3e743c3f4b85b2a5985f5c1ebbf243ec32252e035111e71b96254f6c14edce20",
+        "tests/test_pipeline_controls.py": "e949278daff672ba50619d2c0dbd4fc8496fda1582fc05acd0edf635bfc53ad0",
+        "tools/freeze_g_h.py": "44e70058684299dd4f7892e6fea622dffaec8661affb03a9831b7015a3cd9707",
+        "tools/register_quality_release.py": "dc946f78edae25d36cdad48f427c3195883d6bf75e64a5b4a3868fac58f73541",
+        "tools/run_checks.py": "53b0c384b6345f1c5e72d475965ec6686d09ee5ebb1cd4927ef54c4365b75d23",
+        "tools/validate_integration.py": "dac2f2e3bdbb04fd537559599fff0cae54688f6b1399f7c0189630001d349ae5",
+        "tools/validate_multi_product.py": "443929bab18c26b2d5512186d27d263e1cccea198d3a6bed10c838522b8c635e",
+        "tools/validate_quality_batch.py": "bf071705d6904f7c562ae9c0f8af2dc7ad8c85280cb0c4523b66274c0715e89b",
+        "tools/validate_quality_prefix.py": "7964a29e7135a5d3826d92b1bd1394641ecc15593dceff3f7dac969651ede14e",
+        "src/soutui_image/review_schedule.py": "a07be55d4ed948be16ac73489ae6c983b94adef1d61c957dc959496658f9631f",
+        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69"
+      },
+      "revisions": [
+        {
+          "date": "2026-10-29T13:27:07.351815+00:00",
+          "reason": "用户要求修正袖口、门襟扣位及裤长漏判并更新实际软件包",
+          "authorization": "用户要求处理好并继续，延续既有Sol审核；最后7张及对应原图/裁剪另获明确云端Sol外发授权。Astra不用于35张批量",
+          "previous_files": {
+            "main.py": "5f52ace85a6d1652f31bea6604ae06dacf88be37ed74580f6f8e611cf2da32d7",
+            "run_pipeline.py": "461a0859a75c2cb1ea29d202fc69bed41f2e6bfd1184797c1282ff5425765185",
+            "src/soutui_image/__init__.py": "4808d1ec7517efe9992394dbd82e2c03a017c9b7353542ef65ee24e3e96a0cb8",
+            "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+            "src/soutui_image/pipeline.py": "41af91663647538f7114feb12691641cb2a58f561b857b42ef5940b72acd6147",
+            "src/soutui_image/review_group_state.py": "0d70025b0dcdacaac6e3ef0a47e17451a27996cd026d8720cfb1c1168bb9e9de",
+            "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+            "src/soutui_image/runtime_lock.py": "ead3ddf5d3726f335d8549bef16ef5483c7faa1a69a01499666f41e1137c8c19",
+            "src/soutui_image/stage_a_inputs.py": "b6c4859d3a88294207f45610e719a05d33f3cea684170a044eeffc8d88e6141c",
+            "src/soutui_image/stage_b_web_upload.py": "3b36058417ae61cd99ee0618d36bbd37ee20afd0013e31b5674c2491f4b158c5",
+            "src/soutui_image/stage_c_web_plan.py": "c2f6b833e8c647ae3d0625ef6080714ad58f2cc914df5ca66176b01fe136ffff",
+            "src/soutui_image/stage_d_web_generation.py": "ec6c0b0f7a8d2193754b11e274ad8aa9fe74f9d50b2d62f99239f3bbf2dd7aa4",
+            "src/soutui_image/stage_e_codex_review.py": "ef070c735d4da3113a01d5ed0b8ff3a305020e30153ef8bcbd5cfd7986083254",
+            "src/soutui_image/stage_f_outputs.py": "c660fdc8fb82494de95e3563e495048a3503207c8d7834d2845bf23925747a0c",
+            "src/soutui_image/web_session.py": "88871cb3cce72bc3f9f81370c19c309aea5d87f4f932b34422cbaaa263776d41",
+            "src/soutui_image/web_transport.py": "3e743c3f4b85b2a5985f5c1ebbf243ec32252e035111e71b96254f6c14edce20",
+            "tests/test_pipeline_controls.py": "e949278daff672ba50619d2c0dbd4fc8496fda1582fc05acd0edf635bfc53ad0",
+            "tools/freeze_g_h.py": "44e70058684299dd4f7892e6fea622dffaec8661affb03a9831b7015a3cd9707",
+            "tools/run_checks.py": "53b0c384b6345f1c5e72d475965ec6686d09ee5ebb1cd4927ef54c4365b75d23",
+            "tools/validate_integration.py": "dac2f2e3bdbb04fd537559599fff0cae54688f6b1399f7c0189630001d349ae5",
+            "tools/validate_multi_product.py": "443929bab18c26b2d5512186d27d263e1cccea198d3a6bed10c838522b8c635e"
+          },
+          "prior_baseline": "validation\\history\\frozen_before_quality_release_20261029.json",
+          "evidence": [
+            "validation/quality_v2/g_prefix_live/result.json",
+            "validation/quality_v2/batch_verified/result.json"
+          ]
+        },
+        {
+          "reason": "用户明确允许私有规则上下文接入；旧合格图和三轮补生不变",
+          "previous_files": {
+            "main.py": "5f52ace85a6d1652f31bea6604ae06dacf88be37ed74580f6f8e611cf2da32d7",
+            "run_pipeline.py": "e3cacd174057fced8f348f0f0bd33ac231ee8893bdf86bc8c8ceb88f8b0cafce",
+            "src/soutui_image/__init__.py": "4808d1ec7517efe9992394dbd82e2c03a017c9b7353542ef65ee24e3e96a0cb8",
+            "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+            "src/soutui_image/pipeline.py": "70c6941c20e7db9faf33d138f36eb24e75abd248e9b35b9bb8fc40b093c16c3a",
+            "src/soutui_image/quality_upgrade.py": "cb7d7c6dffdc44d35a771110402e61d6c7805e506898dac4269155fded681620",
+            "src/soutui_image/review_button_edges.py": "502fea1a2ef81ba82e96eea67472e09e4459496e741b60cf1701254b0bd855c3",
+            "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
+            "src/soutui_image/review_detail_locator.py": "fc00c3794a78414fc2022147d298b422726b7fbf156b1b043959c4ba13f1edfc",
+            "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
+            "src/soutui_image/review_group_state.py": "22eb737eb713a80e40e305a10a63f12e89f72b6850435b4bd1afdff602798a03",
+            "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+            "src/soutui_image/review_record_validation.py": "0ebad23a5f55801c028c8ce44ab2f147e265386a08c79ad99adc7092ef6e552c",
+            "src/soutui_image/review_revision.py": "b88d4f652ed0dee042d39a001ae08cfe685b4a1d9bda00af5a5011d264fe5e8f",
+            "src/soutui_image/runtime_lock.py": "ead3ddf5d3726f335d8549bef16ef5483c7faa1a69a01499666f41e1137c8c19",
+            "src/soutui_image/stage_a_inputs.py": "b6c4859d3a88294207f45610e719a05d33f3cea684170a044eeffc8d88e6141c",
+            "src/soutui_image/stage_b_web_upload.py": "3b36058417ae61cd99ee0618d36bbd37ee20afd0013e31b5674c2491f4b158c5",
+            "src/soutui_image/stage_c_web_plan.py": "c2f6b833e8c647ae3d0625ef6080714ad58f2cc914df5ca66176b01fe136ffff",
+            "src/soutui_image/stage_d_web_generation.py": "f5ce5e3b4a80b3fc160a671005fd8656be5b1abceac060374058ae97df996c4a",
+            "src/soutui_image/stage_e_codex_review.py": "544301af921b8b32961078c2a584acfc87221c9f9e0fcef20a1ad1478e6bbb46",
+            "src/soutui_image/stage_f_output_revision.py": "dee091fc79a76253ab63d973bdd2cd91f3a998adc96beccacf126e374c8ed326",
+            "src/soutui_image/stage_f_outputs.py": "21e48004ebf6c6a070281adcfd01d239225a9d57bd5fa26306bf23d12682347b",
+            "src/soutui_image/web_session.py": "88871cb3cce72bc3f9f81370c19c309aea5d87f4f932b34422cbaaa263776d41",
+            "src/soutui_image/web_transport.py": "3e743c3f4b85b2a5985f5c1ebbf243ec32252e035111e71b96254f6c14edce20",
+            "tests/test_pipeline_controls.py": "e949278daff672ba50619d2c0dbd4fc8496fda1582fc05acd0edf635bfc53ad0",
+            "tools/freeze_g_h.py": "44e70058684299dd4f7892e6fea622dffaec8661affb03a9831b7015a3cd9707",
+            "tools/register_quality_release.py": "dc946f78edae25d36cdad48f427c3195883d6bf75e64a5b4a3868fac58f73541",
+            "tools/run_checks.py": "53b0c384b6345f1c5e72d475965ec6686d09ee5ebb1cd4927ef54c4365b75d23",
+            "tools/validate_integration.py": "dac2f2e3bdbb04fd537559599fff0cae54688f6b1399f7c0189630001d349ae5",
+            "tools/validate_multi_product.py": "443929bab18c26b2d5512186d27d263e1cccea198d3a6bed10c838522b8c635e",
+            "tools/validate_quality_batch.py": "bf071705d6904f7c562ae9c0f8af2dc7ad8c85280cb0c4523b66274c0715e89b",
+            "tools/validate_quality_prefix.py": "7964a29e7135a5d3826d92b1bd1394641ecc15593dceff3f7dac969651ede14e"
+          },
+          "evidence": [
+            "validation/updates/U_PIPELINE/prefix/result.json",
+            "validation/updates/U_PIPELINE/actual_batch/result.json"
+          ]
+        },
+        {
+          "reason": "用户明确允许私有规则自动更新接入及重新验收；保留独立复核、600秒和三轮补生",
+          "previous_files": {
+            "main.py": "5f52ace85a6d1652f31bea6604ae06dacf88be37ed74580f6f8e611cf2da32d7",
+            "run_pipeline.py": "e3cacd174057fced8f348f0f0bd33ac231ee8893bdf86bc8c8ceb88f8b0cafce",
+            "src/soutui_image/__init__.py": "4808d1ec7517efe9992394dbd82e2c03a017c9b7353542ef65ee24e3e96a0cb8",
+            "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+            "src/soutui_image/pipeline.py": "0111c422645b3e27f305e1a410a5b0b4e76bfd4cf677002b41fa15afa346fcbb",
+            "src/soutui_image/quality_upgrade.py": "3014eba24736346135317cf1e1f83ff080bd10efd1fe0b61a3b302bcec7814f4",
+            "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+            "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
+            "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+            "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
+            "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+            "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+            "src/soutui_image/review_record_validation.py": "818b30a8cfcfe41d3f0274743634b8fe75aa30ecd2d097a6f6971eb1fa24e763",
+            "src/soutui_image/review_revision.py": "a1ab700f541a4baeb1104832ee4797fa02a14384bb1fa9212462fde8098388cf",
+            "src/soutui_image/runtime_lock.py": "ead3ddf5d3726f335d8549bef16ef5483c7faa1a69a01499666f41e1137c8c19",
+            "src/soutui_image/stage_a_inputs.py": "b6c4859d3a88294207f45610e719a05d33f3cea684170a044eeffc8d88e6141c",
+            "src/soutui_image/stage_b_web_upload.py": "3b36058417ae61cd99ee0618d36bbd37ee20afd0013e31b5674c2491f4b158c5",
+            "src/soutui_image/stage_c_web_plan.py": "c2f6b833e8c647ae3d0625ef6080714ad58f2cc914df5ca66176b01fe136ffff",
+            "src/soutui_image/stage_d_web_generation.py": "7d6657b4529ed430e2a7df46199f41b83cf28ba2f04b82169ecbc40c7fcbcb19",
+            "src/soutui_image/stage_e_codex_review.py": "a68307d323a37eeb8d45957a8f34ba70ac1481e97feba82d56fcb048699c12c5",
+            "src/soutui_image/stage_f_output_revision.py": "0894f06e9c37cb0b396d7986f199d170f8c683adc891f8096cfe55e794e31a8b",
+            "src/soutui_image/stage_f_outputs.py": "cb93121563c1fd6bf3b54bbb2d81cdb9d8eace6c949c03f14549d1bf8bb90d17",
+            "src/soutui_image/web_session.py": "88871cb3cce72bc3f9f81370c19c309aea5d87f4f932b34422cbaaa263776d41",
+            "src/soutui_image/web_transport.py": "3e743c3f4b85b2a5985f5c1ebbf243ec32252e035111e71b96254f6c14edce20",
+            "tests/test_pipeline_controls.py": "e949278daff672ba50619d2c0dbd4fc8496fda1582fc05acd0edf635bfc53ad0",
+            "tools/freeze_g_h.py": "44e70058684299dd4f7892e6fea622dffaec8661affb03a9831b7015a3cd9707",
+            "tools/register_quality_release.py": "dc946f78edae25d36cdad48f427c3195883d6bf75e64a5b4a3868fac58f73541",
+            "tools/run_checks.py": "53b0c384b6345f1c5e72d475965ec6686d09ee5ebb1cd4927ef54c4365b75d23",
+            "tools/validate_integration.py": "dac2f2e3bdbb04fd537559599fff0cae54688f6b1399f7c0189630001d349ae5",
+            "tools/validate_multi_product.py": "443929bab18c26b2d5512186d27d263e1cccea198d3a6bed10c838522b8c635e",
+            "tools/validate_quality_batch.py": "bf071705d6904f7c562ae9c0f8af2dc7ad8c85280cb0c4523b66274c0715e89b",
+            "tools/validate_quality_prefix.py": "7964a29e7135a5d3826d92b1bd1394641ecc15593dceff3f7dac969651ede14e"
+          },
+          "evidence": [
+            "validation/updates/U_H/gui_resume/result.json",
+            "validation/updates/U_H/runtime_021/result.json",
+            "validation/updates/U_H/actual_gui_021/smoke.json",
+            "validation/updates/U_H/portable_021/result.json",
+            "validation/updates/U_PROGRAM_021/result.json",
+            "validation/updates/published_client_021/result.json"
+          ],
+          "prior_baseline": "validation\\updates\\final_frozen_before.json"
+        }
+      ],
+      "revalidation_20261103": {
+        "reason": "用户授权轻微差异、整体镜像、裁切裤长标准调整及独立检查并行",
+        "scope": "最终规则图二通过/图三拒绝；前一阶段图一与两张历史人工回归另按原版本登记；控制检查118项及本机exe清零启动",
+        "evidence": "validation/current_quality/release_acceptance.json"
+      }
+    },
+    "H_DESKTOP": {
+      "status": "verified",
+      "accepted_at": "2026-10-29T13:27:07.351815+00:00",
+      "scope": "本机私有规则下载、GUI复核暂停续跑、exe真实历史副本复核、ZIP迁移及新旧真实程序目录替换；任务规则固定",
+      "limits": "另一台电脑及其只读令牌首次配置尚未实测；本轮没有新图生成或新模型审核，视觉质量标准未改变",
+      "evidence": [
+        "validation/gui_resume/result.json",
+        "validation/package_final/self_test_result.json",
+        "validation/package_final/gui/smoke.json",
+        "validation/package_final/cached_pipeline.json",
+        "validation/package_final/relocated.json",
+        "validation/package_final/release.json",
+        "validation/package_final/runtime_versions.json",
+        "validation/quality_v2/h_gui_release/result.json",
+        "validation/quality_v2/package_runtime_clean/result.json",
+        "validation/quality_v2/package_actual_gui/smoke.json",
+        "validation/quality_v2/package_portable_clean/result.json",
+        "validation/quality_v2/package_release_clean/release.json",
+        "validation/integration/code_checks.json",
+        "validation/updates/U_H/gui_resume/result.json",
+        "validation/updates/U_H/runtime_021/result.json",
+        "validation/updates/U_H/actual_gui_021/smoke.json",
+        "validation/updates/U_H/portable_021/result.json",
+        "validation/updates/U_PROGRAM_021/result.json",
+        "validation/updates/published_client_021/result.json"
+      ],
+      "files": {
+        "main.py": "5f52ace85a6d1652f31bea6604ae06dacf88be37ed74580f6f8e611cf2da32d7",
+        "pyproject.toml": "bac4a7088e6029e3b417ca0e473bc8ee897e029825558e7e57ef64dcb7fe8716",
+        "requirements-build.txt": "a77cca27d95c735d9540e6b1b2112e640d03ad4be4f936b844617d7fb4f6eafd",
+        "run_pipeline.py": "8e5da4cafec658fef44710dc446ae2f58c15762f817cb3a9f5eb7655937c85a0",
+        "src/soutui_image/__init__.py": "4808d1ec7517efe9992394dbd82e2c03a017c9b7353542ef65ee24e3e96a0cb8",
+        "src/soutui_image/browser_connection.py": "7a9c2fb8090e2222001eb2f1e2bd14088c5c19515dc485a8aea391659da7a968",
+        "src/soutui_image/browser_ui.py": "b023aa3bb59e8a525ae30a29b057b5cc4f9d241aa32352ae9a046418a6696faa",
+        "src/soutui_image/clipboard_transfer.py": "9d485d85d4ad77443145e1b1cca28076888cd9908df6162b471799a4eb2d78b9",
+        "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+        "src/soutui_image/desktop_app.py": "d329d27120cbe3c0d0f6a37c08744a5d15eb36fc8a4c8a56d3cdbdf35d328c67",
+        "src/soutui_image/pipeline.py": "0111c422645b3e27f305e1a410a5b0b4e76bfd4cf677002b41fa15afa346fcbb",
+        "src/soutui_image/quality_upgrade.py": "3014eba24736346135317cf1e1f83ff080bd10efd1fe0b61a3b302bcec7814f4",
+        "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+        "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
+        "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+        "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
+        "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+        "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+        "src/soutui_image/review_record_validation.py": "818b30a8cfcfe41d3f0274743634b8fe75aa30ecd2d097a6f6971eb1fa24e763",
+        "src/soutui_image/review_revision.py": "a1ab700f541a4baeb1104832ee4797fa02a14384bb1fa9212462fde8098388cf",
+        "src/soutui_image/runtime_lock.py": "ead3ddf5d3726f335d8549bef16ef5483c7faa1a69a01499666f41e1137c8c19",
+        "src/soutui_image/session_bridge.py": "e879d3dabf86cd5371bf358927aa29fde7e9904547b996a9c4b73f686b6ae81a",
+        "src/soutui_image/stage_a_inputs.py": "b6c4859d3a88294207f45610e719a05d33f3cea684170a044eeffc8d88e6141c",
+        "src/soutui_image/stage_b_web_upload.py": "3b36058417ae61cd99ee0618d36bbd37ee20afd0013e31b5674c2491f4b158c5",
+        "src/soutui_image/stage_c_web_plan.py": "c2f6b833e8c647ae3d0625ef6080714ad58f2cc914df5ca66176b01fe136ffff",
+        "src/soutui_image/stage_d_web_generation.py": "7d6657b4529ed430e2a7df46199f41b83cf28ba2f04b82169ecbc40c7fcbcb19",
+        "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+        "src/soutui_image/stage_f_output_revision.py": "0894f06e9c37cb0b396d7986f199d170f8c683adc891f8096cfe55e794e31a8b",
+        "src/soutui_image/stage_f_outputs.py": "cb93121563c1fd6bf3b54bbb2d81cdb9d8eace6c949c03f14549d1bf8bb90d17",
+        "src/soutui_image/web_session.py": "88871cb3cce72bc3f9f81370c19c309aea5d87f4f932b34422cbaaa263776d41",
+        "src/soutui_image/web_transport.py": "3e743c3f4b85b2a5985f5c1ebbf243ec32252e035111e71b96254f6c14edce20",
+        "src/soutui_image/window_capture.py": "c3f0e5c59ed93410c61e69be4990b9bbb0f435b715e15181f1befdd6baad3498",
+        "tools/build_windows.py": "fa88515bd0b5a3a8e82df3b18f53251b04ad347ab3bab97b1e4549b0e918f408",
+        "tools/connect_existing_browser.py": "bbad4db5bf65cef1c7cf3706a78e11b63efe6c54cde95f7223bf7dfb441688d1",
+        "tools/package_release.py": "77d2cb49bc597449a77aa2ffe522dc426f042e091eaf9ecf3b4d4ec60595c0dc",
+        "tools/register_quality_release.py": "dc946f78edae25d36cdad48f427c3195883d6bf75e64a5b4a3868fac58f73541",
+        "tools/validate_clipboard_transfer.py": "fb9c4c10f9d9b3eb9c6ceaf058a724e5215f8ff74fff898484883e5729a7d95f",
+        "tools/validate_gui_quality.py": "e251a073edc70c2d01eaa84a9c7b8e1ff647539a045d73db19f73d16ceb273ec",
+        "tools/validate_gui_resume.py": "9bbfd176f49feda2649bb1454bf1aca6c49e03132d7df6cf8297f624ad0a1ebb",
+        "tools/validate_package_quality.py": "3eb0307793ad64352b815509476a88ea3a0d930510506debe0641f3dc0bc0ffd",
+        "tools/validate_portable_quality.py": "8a1cc1689c0d2fc5f99fec39530f71fe4c357e171bbe118c76ac4d101f1d0def",
+        "tools/validate_quality_prefix.py": "7964a29e7135a5d3826d92b1bd1394641ecc15593dceff3f7dac969651ede14e",
+        "src/soutui_image/rule_store.py": "4e1711d1d27a94152c531730ac0e1f0ec7e16f65857c49ee54719795cd9c4a4c",
+        "src/soutui_image/resources/review_rules.json": "c06f8853a8847de78124a3655bd639e7ada0ba52ec28cc95fda866f15ef6d5ab",
+        "src/soutui_image/resources/update_source.json": "7e597601549cb4073ac7bc574317ee8134a983c6e15fb854403f882aee17a3cb",
+        "tools/validate_published_private_release.py": "d43d307159b08f71011e8cc663d8e29cf227acae2bcd8be7230aeb54fd34268f",
+        "src/soutui_image/update_dialog.py": "28c5a11616905544b424657dd788cd4aee3209634e044d614ad6221176a8b4a7",
+        "src/soutui_image/rules_bundle.py": "7863d677f1ff40cbe50c27600d7488573a7847bab99414723892f2a5f3e9fd11",
+        "src/soutui_image/update_service.py": "729861895d53f7ba35e489e3b1f88d26f1545c03da6d5dc4e29c825c1eabbc49",
+        "tools/validate_program_replacement.py": "c4b906c99ea9bef169d4b4a1918fb797837ebbfe01931bcb41e903e8ce917bfe",
+        "src/soutui_image/update_security.py": "3ebc9dd51cbdccc4cc052234c61e40d8f0b8a314fc52c8253f772632a0b1b65e",
+        "tools/register_private_release.py": "5beb1067b25b5885caf7a1ee55f3f6b3b2dd8af47277341d3af02a5a6421d67d",
+        "src/soutui_image/program_update.py": "7698ed6d44448097e0ca2d20a8da7935153ca0c099d4a9372549bc5dbd8e7c2f",
+        "src/soutui_image/update_config.py": "8d56b60bb1ddbe8ac98c9be496efc4c5b2c795edffeff8948b6a4e431e0ed0fa",
+        "tests/test_program_updates.py": "a018fdfb362659c57d00069a01cf6e89d3458d8e63b94a6aa12789ddcaf13c38",
+        "src/soutui_image/rule_runtime.py": "aa416a3c76c9d8806ea4acf766847d132d76f4873930656acb319926933374f5",
+        "tools/private_update_panel.py": "0d4162b47d8d58eab1151b86a8134e4d4b1ce8bffa7c09787a4e01b8b3a2dff0",
+        "src/soutui_image/github_updates.py": "9a588002452d27f0b38c9d72e2e31e549a880d8521265f0176c0cc18d1ab47de",
+        "src/soutui_image/review_schedule.py": "a07be55d4ed948be16ac73489ae6c983b94adef1d61c957dc959496658f9631f",
+        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69"
+      },
+      "revisions": [
+        {
+          "date": "2026-10-29T13:27:07.351815+00:00",
+          "reason": "用户要求修正袖口、门襟扣位及裤长漏判并更新实际软件包",
+          "authorization": "用户要求处理好并继续，延续既有Sol审核；最后7张及对应原图/裁剪另获明确云端Sol外发授权。Astra不用于35张批量",
+          "previous_files": {
+            "main.py": "5f52ace85a6d1652f31bea6604ae06dacf88be37ed74580f6f8e611cf2da32d7",
+            "pyproject.toml": "d7abcd91619e2a1f843a73aeb8915dc943d923334b5a9313f5877c145313c839",
+            "requirements-build.txt": "a77cca27d95c735d9540e6b1b2112e640d03ad4be4f936b844617d7fb4f6eafd",
+            "run_pipeline.py": "461a0859a75c2cb1ea29d202fc69bed41f2e6bfd1184797c1282ff5425765185",
+            "src/soutui_image/__init__.py": "4808d1ec7517efe9992394dbd82e2c03a017c9b7353542ef65ee24e3e96a0cb8",
+            "src/soutui_image/browser_connection.py": "7a9c2fb8090e2222001eb2f1e2bd14088c5c19515dc485a8aea391659da7a968",
+            "src/soutui_image/browser_ui.py": "b023aa3bb59e8a525ae30a29b057b5cc4f9d241aa32352ae9a046418a6696faa",
+            "src/soutui_image/clipboard_transfer.py": "9d485d85d4ad77443145e1b1cca28076888cd9908df6162b471799a4eb2d78b9",
+            "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+            "src/soutui_image/desktop_app.py": "841b487d0779f74acf826b19f7c031c46feba4cb3d253b390376d5fcde001c8a",
+            "src/soutui_image/pipeline.py": "41af91663647538f7114feb12691641cb2a58f561b857b42ef5940b72acd6147",
+            "src/soutui_image/review_group_state.py": "0d70025b0dcdacaac6e3ef0a47e17451a27996cd026d8720cfb1c1168bb9e9de",
+            "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+            "src/soutui_image/runtime_lock.py": "ead3ddf5d3726f335d8549bef16ef5483c7faa1a69a01499666f41e1137c8c19",
+            "src/soutui_image/session_bridge.py": "e879d3dabf86cd5371bf358927aa29fde7e9904547b996a9c4b73f686b6ae81a",
+            "src/soutui_image/stage_a_inputs.py": "b6c4859d3a88294207f45610e719a05d33f3cea684170a044eeffc8d88e6141c",
+            "src/soutui_image/stage_b_web_upload.py": "3b36058417ae61cd99ee0618d36bbd37ee20afd0013e31b5674c2491f4b158c5",
+            "src/soutui_image/stage_c_web_plan.py": "c2f6b833e8c647ae3d0625ef6080714ad58f2cc914df5ca66176b01fe136ffff",
+            "src/soutui_image/stage_d_web_generation.py": "ec6c0b0f7a8d2193754b11e274ad8aa9fe74f9d50b2d62f99239f3bbf2dd7aa4",
+            "src/soutui_image/stage_e_codex_review.py": "ef070c735d4da3113a01d5ed0b8ff3a305020e30153ef8bcbd5cfd7986083254",
+            "src/soutui_image/stage_f_outputs.py": "c660fdc8fb82494de95e3563e495048a3503207c8d7834d2845bf23925747a0c",
+            "src/soutui_image/web_session.py": "88871cb3cce72bc3f9f81370c19c309aea5d87f4f932b34422cbaaa263776d41",
+            "src/soutui_image/web_transport.py": "3e743c3f4b85b2a5985f5c1ebbf243ec32252e035111e71b96254f6c14edce20",
+            "src/soutui_image/window_capture.py": "c3f0e5c59ed93410c61e69be4990b9bbb0f435b715e15181f1befdd6baad3498",
+            "tools/build_windows.py": "7937a2893ea8768d6f308967ac0f0b57ab14e3c19fa2fa2d8d5d00c7d86192f4",
+            "tools/connect_existing_browser.py": "bbad4db5bf65cef1c7cf3706a78e11b63efe6c54cde95f7223bf7dfb441688d1",
+            "tools/package_release.py": "35071989debfc32add500fe96bbd6f6ca2424ace025e1aa94ea0b1e0459808ea",
+            "tools/validate_clipboard_transfer.py": "fb9c4c10f9d9b3eb9c6ceaf058a724e5215f8ff74fff898484883e5729a7d95f",
+            "tools/validate_gui_resume.py": "9bbfd176f49feda2649bb1454bf1aca6c49e03132d7df6cf8297f624ad0a1ebb"
+          },
+          "prior_baseline": "validation\\history\\frozen_before_quality_release_20261029.json",
+          "evidence": [
+            "validation/quality_v2/h_gui_release/result.json",
+            "validation/quality_v2/package_runtime_clean/result.json",
+            "validation/quality_v2/package_actual_gui/smoke.json",
+            "validation/quality_v2/package_portable_clean/result.json",
+            "validation/quality_v2/package_release_clean/release.json"
+          ]
+        },
+        {
+          "reason": "用户明确允许私有规则自动更新接入及重新验收；保留独立复核、600秒和三轮补生",
+          "previous_files": {
+            "main.py": "5f52ace85a6d1652f31bea6604ae06dacf88be37ed74580f6f8e611cf2da32d7",
+            "pyproject.toml": "d7abcd91619e2a1f843a73aeb8915dc943d923334b5a9313f5877c145313c839",
+            "requirements-build.txt": "a77cca27d95c735d9540e6b1b2112e640d03ad4be4f936b844617d7fb4f6eafd",
+            "run_pipeline.py": "e3cacd174057fced8f348f0f0bd33ac231ee8893bdf86bc8c8ceb88f8b0cafce",
+            "src/soutui_image/__init__.py": "4808d1ec7517efe9992394dbd82e2c03a017c9b7353542ef65ee24e3e96a0cb8",
+            "src/soutui_image/browser_connection.py": "7a9c2fb8090e2222001eb2f1e2bd14088c5c19515dc485a8aea391659da7a968",
+            "src/soutui_image/browser_ui.py": "b023aa3bb59e8a525ae30a29b057b5cc4f9d241aa32352ae9a046418a6696faa",
+            "src/soutui_image/clipboard_transfer.py": "9d485d85d4ad77443145e1b1cca28076888cd9908df6162b471799a4eb2d78b9",
+            "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+            "src/soutui_image/desktop_app.py": "af5b0938824ba883cf3413ad4c0b5e973af9f3a38717d0e96e4196d8a5f94159",
+            "src/soutui_image/pipeline.py": "70c6941c20e7db9faf33d138f36eb24e75abd248e9b35b9bb8fc40b093c16c3a",
+            "src/soutui_image/quality_upgrade.py": "cb7d7c6dffdc44d35a771110402e61d6c7805e506898dac4269155fded681620",
+            "src/soutui_image/review_button_edges.py": "502fea1a2ef81ba82e96eea67472e09e4459496e741b60cf1701254b0bd855c3",
+            "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
+            "src/soutui_image/review_detail_locator.py": "fc00c3794a78414fc2022147d298b422726b7fbf156b1b043959c4ba13f1edfc",
+            "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
+            "src/soutui_image/review_group_state.py": "22eb737eb713a80e40e305a10a63f12e89f72b6850435b4bd1afdff602798a03",
+            "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
+            "src/soutui_image/review_record_validation.py": "0ebad23a5f55801c028c8ce44ab2f147e265386a08c79ad99adc7092ef6e552c",
+            "src/soutui_image/review_revision.py": "b88d4f652ed0dee042d39a001ae08cfe685b4a1d9bda00af5a5011d264fe5e8f",
+            "src/soutui_image/runtime_lock.py": "ead3ddf5d3726f335d8549bef16ef5483c7faa1a69a01499666f41e1137c8c19",
+            "src/soutui_image/session_bridge.py": "e879d3dabf86cd5371bf358927aa29fde7e9904547b996a9c4b73f686b6ae81a",
+            "src/soutui_image/stage_a_inputs.py": "b6c4859d3a88294207f45610e719a05d33f3cea684170a044eeffc8d88e6141c",
+            "src/soutui_image/stage_b_web_upload.py": "3b36058417ae61cd99ee0618d36bbd37ee20afd0013e31b5674c2491f4b158c5",
+            "src/soutui_image/stage_c_web_plan.py": "c2f6b833e8c647ae3d0625ef6080714ad58f2cc914df5ca66176b01fe136ffff",
+            "src/soutui_image/stage_d_web_generation.py": "f5ce5e3b4a80b3fc160a671005fd8656be5b1abceac060374058ae97df996c4a",
+            "src/soutui_image/stage_e_codex_review.py": "544301af921b8b32961078c2a584acfc87221c9f9e0fcef20a1ad1478e6bbb46",
+            "src/soutui_image/stage_f_output_revision.py": "dee091fc79a76253ab63d973bdd2cd91f3a998adc96beccacf126e374c8ed326",
+            "src/soutui_image/stage_f_outputs.py": "21e48004ebf6c6a070281adcfd01d239225a9d57bd5fa26306bf23d12682347b",
+            "src/soutui_image/web_session.py": "88871cb3cce72bc3f9f81370c19c309aea5d87f4f932b34422cbaaa263776d41",
+            "src/soutui_image/web_transport.py": "3e743c3f4b85b2a5985f5c1ebbf243ec32252e035111e71b96254f6c14edce20",
+            "src/soutui_image/window_capture.py": "c3f0e5c59ed93410c61e69be4990b9bbb0f435b715e15181f1befdd6baad3498",
+            "tools/build_windows.py": "de7da4390aa58e342a457c65d4ababa0300f48dff5b1038d37bcd20111649982",
+            "tools/connect_existing_browser.py": "bbad4db5bf65cef1c7cf3706a78e11b63efe6c54cde95f7223bf7dfb441688d1",
+            "tools/package_release.py": "c5299f0fdc2de550e287da1679b1cc79283ff637f9909de2eb29466bc6f8f388",
+            "tools/register_quality_release.py": "dc946f78edae25d36cdad48f427c3195883d6bf75e64a5b4a3868fac58f73541",
+            "tools/validate_clipboard_transfer.py": "fb9c4c10f9d9b3eb9c6ceaf058a724e5215f8ff74fff898484883e5729a7d95f",
+            "tools/validate_gui_quality.py": "e251a073edc70c2d01eaa84a9c7b8e1ff647539a045d73db19f73d16ceb273ec",
+            "tools/validate_gui_resume.py": "9bbfd176f49feda2649bb1454bf1aca6c49e03132d7df6cf8297f624ad0a1ebb",
+            "tools/validate_package_quality.py": "3eb0307793ad64352b815509476a88ea3a0d930510506debe0641f3dc0bc0ffd",
+            "tools/validate_portable_quality.py": "8a1cc1689c0d2fc5f99fec39530f71fe4c357e171bbe118c76ac4d101f1d0def",
+            "tools/validate_quality_prefix.py": "7964a29e7135a5d3826d92b1bd1394641ecc15593dceff3f7dac969651ede14e"
+          },
+          "evidence": [
+            "validation/updates/U_H/gui_resume/result.json",
+            "validation/updates/U_H/runtime_021/result.json",
+            "validation/updates/U_H/actual_gui_021/smoke.json",
+            "validation/updates/U_H/portable_021/result.json",
+            "validation/updates/U_PROGRAM_021/result.json",
+            "validation/updates/published_client_021/result.json"
+          ],
+          "prior_baseline": "validation\\updates\\final_frozen_before.json"
+        }
+      ],
+      "revalidation_20261103": {
+        "reason": "用户授权轻微差异、整体镜像、裁切裤长标准调整及独立检查并行",
+        "scope": "最终规则图二通过/图三拒绝；前一阶段图一与两张历史人工回归另按原版本登记；控制检查118项及本机exe清零启动",
+        "evidence": "validation/current_quality/release_acceptance.json"
+      }
+    },
+    "U_RULES": {
+      "status": "verified",
+      "scope": "无损外置规则：35张实际原图/结果、已完成整图提示词哈希及可用定位/扣位日志逐字一致；未新调用模型",
+      "evidence": [
+        "validation/updates/U_RULES/result.json"
+      ],
+      "files": {
+        "src/soutui_image/rules_bundle.py": "7863d677f1ff40cbe50c27600d7488573a7847bab99414723892f2a5f3e9fd11",
+        "src/soutui_image/resources/review_rules.json": "c06f8853a8847de78124a3655bd639e7ada0ba52ec28cc95fda866f15ef6d5ab",
+        "tools/export_review_rules.py": "8c87e39b8ae0e971952b72b8f897e53fb4e42af3347f07f897490774261d369c",
+        "tools/validate_rule_bundle.py": "8b8d772342ef33f1fd58154fa0a278787de2a7092101294486ceabfdceabf9f9",
+        "tests/test_rules_bundle.py": "18e708cd18d6bb4560c26aea0144f5eb23f1fa8a6085f1a613fce17175750092"
+      },
+      "revalidation_20261103": {
+        "reason": "用户授权轻微差异、整体镜像、裁切裤长标准调整及独立检查并行",
+        "scope": "最终规则图二通过/图三拒绝；前一阶段图一与两张历史人工回归另按原版本登记；控制检查118项及本机exe清零启动",
+        "evidence": "validation/current_quality/release_acceptance.json"
+      }
+    },
+    "U_GITHUB": {
+      "status": "verified",
+      "scope": "真实GitHub私有仓库及发布资产传输、本机版本固定与失败保留；非跨电脑或新视觉准确率验收",
+      "files": {
+        "src/soutui_image/update_security.py": "3ebc9dd51cbdccc4cc052234c61e40d8f0b8a314fc52c8253f772632a0b1b65e",
+        "src/soutui_image/github_updates.py": "9a588002452d27f0b38c9d72e2e31e549a880d8521265f0176c0cc18d1ab47de",
+        "src/soutui_image/rule_store.py": "4e1711d1d27a94152c531730ac0e1f0ec7e16f65857c49ee54719795cd9c4a4c",
+        "src/soutui_image/resources/update_source.json": "7e597601549cb4073ac7bc574317ee8134a983c6e15fb854403f882aee17a3cb",
+        "run_updates.py": "28bd91a6298b0733d169978ae9febd9ae719d7280b5ad0acae5525f941549baf",
+        "tests/test_private_updates.py": "4ed6877dcecbe998ce7db9d8cd3ebc6cdb7f4466423d018b2aace4a7e688aa8e",
+        "tools/validate_private_update.py": "abc2063df1ea6a41274055617c829df39d974565d2a2afbe01a246972658bbbc"
+      },
+      "evidence": [
+        "validation/updates/U_GITHUB_final/result.json",
+        "validation/updates/U_H/gui_resume/result.json",
+        "validation/updates/U_H/runtime_021/result.json",
+        "validation/updates/U_H/actual_gui_021/smoke.json",
+        "validation/updates/U_H/portable_021/result.json",
+        "validation/updates/U_PROGRAM_021/result.json",
+        "validation/updates/published_client_021/result.json"
+      ],
+      "revisions": [
+        {
+          "reason": "用户明确允许私有规则自动更新接入及重新验收；保留独立复核、600秒和三轮补生",
+          "previous_files": {
+            "src/soutui_image/update_security.py": "3ebc9dd51cbdccc4cc052234c61e40d8f0b8a314fc52c8253f772632a0b1b65e",
+            "src/soutui_image/github_updates.py": "9a588002452d27f0b38c9d72e2e31e549a880d8521265f0176c0cc18d1ab47de",
+            "src/soutui_image/rule_store.py": "00f8377d7c1cebb88dd1ba9aad6365c16cb8b6d2a0e9b2b105bcb9d4534d0a0d",
+            "src/soutui_image/resources/update_source.json": "7e597601549cb4073ac7bc574317ee8134a983c6e15fb854403f882aee17a3cb",
+            "run_updates.py": "52ed751b72f10d78f08396b180c9c30195f6467eac4bb79d5e3a06366948b026",
+            "tests/test_private_updates.py": "7493c46eff099fb9c12b20cdcc181d188f618e49f2543d872780f9de4b8f010f",
+            "tools/validate_private_update.py": "abc2063df1ea6a41274055617c829df39d974565d2a2afbe01a246972658bbbc"
+          },
+          "evidence": [
+            "validation/updates/U_H/gui_resume/result.json",
+            "validation/updates/U_H/runtime_021/result.json",
+            "validation/updates/U_H/actual_gui_021/smoke.json",
+            "validation/updates/U_H/portable_021/result.json",
+            "validation/updates/U_PROGRAM_021/result.json",
+            "validation/updates/published_client_021/result.json"
+          ],
+          "prior_baseline": "validation\\updates\\final_frozen_before.json"
+        }
+      ],
+      "revalidation_20261103": {
+        "reason": "用户授权轻微差异、整体镜像、裁切裤长标准调整及独立检查并行",
+        "scope": "最终规则图二通过/图三拒绝；前一阶段图一与两张历史人工回归另按原版本登记；控制检查118项及本机exe清零启动",
+        "evidence": "validation/current_quality/release_acceptance.json"
+      }
+    },
+    "U_E_RUNTIME": {
+      "status": "verified",
+      "scope": "无损规则运行时：35张实际原/结果的已完成结论一致、49阶段真实输入指纹一致；新版本隔离旧缓存，未新审图",
+      "evidence": [
+        "validation/updates/U_E_RUNTIME/result.json",
+        "validation/updates/U_PIPELINE/prefix/result.json",
+        "validation/updates/U_PIPELINE/actual_batch/result.json"
+      ],
+      "files": {
+        "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+        "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+        "src/soutui_image/rule_runtime.py": "aa416a3c76c9d8806ea4acf766847d132d76f4873930656acb319926933374f5",
+        "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+        "tools/validate_external_rule_runtime.py": "94e82d3bcc1e384bf4de41616b2ee549d7069e9b1c5a8754ba92098cbf66d1d5",
+        "src/soutui_image/review_schedule.py": "a07be55d4ed948be16ac73489ae6c983b94adef1d61c957dc959496658f9631f",
+        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69"
+      },
+      "revisions": [
+        {
+          "reason": "用户明确允许私有规则上下文接入；旧合格图和三轮补生不变",
+          "previous_files": {
+            "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+            "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+            "src/soutui_image/rule_runtime.py": "aa416a3c76c9d8806ea4acf766847d132d76f4873930656acb319926933374f5",
+            "src/soutui_image/stage_e_codex_review.py": "a68307d323a37eeb8d45957a8f34ba70ac1481e97feba82d56fcb048699c12c5",
+            "tools/validate_external_rule_runtime.py": "94e82d3bcc1e384bf4de41616b2ee549d7069e9b1c5a8754ba92098cbf66d1d5"
+          },
+          "evidence": [
+            "validation/updates/U_PIPELINE/prefix/result.json",
+            "validation/updates/U_PIPELINE/actual_batch/result.json"
+          ]
+        }
+      ],
+      "revalidation_20261103": {
+        "reason": "用户授权轻微差异、整体镜像、裁切裤长标准调整及独立检查并行",
+        "scope": "最终规则图二通过/图三拒绝；前一阶段图一与两张历史人工回归另按原版本登记；控制检查118项及本机exe清零启动",
+        "evidence": "validation/current_quality/release_acceptance.json"
+      }
+    },
+    "U_PIPELINE": {
+      "status": "verified",
+      "scope": "实际历史前缀复核、保存去重、下一补生第2轮；真实35份当前图像记录与19个原生成任务不变；没有新增模型调用",
+      "files": {
+        "src/soutui_image/pipeline.py": "0111c422645b3e27f305e1a410a5b0b4e76bfd4cf677002b41fa15afa346fcbb",
+        "src/soutui_image/quality_upgrade.py": "3014eba24736346135317cf1e1f83ff080bd10efd1fe0b61a3b302bcec7814f4",
+        "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+        "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+        "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+        "src/soutui_image/review_record_validation.py": "818b30a8cfcfe41d3f0274743634b8fe75aa30ecd2d097a6f6971eb1fa24e763",
+        "src/soutui_image/review_revision.py": "a1ab700f541a4baeb1104832ee4797fa02a14384bb1fa9212462fde8098388cf",
+        "src/soutui_image/stage_d_web_generation.py": "7d6657b4529ed430e2a7df46199f41b83cf28ba2f04b82169ecbc40c7fcbcb19",
+        "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+        "src/soutui_image/stage_f_output_revision.py": "0894f06e9c37cb0b396d7986f199d170f8c683adc891f8096cfe55e794e31a8b",
+        "src/soutui_image/stage_f_outputs.py": "cb93121563c1fd6bf3b54bbb2d81cdb9d8eace6c949c03f14549d1bf8bb90d17",
+        "src/soutui_image/update_config.py": "8d56b60bb1ddbe8ac98c9be496efc4c5b2c795edffeff8948b6a4e431e0ed0fa",
+        "tools/register_private_core.py": "8159142b0e376ebe58943bc21a7a30280a0cf8935d79e849cf79d964bdae1e2e",
+        "src/soutui_image/review_schedule.py": "a07be55d4ed948be16ac73489ae6c983b94adef1d61c957dc959496658f9631f",
+        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69"
+      },
+      "evidence": [
+        "validation/updates/U_PIPELINE/prefix/result.json",
+        "validation/updates/U_PIPELINE/actual_batch/result.json",
+        "validation/updates/U_H/gui_resume/result.json",
+        "validation/updates/U_H/runtime_021/result.json",
+        "validation/updates/U_H/actual_gui_021/smoke.json",
+        "validation/updates/U_H/portable_021/result.json",
+        "validation/updates/U_PROGRAM_021/result.json",
+        "validation/updates/published_client_021/result.json"
+      ],
+      "revisions": [
+        {
+          "reason": "用户明确允许私有规则自动更新接入及重新验收；保留独立复核、600秒和三轮补生",
+          "previous_files": {
+            "src/soutui_image/pipeline.py": "0111c422645b3e27f305e1a410a5b0b4e76bfd4cf677002b41fa15afa346fcbb",
+            "src/soutui_image/quality_upgrade.py": "3014eba24736346135317cf1e1f83ff080bd10efd1fe0b61a3b302bcec7814f4",
+            "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+            "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+            "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+            "src/soutui_image/review_record_validation.py": "818b30a8cfcfe41d3f0274743634b8fe75aa30ecd2d097a6f6971eb1fa24e763",
+            "src/soutui_image/review_revision.py": "a1ab700f541a4baeb1104832ee4797fa02a14384bb1fa9212462fde8098388cf",
+            "src/soutui_image/stage_d_web_generation.py": "7d6657b4529ed430e2a7df46199f41b83cf28ba2f04b82169ecbc40c7fcbcb19",
+            "src/soutui_image/stage_e_codex_review.py": "a68307d323a37eeb8d45957a8f34ba70ac1481e97feba82d56fcb048699c12c5",
+            "src/soutui_image/stage_f_output_revision.py": "0894f06e9c37cb0b396d7986f199d170f8c683adc891f8096cfe55e794e31a8b",
+            "src/soutui_image/stage_f_outputs.py": "cb93121563c1fd6bf3b54bbb2d81cdb9d8eace6c949c03f14549d1bf8bb90d17",
+            "src/soutui_image/update_config.py": "3dd8e23edeeb4393a7d80d38cd275576c1a5fb9c455f7beda19469eb1ef11db7",
+            "tools/register_private_core.py": "8159142b0e376ebe58943bc21a7a30280a0cf8935d79e849cf79d964bdae1e2e"
+          },
+          "evidence": [
+            "validation/updates/U_H/gui_resume/result.json",
+            "validation/updates/U_H/runtime_021/result.json",
+            "validation/updates/U_H/actual_gui_021/smoke.json",
+            "validation/updates/U_H/portable_021/result.json",
+            "validation/updates/U_PROGRAM_021/result.json",
+            "validation/updates/published_client_021/result.json"
+          ],
+          "prior_baseline": "validation\\updates\\final_frozen_before.json"
+        }
+      ],
+      "revalidation_20261103": {
+        "reason": "用户授权轻微差异、整体镜像、裁切裤长标准调整及独立检查并行",
+        "scope": "最终规则图二通过/图三拒绝；前一阶段图一与两张历史人工回归另按原版本登记；控制检查118项及本机exe清零启动",
+        "evidence": "validation/current_quality/release_acceptance.json"
+      }
+    },
+    "U_PRIVATE_CLIENT": {
+      "status": "verified",
+      "scope": "本机私有规则下载、GUI复核暂停续跑、exe真实历史副本复核、ZIP迁移及新旧真实程序目录替换；任务规则固定",
+      "limits": "另一台电脑及其只读令牌首次配置尚未实测；本轮没有新图生成或新模型审核，视觉质量标准未改变",
+      "files": {
+        "pyproject.toml": "bac4a7088e6029e3b417ca0e473bc8ee897e029825558e7e57ef64dcb7fe8716",
+        "run_pipeline.py": "8e5da4cafec658fef44710dc446ae2f58c15762f817cb3a9f5eb7655937c85a0",
+        "src/soutui_image/desktop_app.py": "d329d27120cbe3c0d0f6a37c08744a5d15eb36fc8a4c8a56d3cdbdf35d328c67",
+        "src/soutui_image/github_updates.py": "9a588002452d27f0b38c9d72e2e31e549a880d8521265f0176c0cc18d1ab47de",
+        "src/soutui_image/program_update.py": "7698ed6d44448097e0ca2d20a8da7935153ca0c099d4a9372549bc5dbd8e7c2f",
+        "src/soutui_image/resources/review_rules.json": "c06f8853a8847de78124a3655bd639e7ada0ba52ec28cc95fda866f15ef6d5ab",
+        "src/soutui_image/resources/update_source.json": "7e597601549cb4073ac7bc574317ee8134a983c6e15fb854403f882aee17a3cb",
+        "src/soutui_image/rule_runtime.py": "aa416a3c76c9d8806ea4acf766847d132d76f4873930656acb319926933374f5",
+        "src/soutui_image/rule_store.py": "4e1711d1d27a94152c531730ac0e1f0ec7e16f65857c49ee54719795cd9c4a4c",
+        "src/soutui_image/rules_bundle.py": "7863d677f1ff40cbe50c27600d7488573a7847bab99414723892f2a5f3e9fd11",
+        "src/soutui_image/update_config.py": "8d56b60bb1ddbe8ac98c9be496efc4c5b2c795edffeff8948b6a4e431e0ed0fa",
+        "src/soutui_image/update_dialog.py": "28c5a11616905544b424657dd788cd4aee3209634e044d614ad6221176a8b4a7",
+        "src/soutui_image/update_security.py": "3ebc9dd51cbdccc4cc052234c61e40d8f0b8a314fc52c8253f772632a0b1b65e",
+        "src/soutui_image/update_service.py": "729861895d53f7ba35e489e3b1f88d26f1545c03da6d5dc4e29c825c1eabbc49",
+        "tests/test_program_updates.py": "a018fdfb362659c57d00069a01cf6e89d3458d8e63b94a6aa12789ddcaf13c38",
+        "tools/build_windows.py": "fa88515bd0b5a3a8e82df3b18f53251b04ad347ab3bab97b1e4549b0e918f408",
+        "tools/package_release.py": "77d2cb49bc597449a77aa2ffe522dc426f042e091eaf9ecf3b4d4ec60595c0dc",
+        "tools/private_update_panel.py": "0d4162b47d8d58eab1151b86a8134e4d4b1ce8bffa7c09787a4e01b8b3a2dff0",
+        "tools/register_private_release.py": "5beb1067b25b5885caf7a1ee55f3f6b3b2dd8af47277341d3af02a5a6421d67d",
+        "tools/validate_program_replacement.py": "c4b906c99ea9bef169d4b4a1918fb797837ebbfe01931bcb41e903e8ce917bfe",
+        "tools/validate_published_private_release.py": "d43d307159b08f71011e8cc663d8e29cf227acae2bcd8be7230aeb54fd34268f"
+      },
+      "evidence": [
+        "validation/updates/U_H/gui_resume/result.json",
+        "validation/updates/U_H/runtime_021/result.json",
+        "validation/updates/U_H/actual_gui_021/smoke.json",
+        "validation/updates/U_H/portable_021/result.json",
+        "validation/updates/U_PROGRAM_021/result.json",
+        "validation/updates/published_client_021/result.json"
+      ],
+      "revalidation_20261103": {
+        "reason": "用户授权轻微差异、整体镜像、裁切裤长标准调整及独立检查并行",
+        "scope": "最终规则图二通过/图三拒绝；前一阶段图一与两张历史人工回归另按原版本登记；控制检查118项及本机exe清零启动",
+        "evidence": "validation/current_quality/release_acceptance.json"
+      }
+    },
+    "MAINTENANCE_RESET": {
+      "status": "verified_scoped",
+      "scope": "实际结束旧批次、原图保留、窗口清零；未知文件和运行锁保护控制检查",
+      "evidence": "migration_backup/reset_latest.json",
+      "files": {
+        "tools/reset_run_records.py": "28fd35fe6e298ebbe23dfa9bc41d107c09a4a6093dbcddcff283cfae32ba1c62",
+        "tests/test_reset_records.py": "febff359e6a4b2ac131c1d6c3ec40dfd708a27b7e2ad328dfaa12aa165477cb1"
+      }
+    }
+  },
+  "maintenance_20261103": {
+    "authorization": "用户要求新版完成后删除全部旧版本及无用测试和临时副本",
+    "scope": "仅修改打包脚本取消旧ZIP保留，并逐文件回读校验；不改变任何冻结业务源码",
+    "files": {
+      "tools/package_release.py": {
+        "sha256": "8f5bcea26877d696bb0b8f29094b0d47bf8cda51b8ccf2fe2a6c2ecb65d04c40",
+        "previous_sha256_by_module": {
+          "H_DESKTOP": "c5299f0fdc2de550e287da1679b1cc79283ff637f9909de2eb29466bc6f8f388",
+          "U_PRIVATE_CLIENT": "c5299f0fdc2de550e287da1679b1cc79283ff637f9909de2eb29466bc6f8f388"
+        }
+      }
+    },
+    "checks": 111,
+    "evidence": "migration_backup/maintenance_acceptance.json",
+    "historical_source_copies_removed": true
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "as_of": "2026-11-03",
+  "public_source_repository": "https://github.com/wanghua361/soutui-image",
+  "program_version": "0.2.2",
+  "policy_version": "2026-11-03.3",
+  "business_code_changed_for_publication": false,
+  "frozen_files": 112,
+  "frozen_manifest_sha256": "e1ad928fc3c9646453e41948d0f95036948fc42a9f918846e4f5d25c2010cf82",
+  "batch_state": "previous_batch_explicitly_ended_new_test_not_started",
+  "source_inputs_in_public_repository": 0,
+  "original_inputs_preserved_on_original_computer": 7,
+  "historical_quality_scopes": [
+    {
+      "policy_version": "2026-11-03.1",
+      "scope": "袖口/镜像调整及独立检查并行",
+      "sample_1": "pass",
+      "sample_3": "reject",
+      "holdout_normal": "pass",
+      "holdout_error": "reject",
+      "sample_2": "袖口match，但旧裤长标准review；之后经用户明确授权放宽裤长"
+    },
+    {
+      "policy_version": "2026-11-03.2",
+      "scope": "中间校准未通过，不作为当前版验收",
+      "sample_2": "复核误杀细窄网孔边饰",
+      "sample_3": "reject"
+    },
+    {
+      "policy_version": "2026-11-03.3",
+      "scope": "最终细窄边饰与裤长容忍标准的真实正反例",
+      "sample_2": "pass",
+      "sample_3": "reject"
+    }
+  ],
+  "original_computer_control_checks": {
+    "tests_run": 118,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "success": true,
+    "scope": "现有模块规则和编排控制检查；真实网站与图片审核另见联调证据"
+  },
+  "original_computer_performance_observations": [
+    {
+      "sample": "sample_2",
+      "policy_version": "2026-11-03.3",
+      "phase": "verification",
+      "body_seconds": 439.07,
+      "buttons_seconds": 178.22,
+      "parallel_elapsed_seconds": 439.07,
+      "observed_overlap_seconds": 178.22,
+      "scope": "同次独立检查实际重叠等待；非单独串行重跑对照或固定加速倍数"
+    }
+  ],
+  "original_computer_executable_sha256": "4f974842a902dbfd832eb5573f4a523689196cf7194a5ada7c11621e184a75b0",
+  "windows_archive_sha256": "664b7dee661e06c043a36d5b0e978f59085b96af00f1244b338c96b565d684eb",
+  "new_website_generation_submissions_during_quality_update": 0,
+  "second_stage_implemented": false,
+  "cross_computer_business_validation_complete": false,
+  "outbound_approval_scope": "Only the explicitly registered original plus samples 2 and 3 and same-image crops/prompts/IDs to OpenAI Codex; this is not permission to publish images.",
+  "limitations": "少量人工样本的本机验证，不保证所有商品准确率或固定倍数提速；未执行新网站批次，未跨电脑验收",
+  "evidence_origin": "Original-computer local records; summarized here without product images, raw responses, credentials or private signing material. New computer must run its own environment and business verification.",
+  "public_evidence_files": [
+    "validation/frozen_modules.json",
+    "validation/public_handoff/current_state.json"
+  ],
+  "handoff_document": "docs/换机继续开发.md",
+  "next_action": "Prepare own images and logins on the new computer; run freeze/control checks, then start a user-requested fresh test. Never restore the ended historical batch."
+}

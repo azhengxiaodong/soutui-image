@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# 本地配置、登录状态、任务及图片
+.env
+.env.*
+!.env.example
+config.local.*
+data/
+output/
+outputs/
+downloads/
+logs/
+.browser-profile/
+storage-state*.json
+
+# 编辑器与系统文件
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store
+
+# 公开源码仓库：本机业务资料、签名恢复材料及发布二进制不入库
+/migration_backup/
+/release/
+/.maintenance-tmp/
+/白底/
+/商品图片/
+/模板/
+/ID/
+/鎼滄帹涓婅韩/
+/*恢复口令*
+/重装后给Codex的恢复说明.md
+/*.lnk
+*.pem
+*.key
+*.pfx
+*.p12
+*.dpapi
+*.zip
+*.exe
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.gif
+*.bmp
+*.tif
+*.tiff
+
+# 原始审图响应、带业务标识的报告及样图留在本机；公开必要接续摘要
+/validation/*
+!/validation/frozen_modules.json
+!/validation/public_handoff/
+/docs/审核样例/*
+!/docs/审核样例/README.md

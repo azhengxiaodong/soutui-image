@@ -1,0 +1,2 @@
+# 开发打包依赖；不改变已经冻结的业务模块与 pyproject.toml。
+pyinstaller==6.16.0
