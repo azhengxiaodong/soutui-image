@@ -2,7 +2,7 @@
   "as_of": "2026-11-08",
   "program_version": "0.2.11",
   "policy_version": "2026-11-04.1",
-  "repository": "https://github.com/wanghua361/soutui-image",
+  "repository": "https://github.com/azhengxiaodong/soutui-image",
   "branch": "main",
   "target_visibility_verified": "public",
   "scope": "Current source publication preparation and exact staged public-source control validation; publication completion is verified by the GitHub branch commit.",
@@ -51,11 +51,15 @@
   },
   "cleanup": {
     "status": "deleted",
-    "file_count": 202,
-    "bytes": 2173218,
+    "file_count": 203,
+    "bytes": 2175861,
     "targets": [
-      ".maintenance-tmp"
+      ".maintenance-tmp",
+      "validation/publication_0211/github_login_trace.log"
     ],
     "retained": "Concise control result; current source, runtime, real business data, images and Git history preserved."
-  }
+  },
+  "source_repository": "https://github.com/wanghua361/soutui-image",
+  "publication_account": "azhengxiaodong",
+  "destination_reason": "User requested the currently signed-in GitHub account; it has no write permission to the original source repository. A new public repository was created under the current account."
 }

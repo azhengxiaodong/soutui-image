@@ -81,6 +81,7 @@
     "program_version": "0.2.11",
     "policy_version": "2026-11-04.1",
     "report": "validation/public_handoff/publication_0211.json",
-    "note": "Top-level 0.2.2 fields and source_manifest.json describe the initial publication; keep them as historical evidence."
+    "note": "Top-level 0.2.2 fields and source_manifest.json describe the initial publication; keep them as historical evidence.",
+    "repository": "https://github.com/azhengxiaodong/soutui-image"
   }
 }
