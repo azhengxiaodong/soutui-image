@@ -1,0 +1,131 @@
+{
+  "date": "2026-11-04",
+  "version": "0.2.5",
+  "policy_version": "2026-11-04.1",
+  "rule_bundle_sha256": "942007e22643a8063f315685e08226b7df32e804f0c5ed99e5a185e0a8ff8681",
+  "scope": "新增袖口自然垂坠与门襟连续新增细线标准；保留仍绑定旧规则任务的身份与缓存；人工澄清撤下1张。",
+  "visual_validation": {
+    "samples": 7,
+    "calibration": 5,
+    "held_out_same_product": 2,
+    "sleeve_matches": 3,
+    "placket_rejections": 4,
+    "full_double_review_passes": 3,
+    "matched_after_user_clarification": 7
+  },
+  "limits": [
+    "同款小样本，不代表跨款准确率或零误判。",
+    "04图2原整图标签经用户明确澄清为袖口项正常、门襟多线仍拒绝；保留原标签及模型原响应。",
+    "当前已有批次仍固定2026-11-03.3，新商品采用2026-11-04.1，没有静默重审或补生。",
+    "定位模板未变，复用已核对原图/结果哈希的真实定位。",
+    "未发布新EXE/ZIP或GitHubRelease。"
+  ],
+  "transport": {
+    "actual_calls": 13,
+    "websocket_logs": 0,
+    "routing_failure_logs": 0,
+    "retry_logs": 0,
+    "providers": {
+      "openai_https": 13
+    },
+    "models": {
+      "gpt-6.1-sol": 13
+    },
+    "reasoning": {
+      "xhigh": 13
+    }
+  },
+  "tests": {
+    "tests_run": 138,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "success": true,
+    "scope": "现有模块规则和编排控制检查；真实网站与图片审核另见联调证据"
+  },
+  "gui": {
+    "window_created": true,
+    "app_version": "0.2.5",
+    "current_total": 21,
+    "generation_started": false
+  },
+  "current_counts": [
+    1,
+    3,
+    2,
+    3,
+    3,
+    1,
+    1,
+    6,
+    1
+  ],
+  "old_task_identity_preserved": true,
+  "speed_implementation_unchanged": true,
+  "stage_e_change_only": "POLICY_VERSION常量",
+  "speed_code_unchanged_sha256": {
+    "src/soutui_image/codex_runtime.py": "d6685981508d982facfabe9918d03ab8c2418804f2d99a8ca7968bed862cfba1",
+    "src/soutui_image/pipeline.py": "4237529e2804df170326365c7e6e9a519c1097346ee50e332ab24403a2207a4b",
+    "src/soutui_image/review_schedule.py": "a07be55d4ed948be16ac73489ae6c983b94adef1d61c957dc959496658f9631f",
+    "src/soutui_image/review_detail_locator.py": "a4e205d011c55620231e0051d5e238e0776ded48db007f41f69ffdea39a697f6",
+    "src/soutui_image/review_button_edges.py": "737388e64aef69d87f3adff3102569b7f4a478a8736cdf3750b5aa220b68fa9c",
+    "src/soutui_image/desktop_app.py": "b11869ae0c0b9f6e6abf3a54241680030fab4a0e00ad037707ffd4a9794301a0",
+    "run_pipeline.py": "8a711a6dbfb08ee0d6357913a180f8303d9bf48a96814624c6b4478606e3a04b"
+  },
+  "changed_files": {
+    "pyproject.toml": {
+      "before": "d21839d98a15ae8783f4d949ed521049717c476955cc9c0cbe184c5687f9e0b5",
+      "after": "3c31f2f4067843702ce4133adc69e03a5de7ff07380d5062c2bf374bc3947d7e"
+    },
+    "src/soutui_image/resources/review_rules.json": {
+      "before": "c06f8853a8847de78124a3655bd639e7ada0ba52ec28cc95fda866f15ef6d5ab",
+      "after": "942007e22643a8063f315685e08226b7df32e804f0c5ed99e5a185e0a8ff8681"
+    },
+    "src/soutui_image/rule_store.py": {
+      "before": "4e1711d1d27a94152c531730ac0e1f0ec7e16f65857c49ee54719795cd9c4a4c",
+      "after": "48bd6efc805b368c5d1de224cb888c0c2ec04c23d607122da402de70c0e0c886"
+    },
+    "src/soutui_image/rules_bundle.py": {
+      "before": "7863d677f1ff40cbe50c27600d7488573a7847bab99414723892f2a5f3e9fd11",
+      "after": "8f71059427a2df9460b2de6e32c3a4fa4f71c117d377a3f41e627cc3c4649547"
+    },
+    "src/soutui_image/stage_e_codex_review.py": {
+      "before": "f328afdd77a7d6a3eb46abcfb8b01d6b26d0b391acf6517c8e79ff7a4d34701b",
+      "after": "759e4377e3ace3c036bfe79e10129fd188bca6b5d8b23471aa099cd4334f80a8"
+    },
+    "src/soutui_image/update_config.py": {
+      "before": "0a4da94634bf33143f7f58b98e1ae42790fd6a5771afcfccd2f246f0026cb355",
+      "after": "731a1bb7f04bab2b6b93de908a103199147c121db93a5a2f8c2b44f42d8d85d2"
+    }
+  },
+  "new_files": {
+    "src/soutui_image/resources/review_rules_2026-11-03.3.json": "c06f8853a8847de78124a3655bd639e7ada0ba52ec28cc95fda866f15ef6d5ab",
+    "tests/test_pinned_builtin_rules.py": "124f99764f735843cf276d833cb9cdf737c30de5fd357fc5ec33eda4210ffa6f"
+  },
+  "frozen_manifest_sha256": "35f544bda9347dc213d779157cc727b4a137d7d8f61775298ccd7015cee2f550",
+  "speed_estimate": {
+    "basis": "0.2.3后7组45张实际每图阶段时间，耗时固定，4个图片槽位；04/08原轮完成后分别等待60/51秒才释放补生图",
+    "current_group_barriers_minutes": 114.4,
+    "cross_group_fifo_minutes": 80.46,
+    "estimated_reduction_percent": 29.7,
+    "actual_wall_minutes": 114.83,
+    "caveat": "调度回放估计，并非云端实测；实际容量/网络及新规则拒绝率变化会改变收益。未修改生产调度。"
+  },
+  "evidence": [
+    "validation/current_quality/visual_acceptance_1104.json",
+    "validation/current_quality/labels_clarification_1104.json",
+    "validation/current_quality/transport_1104.json",
+    "validation/current_quality/integration_1104.json",
+    "validation/current_quality/withdraw_04_02_result.json",
+    "validation/current_quality/gui_025/smoke.json"
+  ],
+  "cleanup": {
+    "this_run_files": 6,
+    "this_run_bytes": 33723,
+    "obsolete_release_artifacts": 0,
+    "installed_versions": [
+      "0.2.5"
+    ],
+    "task_bound_rules_retained": true
+  }
+}

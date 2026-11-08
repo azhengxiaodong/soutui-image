@@ -1,5 +1,6 @@
 """统一编排暂停和多开保护，不能因启动两个窗口而重复提交同一批任务。"""
 
+import json
 import tempfile
 import threading
 import unittest
@@ -64,6 +65,30 @@ class PipelineControlTests(unittest.TestCase):
                 self.assertEqual(pipeline._review(product, self._job()), {"verified": True})
             self.assertEqual(review.call_count, 2)
             self.assertEqual(sum(e["kind"] == "review_retry" for e in events), 1)
+
+    def test_one_failed_image_does_not_discard_successful_peers_or_complete_group(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            pipeline = Pipeline(PipelinePaths(root), review_workers=4)
+            product = SimpleNamespace(product_id="001", sha256="source")
+            job = self._job()
+            job["results"] = [{"status":"done", "reference_id":"ref", "reference_index":i} for i in range(5)]
+            def download(product_id, result, root): return Candidate(f"task/slot-{result['reference_index']}")
+            def audit(product, candidate, *args, **kwargs):
+                if candidate.result_id.endswith("slot-0"): raise RuntimeError("network")
+                return Review()
+            progress = []
+            with patch("soutui_image.pipeline.download_result", side_effect=download), \
+                 patch("soutui_image.pipeline.review_candidate", side_effect=audit), \
+                 patch("soutui_image.pipeline.write_group_review_summary") as summary:
+                with self.assertRaisesRegex(RuntimeError, "network"):
+                    pipeline._review(product, job, on_progress=lambda: progress.append(True))
+            report = json.loads(next(root.rglob("partial_review.json")).read_text(encoding="utf-8"))
+            self.assertEqual(len(report["outcomes"]), 4)
+            self.assertEqual(len(progress), 4)
+            self.assertFalse(report["all_successful_images_reviewed"])
+            self.assertFalse(list(root.rglob("round_review.json")))
+            summary.assert_not_called()
 
     def test_second_timeout_stops_without_complete_review_report(self):
         with tempfile.TemporaryDirectory() as directory:

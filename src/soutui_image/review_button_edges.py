@@ -3,6 +3,7 @@
 import hashlib
 import json
 import subprocess
+from .codex_runtime import run_image_call
 from pathlib import Path
 
 from .rule_runtime import active_rules, current_policy
@@ -13,6 +14,7 @@ from .codex_clothing import find_codex
 from .review_detail_views import assert_detail_views_unchanged
 from .review_images import assert_review_image_unchanged
 from .stage_a_inputs import assert_source_unchanged
+from .review_profiles import current_profile, reasoning_arguments
 
 
 SCHEMA = {"type": "object", "properties": {
@@ -81,6 +83,7 @@ def prepare_button_segments(views, directory, *, product=None, candidate=None):
 
 def review_button_edges(product, candidate, views, directory, *, model=None, codex_exe=None, timeout=600):
     """真实调用当前指定模型，仅审核扣位边缘；不读取上次审核的结论或期望标签。"""
+    model = current_profile(model).model
     assert_source_unchanged(product)
     assert_review_image_unchanged(candidate)
     root = Path(directory)
@@ -97,9 +100,10 @@ def review_button_edges(product, candidate, views, directory, *, model=None, cod
     command += ["--output-schema", str(schema), "--output-last-message", str(response)]
     if model:
         command += ["--model", model]
+    command += reasoning_arguments("buttons", model=model)
     command.append("-")
     try:
-        result = subprocess.run(command, input=prompt, text=True, encoding="utf-8", errors="replace", capture_output=True,
+        result = run_image_call(command, stage="扣位专项", input=prompt, text=True, encoding="utf-8", errors="replace", capture_output=True,
                                 cwd=root, timeout=timeout, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
     except subprocess.TimeoutExpired:
         raise TimeoutError("扣位专项复核超时，缺少完整通过证据") from None

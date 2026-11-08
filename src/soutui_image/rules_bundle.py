@@ -74,3 +74,16 @@ class RuleBundle:
 def builtin_bundle():
     """程序自带已验收的初始规则，首次运行无需GitHub即可读取。"""
     return RuleBundle.parse((Path(__file__).parent / "resources" / "review_rules.json").read_bytes())
+
+
+def pinned_builtin_bundles():
+    """只保留真实未结束任务仍绑定的内置规则；固定内容哈希，不能借兼容入口改写旧标准。"""
+    expected = {"2026-11-03.3": "05291e8a435275d69c9e789a3b273a4a94f45dba3561266150e7a3d467c87f84"}
+    bundles = []
+    for version, sha256 in expected.items():
+        path = Path(__file__).parent / "resources" / f"review_rules_{version}.json"
+        bundle = RuleBundle.parse(path.read_bytes())
+        if bundle.version != version or bundle.sha256 != sha256:
+            raise ValueError("任务兼容规则内容已改变，不能继续旧批次")
+        bundles.append(bundle)
+    return tuple(bundles)

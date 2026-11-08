@@ -8,7 +8,7 @@ import time
 import uuid
 from pathlib import Path
 
-from .rules_bundle import RuleBundle, builtin_bundle, canonical
+from .rules_bundle import RuleBundle, builtin_bundle, pinned_builtin_bundles, canonical
 from .update_security import verify_payload
 
 
@@ -29,6 +29,9 @@ def policy_id(bundle):
     original=builtin_bundle()
     if bundle.sha256==original.sha256: return original.version
     if bundle.version==original.version: raise ValueError("已发布版本内容不能改写，需发布新版本")
+    for pinned in pinned_builtin_bundles():
+        if bundle.sha256==pinned.sha256: return pinned.version
+        if bundle.version==pinned.version: raise ValueError("已绑定任务的旧规则内容不能改写")
     return bundle.version+"@"+bundle.sha256[:16]
 
 
@@ -105,6 +108,8 @@ class RuleStore:
         original=builtin_bundle()
         if sha256==original.sha256: return original
         if not re.fullmatch(r"[a-f0-9]{64}",sha256): raise ValueError("规则哈希无效")
+        for pinned in pinned_builtin_bundles():
+            if sha256==pinned.sha256: return pinned
         path=self.root/"bundles"/(sha256+".json")
         payload=self._payload(read(path.with_suffix(".proof.json")))
         descriptor=self._descriptor(payload["rules"]); raw=path.read_bytes()

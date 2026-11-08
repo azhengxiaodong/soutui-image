@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "scope": "真实图片及既有完整审核缓存的离线隔离回放",
+  "limitations": [
+    "网站完成顺序由回放控制，不是新生图验收",
+    "未调用模型，不验证新模型或新强度准确率",
+    "回放耗时不代表真实生图或审图耗时",
+    "拒绝及待确认标签沿用已有 AI 记录，不新增人工真值"
+  ],
+  "generation_only": {
+    "saved": 5,
+    "approved": 0,
+    "unreviewed": 5,
+    "saved_before_other_four_finished": true,
+    "original_bytes_verified": true,
+    "E_calls": 0,
+    "new_generation_submissions": 0,
+    "extra_rounds": 0
+  },
+  "saved_review": {
+    "real_cached_reviews": 5,
+    "retained_pass": 1,
+    "retained_pending_confirmation": 2,
+    "deleted_reject": 2,
+    "new_model_calls": 0,
+    "new_generation_submissions": 0,
+    "retained_original_bytes_verified": true
+  },
+  "network_or_process_attempts": 0,
+  "protected_file_count": 8353,
+  "protected_files_unchanged": true,
+  "output_auxiliary_files": 0,
+  "copied_image_entries": 11,
+  "test_workspace_removed": true,
+  "private_evidence_sha256": "563e3773d7a0bcfece954c2c53113398066c7658d3d49909411a6f79029eac80",
+  "validator_sha256": "ec781c4f1cc0530b39a1ccd94841b9662db383c4bfe509a7bc7fb4af0905ca2d"
+}

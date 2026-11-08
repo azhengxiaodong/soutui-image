@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "soutui-image"
-version = "0.2.2"
+version = "0.2.11"
 description = "分阶段实现生图网站操作和店铺后台图片上传的 Python 工具"
 readme = "README.md"
 requires-python = ">=3.11"

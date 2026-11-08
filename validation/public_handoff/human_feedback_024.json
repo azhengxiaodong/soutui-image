@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-04",
+  "version": "0.2.4",
+  "policy_version": "2026-11-03.3",
+  "reason": "用户明确人工保留3张并撤下22张门襟问题图；已确认按文件名排序定位。速度仅分析，不改代码。",
+  "scope": "人工裁定的身份绑定、保存及计数覆盖、实际25张纠正、重复保存不恢复否决图、GUI和135项控制检查。",
+  "limits": [
+    "没有新增模型审核或生图，没有调整速度/推理/图片/提示词",
+    "当前模型的袖口误杀和门襟漏判已由用户证实；本次人工修正不能当作自动审核准确率已修复"
+  ],
+  "tests": {
+    "tests_run": 135,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "success": true,
+    "scope": "现有模块规则和编排控制检查；真实网站与图片审核另见联调证据"
+  },
+  "removed": 22,
+  "restored": 3,
+  "current_total": 22,
+  "counts": {
+    "组01": 1,
+    "组02": 3,
+    "组03": 2,
+    "组04": 4,
+    "组05": 3,
+    "组06": 1,
+    "组07": 1,
+    "组08": 6,
+    "组09": 1
+  },
+  "original_evidence_unchanged": true,
+  "generation_jobs_unchanged": true,
+  "new_cloud_calls": 0,
+  "changed_files": {
+    "pyproject.toml": {
+      "before": "86961ab914954e55ed5e695ff0fc29679e13dab9a3176bb70c65e86d6c318954",
+      "after": "d21839d98a15ae8783f4d949ed521049717c476955cc9c0cbe184c5687f9e0b5"
+    },
+    "src/soutui_image/review_group_state.py": {
+      "before": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+      "after": "76a5cab07d4730a5112ff6a4c458785fb1ead3520eb012fb5c00a7395f2efeb7"
+    },
+    "src/soutui_image/stage_f_outputs.py": {
+      "before": "ef4a2e7e397f6b1e4d0963a04f76df378b70b32653f0f454081a1ccfab232e31",
+      "after": "332be451de9b1f5e07dd1f69b6d917c6321bba82faba52c5b92a6522498f914d"
+    },
+    "src/soutui_image/update_config.py": {
+      "before": "790a8f0fc49c1d5210f657e63605dba1994312d0e055aedf7e6e8834be7af030",
+      "after": "0a4da94634bf33143f7f58b98e1ae42790fd6a5771afcfccd2f246f0026cb355"
+    }
+  },
+  "new_files": {
+    "src/soutui_image/human_review.py": "e4483d238016e58fcfd1b62072cbf9c01a868b08ec53418c83d36d6767a72d40",
+    "tests/test_human_review.py": "cf0f9e5d8933ff13e0a4b47588cb834828dc63f14d8ff2255c846890829d4d9d"
+  },
+  "speed_code_unchanged_sha256": {
+    "src/soutui_image/codex_runtime.py": "d6685981508d982facfabe9918d03ab8c2418804f2d99a8ca7968bed862cfba1",
+    "src/soutui_image/pipeline.py": "4237529e2804df170326365c7e6e9a519c1097346ee50e332ab24403a2207a4b",
+    "src/soutui_image/review_schedule.py": "a07be55d4ed948be16ac73489ae6c983b94adef1d61c957dc959496658f9631f",
+    "src/soutui_image/stage_e_codex_review.py": "f328afdd77a7d6a3eb46abcfb8b01d6b26d0b391acf6517c8e79ff7a4d34701b",
+    "src/soutui_image/review_detail_locator.py": "a4e205d011c55620231e0051d5e238e0776ded48db007f41f69ffdea39a697f6",
+    "src/soutui_image/review_button_edges.py": "737388e64aef69d87f3adff3102569b7f4a478a8736cdf3750b5aa220b68fa9c",
+    "src/soutui_image/desktop_app.py": "b11869ae0c0b9f6e6abf3a54241680030fab4a0e00ad037707ffd4a9794301a0",
+    "run_pipeline.py": "8a711a6dbfb08ee0d6357913a180f8303d9bf48a96814624c6b4478606e3a04b"
+  },
+  "evidence": [
+    "validation/human_feedback_20261104/result.json",
+    "validation/human_feedback_20261104/gui/smoke.json",
+    "validation/human_feedback_20261104/timing_diagnosis.json",
+    "validation/integration/code_checks.json"
+  ]
+}

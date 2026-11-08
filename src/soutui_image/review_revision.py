@@ -12,6 +12,8 @@ from .review_images import ReviewImage, assert_review_image_unchanged
 from .stage_a_inputs import assert_source_unchanged
 from .stage_e_codex_review import (review_candidate)
 from .rule_runtime import current_policy
+from .review_profiles import current_profile, review_cache_key, phase_profile_identity, validate_review_profile
+from .output_store import read_manifest, manifest_path, MANIFEST_NAME
 
 
 def _hash(path):
@@ -32,13 +34,15 @@ def plan_revision(products, task_directory, cache_directory):
     for product in products:
         assert_source_unchanged(product)
         source_hashes[product.product_id] = product.sha256
-        manifest = Path(product.source_path).parent / product.product_id / ".搜推生图.json"
-        if not manifest.exists():
+        output = Path(product.source_path).parent / product.product_id
+        saved = read_manifest(output, tasks, product)
+        if saved is None:
             continue
-        saved = json.loads(manifest.read_text(encoding="utf-8"))
-        if saved["product_id"] != product.product_id or saved["source_sha256"] != product.sha256:
-            raise ValueError("旧保存清单不属于当前原图")
-        indexed_saved = {(g["row"], item["sha256"]): (g, item) for g in saved["groups"] for item in g["saved"]}
+        manifest = manifest_path(output, tasks)
+        if not manifest.exists():
+            manifest = output / MANIFEST_NAME
+        indexed_saved = {(g["row"], item["sha256"]): (g, item) for g in saved["groups"] for item in g["saved"]
+                         if item.get("review_status", "pass") == "pass"}
         covered = set()
         for report_path in sorted((cache / product.product_id).glob("group_*/round_*/round_review.json")):
             report = json.loads(report_path.read_text(encoding="utf-8"))
@@ -76,8 +80,8 @@ def plan_revision(products, task_directory, cache_directory):
                         raise ValueError("旧合格输出串入其他参考组")
                     if Path(item["filename"]).name != item["filename"]:
                         raise ValueError("旧保存文件名不安全")
-                    photo = manifest.parent / group["directory"] / item["filename"]
-                    if photo.is_symlink() or photo.resolve().parent != (manifest.parent / f"组{row:02}").resolve():
+                    photo = output / group["directory"] / item["filename"]
+                    if photo.is_symlink() or photo.resolve().parent != (output / f"组{row:02}").resolve():
                         raise ValueError("旧输出路径越界")
                     if _hash(photo) != candidate.sha256:
                         raise ValueError("旧合格输出内容改变")
@@ -100,7 +104,7 @@ def execute_revision(products, plan, directory, review_directory, *, reuse_direc
         raise ValueError("复核规则或并发参数不符")
     target = Path(directory).resolve()
     target.mkdir(parents=True, exist_ok=True)
-    settings = {"policy_version": current_policy(), "model": model or "default"}
+    settings = {"policy_version": current_policy(), "model": model or "default", **phase_profile_identity(model=model)}
     settings_path = target / "run_config.json"
     if settings_path.exists() and json.loads(settings_path.read_text(encoding="utf-8")) != settings:
         raise ValueError("复核目录已使用其他审核模型，不能混用旧结论")
@@ -125,7 +129,14 @@ def execute_revision(products, plan, directory, review_directory, *, reuse_direc
             raw = json.loads(path.read_text(encoding="utf-8"))
             if raw.get("policy_version") == current_policy():
                 identity = (raw["product_id"], raw["result_id"], raw["source_sha256"], raw["result_sha256"])
-                expected_key = hashlib.sha256("\0".join((current_policy(), *identity, model or "default")).encode()).hexdigest()
+                product = products_by_id.get(raw["product_id"])
+                if product is None:
+                    continue
+                try:
+                    validate_review_profile(raw, model=model)
+                except ValueError:
+                    continue
+                expected_key = review_cache_key(product, {"result_id": raw["result_id"], "sha256": raw["result_sha256"]}, model=model)
                 if path.parent.name == expected_key:
                     reuse[identity] = path.parent.parent
     completed = []

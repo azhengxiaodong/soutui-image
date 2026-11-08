@@ -1,0 +1,239 @@
+{
+  "date": "2026-11-04",
+  "version": "0.2.8",
+  "policy_version": "2026-11-04.1",
+  "status": "implemented_control_verified_visual_profile_partial",
+  "features": [
+    "new_tasks_review_off_by_default",
+    "save_every_success_without_quality_regeneration",
+    "independent_saved_image_review",
+    "delete_explicit_reject_keep_uncertain_and_errors",
+    "sol_terra_selector_and_pinned_profiles",
+    "automatic_existing_browser_connection",
+    "internal_output_records_no_sidecars",
+    "larger_log_and_pending_image_details"
+  ],
+  "tests": {
+    "tests_run": 237,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "success": true,
+    "scope": "现有模块规则和编排控制检查；真实网站与图片审核另见联调证据"
+  },
+  "real_replay": "validation/public_handoff/workbench_modes_replay_028.json",
+  "models": {
+    "gpt-6.1-sol": {
+      "whole_image_matches": 7,
+      "strict_sample_matches": 6,
+      "cases": 7,
+      "single_image_seconds_range": [
+        110.635,
+        216.043
+      ],
+      "single_image_seconds_mean": 157.8412857142857,
+      "single_image_seconds_median": 133.957,
+      "logged_tokens": 545813,
+      "calls": 20,
+      "missing_token_counts": 0
+    },
+    "gpt-6.1-terra": {
+      "whole_image_matches": 7,
+      "strict_sample_matches": 7,
+      "cases": 7,
+      "single_image_seconds_range": [
+        51.297,
+        104.288
+      ],
+      "single_image_seconds_mean": 69.397,
+      "single_image_seconds_median": 55.185,
+      "logged_tokens": 465839,
+      "calls": 20,
+      "missing_token_counts": 0
+    },
+    "comparison": {
+      "token_reduction_fraction": 0.1465227101589739,
+      "mean_single_image_time_reduction_fraction": 0.5603368302155238,
+      "scope": "同7张实际新定位与完整审核，双审和专项保留，各2张并发；非网站新批次测试，也非账单。"
+    }
+  },
+  "gui": {
+    "app_version": "0.2.8",
+    "window_created": true,
+    "connected": true,
+    "review_model": "gpt-6.1-sol",
+    "review_enabled": false,
+    "log_size": [
+      1078,
+      161
+    ],
+    "group_rows": 9,
+    "generation_started": false,
+    "codex_ready": true
+  },
+  "native_model_selector_test": {
+    "actual_workbench": "0.2.8",
+    "native_ui_observed": true,
+    "model_menu_sol_terra": true,
+    "selected_terra_and_settings_persisted": true,
+    "restored_default_sol": true,
+    "review_enabled_left_false": true,
+    "pending_view_opened_empty_message_correct": true,
+    "all_nine_groups_visible": true,
+    "current_saved_30": true,
+    "old_batch_configuration_warning_visible": true,
+    "generation_or_saved_review_started": false
+  },
+  "migration": {
+    "products": 2,
+    "saved_image_counts": [
+      21,
+      30
+    ],
+    "removed_sidecars": 4,
+    "source_and_output_files_unchanged": 53,
+    "business_files_unchanged": 8300
+  },
+  "new_generation_submissions": 0,
+  "changed_frozen_files": {
+    "pyproject.toml": {
+      "before": "7373e02029e78421c89be5d0571a46ee62ea75bb3de647d4d99f659c1d1c1497",
+      "after": "507b3e410ee12936bae7dc24328e608123cb422e18fa53db19474cd44a102b79"
+    },
+    "src/soutui_image/codex_runtime.py": {
+      "before": "d6685981508d982facfabe9918d03ab8c2418804f2d99a8ca7968bed862cfba1",
+      "after": "2d30a69443f75bcb2360d2b524d5db682ab6a6a72ef22326cdf50cbabcb51e0d"
+    },
+    "src/soutui_image/review_button_edges.py": {
+      "before": "737388e64aef69d87f3adff3102569b7f4a478a8736cdf3750b5aa220b68fa9c",
+      "after": "c60933403623f0c75a30e1ec8b829abbe908f582ea7f5de54c769225d90f59d9"
+    },
+    "src/soutui_image/review_detail_locator.py": {
+      "before": "a4e205d011c55620231e0051d5e238e0776ded48db007f41f69ffdea39a697f6",
+      "after": "f765f536d5091159aabe3dc5a0368452964e3939765cf48233b6f1e3777c08af"
+    },
+    "src/soutui_image/stage_d_web_generation.py": {
+      "before": "c6caa8c0f4ace6d0638d5207da8e92d04d0310de3c04f3c12b8524247e0f7c9e",
+      "after": "53684dafbdbb4f40aa28ff66f4a769c6d5081ce465756557943dc4716772b56b"
+    },
+    "src/soutui_image/stage_e_codex_review.py": {
+      "before": "759e4377e3ace3c036bfe79e10129fd188bca6b5d8b23471aa099cd4334f80a8",
+      "after": "14e1c60ed68c4c82f0118c534a8497d32049479743b00e1162a4825221ab841e"
+    },
+    "tests/test_quality_bridge.py": {
+      "before": "d278e4566583a4079d267632e1df88613d6fd3bb994b888b47ad2fe3d2220b05",
+      "after": "e1deacc5eb104b592bfbf8081a31437ff709946c73a0aa3acd3be4c5c31e4d0a"
+    },
+    "src/soutui_image/quality_upgrade.py": {
+      "before": "3014eba24736346135317cf1e1f83ff080bd10efd1fe0b61a3b302bcec7814f4",
+      "after": "0919c1bd2171fdc875b1212d8665904421a2243433297b50c2c598675a3a0e74"
+    },
+    "src/soutui_image/review_group_state.py": {
+      "before": "5c86dbc2770de7ceeb856d1c4048312a5a68636ddb79d56b900057465ff13052",
+      "after": "13b4d25ef70db03b63192817168d217e2672a40f9403df573f131c35f79aaf72"
+    },
+    "src/soutui_image/review_revision.py": {
+      "before": "a1ab700f541a4baeb1104832ee4797fa02a14384bb1fa9212462fde8098388cf",
+      "after": "a35597adc3b6b306ba803bc319abb993019a9af0e5e61fafb5c5105145889105"
+    },
+    "src/soutui_image/stage_f_output_revision.py": {
+      "before": "0894f06e9c37cb0b396d7986f199d170f8c683adc891f8096cfe55e794e31a8b",
+      "after": "36dc9d7dd0dff147dd0dee45db5184be223ccd762d5b4cd6a9fef01f5ee1449a"
+    },
+    "tests/test_review_revision.py": {
+      "before": "f8ceaf3a59e970103e08b447c6c2f60217e3f25562042974676d6f0ef852383c",
+      "after": "517858220d2a13232b44e022981a4c482599b4710860999bd096bc2bbad7c943"
+    },
+    "src/soutui_image/stage_f_outputs.py": {
+      "before": "ded2bfd3f74bbabbf2dc40f4825dceb05243faea67669deba9bb803409f1b92d",
+      "after": "5d1d776e4869e9f6aaf94691a43d297c31ae4190fbdc8a04314eb83da6477bf6"
+    },
+    "tests/test_output_revision.py": {
+      "before": "b369489b2cbf7c2909b47db2368926ef6a0f2d043a00195a98427b3b55ec615d",
+      "after": "476c63365716c77b1ccf5f355c8b6f63cb874b27897e4a30e6985a65827d677f"
+    },
+    "run_pipeline.py": {
+      "before": "8a711a6dbfb08ee0d6357913a180f8303d9bf48a96814624c6b4478606e3a04b",
+      "after": "7fab4a066d47aa8fb2fab77d032714eb35ed44b69fb212369e53af72a88e371f"
+    },
+    "src/soutui_image/pipeline.py": {
+      "before": "d0717e04db45afecc33e0ff2b2dbab2ee7201f855d4f4e0a5503fba14fc0b83c",
+      "after": "5ef60fcd93844ae186a757cb41beffa404e412321934948ed6e6911376be747f"
+    },
+    "src/soutui_image/desktop_app.py": {
+      "before": "3db93896bcb851e22208613b2da86b430939ca46a8c28665c5ca3553237e8cfe",
+      "after": "1011cf88d9c7c897fa7aadf0987a0eba8987f6a0c6c5059f4ead8c7ff8436d7e"
+    },
+    "src/soutui_image/update_config.py": {
+      "before": "fadfd1d2fd327d8097bd1386c99a9eaa5cb0d4f71f87524be1116e72c40eedcc",
+      "after": "c38af20e45f1997238c90b11b962b330ff5a2e3ce49a3c58b31c359cc3824201"
+    },
+    "tests/test_codex_runtime.py": {
+      "before": "256fc826ccca2c381098297dcaa403f606fe49441b1a289952c1532afc52cb6b",
+      "after": "b955d8f2efe6e2dbee69f5f0652adeaa9ffac7abbd1c1e56da360c6a6d234cd4"
+    },
+    "tests/test_human_review.py": {
+      "before": "cf0f9e5d8933ff13e0a4b47588cb834828dc63f14d8ff2255c846890829d4d9d",
+      "after": "a95f9d8d3f447b5e8ed7c48e1977983142409d3c80f8f54f3361c218b6d910a6"
+    },
+    "src/soutui_image/streaming_pipeline.py": {
+      "before": "fd33d5753dd3a96b09decd6ec351441fed8dadd960691085eedbf4563515a7b4",
+      "after": "37a689677241afcc3c066b47a74f3a28ca5d6433243c30e39b83ebb4db86b862"
+    },
+    "tests/test_streaming_pipeline.py": {
+      "before": "463f1a5807e8286f7f148bfd2bcc467d9b29f183c1538c23f953dc3d7774d343",
+      "after": "8690a71220f572a58d9aacad9a958aabc5bb5c2004349f758f318d747cfbd466"
+    }
+  },
+  "new_files": {
+    "src/soutui_image/review_profiles.py": "910bb08d5f2d73a6a419b1ddd111cb6dfea54c662ed6c85762bd53586fae619b",
+    "src/soutui_image/workflow_options.py": "60d8521ce3e9b1fe8aac0171a1e36130a4553445cd5713ebe458270d5ac7667d",
+    "src/soutui_image/output_store.py": "10545dc83a2b0fd14cae54edf0893d7da8b72295fe3eecccd203c7a3a7713a37",
+    "src/soutui_image/generation_only.py": "f74ab3ea2850bd990857d9430ae7d446fe4a5136c828b03d3ba498a29611276c",
+    "src/soutui_image/saved_images.py": "b7ea62b6153d550be6252986bde320185ec4bda31b5bada1ae74b83f15e08ce0",
+    "src/soutui_image/saved_review.py": "723645f31e8aa2815dfdbdf3528d9db6b7ea715158d2ed81d6c3d3a9a56b6158",
+    "tests/test_review_profiles.py": "626af2ceb71a9966d56840ec447ba2d8210f0f49168527d53e09b7ed8c900c1b",
+    "tests/test_output_store.py": "ed1ae13f6f67ac3aeb8532d43755b8086119b074b9ee4a22ed667ec166dcc607",
+    "tests/test_generation_only.py": "65ee6c56d5ca36584d0f6fd70ed9f887177517b18cd7e272742443a83fca4dec",
+    "tests/test_saved_images.py": "016fcfd9f2285c399abbdb7f7279c41f918cf27911494c7e999e150e1904e56d",
+    "tests/test_saved_review.py": "a8bad4db8d51801075e1fcb87f689bfc559148c72fb4009c133f083d84a897d4",
+    "tests/test_workbench_options.py": "e0453591c81dc74fe8a8d4647fafdb5f394a31400aa403b279be99cf1d575229",
+    "tests/test_quality_upgrade_profiles.py": "ec925d26f0d00d87e7116664a4347b71502fd3912a775d63ec7b4bb4b6cb8f91",
+    "tests/test_model_profile_validation.py": "5fd3446d371c83d83433a60384e6126e84d3c148ef2a5296fea9885844bded3d",
+    "tools/validate_model_profiles.py": "9fb04a8fa1caad7bcc0345683fb6b5d30342c3c4973aa4d19f47ca37d72f7b04",
+    "tools/validate_workbench_modes.py": "ec781c4f1cc0530b39a1ccd94841b9662db383c4bfe509a7bc7fb4af0905ca2d"
+  },
+  "baseline": {
+    "old_baseline_preserved": true,
+    "authorized_changed_file_count": 22,
+    "unchanged_original_frozen_file_count": 101,
+    "new_freeze_registered": false,
+    "reason": "Sol medium/high 的袖口专项仍有一个已知误判，按项目规则不把部分视觉验证登记为整体验收通过并冻结。当前代码哈希另记，不覆盖原冻结基线。"
+  },
+  "limits": [
+    "只交付本机源码工作台，未发布EXE/ZIP或GitHub Release。",
+    "Terra只在7张同款人工样本通过；Sol整体处置7/7，专项6/7。",
+    "未新增网站生成；无审图/独立审图生命周期使用真实图与真实缓存隔离回放，非整批速度测试。",
+    "实际自动连接验证复用本机有效会话，失效桥接自动触发有控制检查，未另行消耗网站积分。"
+  ],
+  "cleanup": {
+    "files": 7,
+    "bytes": 586444,
+    "old_install_removed": "0.2.7",
+    "old_program_archives_found": 0,
+    "isolated_replay_workspace_removed": true,
+    "raw_model_evidence_preserved": true,
+    "deduplicated_crop_retained_at_verified_data_path": true
+  },
+  "installed_version": "0.2.8",
+  "final_business_hash_check": {
+    "business_files": 8300,
+    "source_and_saved_images": 53,
+    "all_unchanged": true
+  },
+  "local_launcher": {
+    "filename": "搜推生图-本机续跑.lnk",
+    "target_verified": true,
+    "launches_source_gui_without_starting_jobs": true
+  }
+}

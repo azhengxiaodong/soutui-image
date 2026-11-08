@@ -1,0 +1,61 @@
+{
+  "as_of": "2026-11-08",
+  "program_version": "0.2.11",
+  "policy_version": "2026-11-04.1",
+  "repository": "https://github.com/wanghua361/soutui-image",
+  "branch": "main",
+  "target_visibility_verified": "public",
+  "scope": "Current source publication preparation and exact staged public-source control validation; publication completion is verified by the GitHub branch commit.",
+  "business_code_changed_for_publication": false,
+  "clean_export_control_checks": {
+    "tests_run": 276,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "success": true,
+    "scope": "现有模块规则和编排控制检查；真实网站与图片审核另见联调证据"
+  },
+  "tested_source_files_matched": 153,
+  "public_index_check": {
+    "status": "passed",
+    "frozen_files": 123,
+    "registered_candidate_files": 45,
+    "scope": "Allowed public text, common secret patterns, original frozen hashes plus registered candidate chain"
+  },
+  "frozen_baseline_replaced_for_publication": false,
+  "registered_reports": [
+    "workbench_028.json",
+    "workbench_029.json",
+    "startup_0210.json",
+    "regenerate_0211.json",
+    "label_0211.json"
+  ],
+  "excluded": [
+    "product/reference/result images",
+    "data and local settings",
+    "credentials and signing material",
+    "raw model responses",
+    "virtual environments and temporary exports"
+  ],
+  "historical_source_manifest": "source_manifest.json remains the original 0.2.2 publication inventory; current source is identified by this commit and registered hashes.",
+  "new_generation_posts": 0,
+  "new_model_calls": 0,
+  "limitations": [
+    "Sol cuff special check 6/7; Terra 7/7 on the authorized same-product sample, not cross-product accuracy.",
+    "Real 4K output and the new manual regeneration POST remain unverified; earlier read-only validation is not a new generation test.",
+    "No new whole-batch timing or cross-computer business test."
+  ],
+  "publication_maintenance_files": {
+    "tools/check_public_repository.py": "24f78beeb426542497f6a982a9566b463cccd355f001eb8447273c7293732823",
+    "tests/test_public_repository.py": "d49ae8ce20557d34d226615f24220c42160d47c757ab1146dfa8e488e846695d"
+  },
+  "cleanup": {
+    "status": "deleted",
+    "file_count": 202,
+    "bytes": 2173218,
+    "targets": [
+      ".maintenance-tmp"
+    ],
+    "retained": "Concise control result; current source, runtime, real business data, images and Git history preserved."
+  }
+}

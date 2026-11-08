@@ -4,12 +4,15 @@ import copy
 import hashlib
 import json
 import os
+from contextlib import contextmanager
 from pathlib import Path
 
 from .stage_a_inputs import assert_source_unchanged
 from .rule_runtime import current_policy
 from .stage_f_outputs import (MANIFEST_NAME, _destination, _direct_path, _group_mapping,
                               _output_lock, _save_manifest)
+from .output_store import (manifest_path as internal_manifest_path, read_manifest,
+                           migrate_manifest, _file_lock, LOCK_NAME)
 
 
 def digest(path):
@@ -27,14 +30,33 @@ def _write(path, data):
     temporary.replace(path)
 
 
-def withdraw_legacy_outputs(product, plan, directory):
+@contextmanager
+def _revision_manifest(output, state_directory, product, plan):
+    """先完成旧撤回事务再迁移，避免迁移重排字节使原断点哈希失效。"""
+    with _output_lock(output, state_directory):
+        record = read_manifest(output, state_directory, product)
+        if record is None:
+            yield None
+            return
+        internal = internal_manifest_path(output, state_directory)
+        legacy = output / MANIFEST_NAME
+        if internal.exists() and legacy.exists():
+            migrate_manifest(output, state_directory, product, plan)
+        manifest = internal if internal.exists() else legacy
+        with _file_lock(output / LOCK_NAME, existing_only=True):
+            yield manifest
+        # 异常时不执行迁移，保留旧事务所需的原始清单与剩余图片。
+        migrate_manifest(output, state_directory, product, plan)
+
+
+def withdraw_legacy_outputs(product, plan, directory, *, state_directory=None):
     """输入当前原图、九组计划和本机待复核根目录；可断点恢复，不改原图/任务/缓存。"""
     assert_source_unchanged(product)
     if plan.product_id != product.product_id or plan.source_sha256 != product.sha256:
         raise ValueError("撤回计划不属于当前原图")
     output = _destination(product)
-    manifest_path = _safe_child(output / MANIFEST_NAME, output)
-    if not manifest_path.exists():
+    state_directory = Path(state_directory) if state_directory is not None else Path(directory).resolve().parent / "tasks"
+    if read_manifest(output, state_directory, product) is None:
         return {"product_id": product.product_id, "withdrawn": 0, "pending": 0}
     archive = Path(directory).resolve()
     archive.mkdir(parents=True, exist_ok=True)
@@ -43,7 +65,9 @@ def withdraw_legacy_outputs(product, plan, directory):
     operation = hashlib.sha256((current_policy() + product.product_id + product.sha256).encode()).hexdigest()[:24]
     target = _safe_child(archive / operation, archive); target.mkdir(exist_ok=True)
     journal = _safe_child(target / "journal.json", target)
-    with _output_lock(output):
+    with _revision_manifest(output, state_directory, product, plan) as manifest_path:
+        if manifest_path is None:
+            return {"product_id": product.product_id, "withdrawn": 0, "pending": 0}
         raw = manifest_path.read_bytes()
         record = json.loads(raw)
         expected = _group_mapping(plan)
@@ -56,7 +80,8 @@ def withdraw_legacy_outputs(product, plan, directory):
             if transaction["product_id"] != product.product_id or transaction["source_sha256"] != product.sha256:
                 raise ValueError("撤回事务身份不符")
             if transaction["status"] == "complete":
-                if any(x.get("policy_version") != current_policy() for g in record["groups"] for x in g["saved"]):
+                if any(x.get("policy_version") != current_policy() and x.get("review_status", "pass") in ("pass", "review")
+                       for g in record["groups"] for x in g["saved"]):
                     raise ValueError("已完成撤回后又出现未登记旧输出，需核对历史")
                 return {"product_id": product.product_id, "withdrawn": 0,
                         "pending": sum(x.get("review_status") == "pending" for x in record.get("withdrawn", [])),
@@ -69,7 +94,7 @@ def withdraw_legacy_outputs(product, plan, directory):
             for group in after["groups"]:
                 keep = []
                 for item in group["saved"]:
-                    if item.get("policy_version") == current_policy():
+                    if item.get("policy_version") == current_policy() or item.get("review_status") in ("unreviewed", "error"):
                         keep.append(item); continue
                     if Path(item["filename"]).name != item["filename"]:
                         raise ValueError("旧文件名越界")

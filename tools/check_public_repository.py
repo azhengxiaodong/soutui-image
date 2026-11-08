@@ -21,6 +21,37 @@ SECRET_PATTERNS = {
 }
 
 
+def registered_source_baseline(files, frozen):
+    """逐步核对已登记的候选差异；旧冻结值保留，未知变化或断链仍拒绝公开。"""
+    expected = dict(frozen)
+    reports = (("workbench_028", "changed_frozen_files"), ("workbench_029", "changed_from_028"),
+               ("startup_0210", "changed_from_029"), ("regenerate_0211", "changed_from_0210"))
+    def digest(value):
+        if not isinstance(value, str) or not re.fullmatch(r"[a-f0-9]{64}", value):
+            raise ValueError("候选记录缺少有效SHA-256")
+        return value
+    for report_name, changes_key in reports:
+        path = f"validation/public_handoff/{report_name}.json"
+        if path not in files: continue
+        report = json.loads(files[path][1].decode("utf-8"))
+        for name, change in report[changes_key].items():
+            if expected.get(name) != digest(change["before"]):
+                raise ValueError(f"候选来源SHA-256不连续：{path} / {name}")
+            expected[name] = digest(change["after"])
+        for name, value in report.get("new_files", {}).items():
+            if name in expected or not allowed_path(name):
+                raise ValueError(f"候选新增文件重复或不在公开范围：{name}")
+            expected[name] = digest(value)
+    patch_path = "validation/public_handoff/label_0211.json"
+    if patch_path in files:
+        patch = json.loads(files[patch_path][1].decode("utf-8"))
+        name = patch["file"]
+        if expected.get(name) != digest(patch["before_sha256"]):
+            raise ValueError("按钮文字更正与已登记候选不连续")
+        expected[name] = digest(patch["after_sha256"])
+    return expected
+
+
 def allowed_path(name: str) -> bool:
     """仅允许当前源码、文本说明和已指定公开验收摘要；业务资料禁止入库。"""
     path = PurePosixPath(name)
@@ -89,18 +120,25 @@ def main() -> int:
                 problems.append({"file": name, "reason": detector, "line": raw[:match.start()].count(b"\n") + 1})
     frozen_name = "validation/frozen_modules.json"
     frozen_count = 0
+    candidate_count = 0
     if frozen_name not in files:
         problems.append({"reason": "缺少冻结基线"})
     else:
         baseline = json.loads(files[frozen_name][1].decode("utf-8"))
         expected = {name: digest for module in baseline["modules"].values() for name, digest in module["files"].items()}
         frozen_count = len(expected)
+        try:
+            current = registered_source_baseline(files, expected)
+            candidate_count = sum(expected.get(name) != digest for name, digest in current.items())
+            expected = current
+        except (KeyError, TypeError, ValueError) as error:
+            problems.append({"reason": "候选验收记录无法核对", "detail": str(error)})
         for name, digest in expected.items():
             if name not in files or hashlib.sha256(files[name][1]).hexdigest() != digest:
-                problems.append({"file": name, "reason": "暂存内容缺失或不符合冻结SHA-256"})
-    report = {"status": "passed" if not problems else "failed", "scope": "Git暂存区公开范围、常见密钥格式及冻结字节",
+                problems.append({"file": name, "reason": "暂存内容缺失或不符合冻结/已登记候选SHA-256"})
+    report = {"status": "passed" if not problems else "failed", "scope": "Git暂存区公开范围、常见密钥格式及冻结/已登记候选字节；不扩大业务验收范围",
               "files": len(files), "bytes": sum(len(raw) for _, raw in files.values()),
-              "frozen_files": frozen_count, "problems": problems}
+              "frozen_files": frozen_count, "registered_candidate_files": candidate_count, "problems": problems}
     print(json.dumps(report, ensure_ascii=False, indent=2))
     return 1 if problems else 0
 

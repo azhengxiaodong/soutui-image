@@ -1,0 +1,243 @@
+{
+  "date": "2026-11-04",
+  "version": "0.2.9",
+  "policy_version": "2026-11-04.1",
+  "status": "ui_and_controls_verified_live_4k_generation_pending",
+  "features": [
+    "flat_monochrome_options_row",
+    "remove_concurrency_selector_keep_four_workers",
+    "remember_2k_4k_selection",
+    "actual_resolution_and_live_quote",
+    "pin_existing_task_resolution"
+  ],
+  "tests": {
+    "tests_run": 257,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "success": true,
+    "scope": "现有模块规则和编排控制检查；真实网站与图片审核另见联调证据"
+  },
+  "desktop": {
+    "scope": "isolated desktop UI, actual read-only tiers fixture; no generation or cloud review",
+    "default_resolution": "2K",
+    "default_quote": "均衡 2K：6积分/张，首轮45张约270积分。 未开启审图：保存全部成功图，不按合格数量补生。",
+    "default_group9_bbox": [
+      2,
+      255,
+      571,
+      28
+    ],
+    "default_tree_height": 295,
+    "default_log_height": 162,
+    "option_controls": 3,
+    "concurrency_selector_present": false,
+    "selected_resolution": "4K",
+    "selected_quote": "均衡 4K：10积分/张，首轮45张约450积分。 开启审图：不足 3 张通过图时，原组最多补生 3 轮。",
+    "review_checked": true,
+    "minimum_group9_bbox": [
+      2,
+      171,
+      475,
+      28
+    ],
+    "minimum_tree_height": 217,
+    "minimum_log_height": 140
+  },
+  "resolution": {
+    "real_site_get": true,
+    "balanced_available_resolutions": [
+      "2K",
+      "4K"
+    ],
+    "live_price_per_image": {
+      "2K": 6,
+      "4K": 10
+    },
+    "draft_credits_per_group": {
+      "2K": 30,
+      "4K": 50
+    },
+    "request_fields_equal_except_resolution_and_price": true,
+    "legacy_products_readonly_2k": 2,
+    "existing_records_unchanged": true,
+    "generation_posts": 0,
+    "image_uploads": 0,
+    "model_calls": 0,
+    "actual_4k_generation_measured": false,
+    "scope": "当前站点HTTPS只读配置核对 + 实际商品/上传回执/参考组构造请求草稿；未发送生成POST，不作为4K新图产出验收"
+  },
+  "installed_version": "0.2.9",
+  "changed_from_028": {
+    "src/soutui_image/desktop_app.py": {
+      "before": "1011cf88d9c7c897fa7aadf0987a0eba8987f6a0c6c5059f4ead8c7ff8436d7e",
+      "after": "85bce4b4ab88ff96bb897fa18a7552a71807eb1385052ffd914eb17ba506518d"
+    },
+    "src/soutui_image/generation_only.py": {
+      "before": "f74ab3ea2850bd990857d9430ae7d446fe4a5136c828b03d3ba498a29611276c",
+      "after": "c67b96d908ed12f704ed4c29bd739b0aa0274618a4e23abda44a9934c90c123e"
+    },
+    "src/soutui_image/pipeline.py": {
+      "before": "5ef60fcd93844ae186a757cb41beffa404e412321934948ed6e6911376be747f",
+      "after": "8f59b6684d89456d6990e87ed68d8e1dbf886b478967fe366dfda0b06c838ae9"
+    },
+    "src/soutui_image/stage_d_web_generation.py": {
+      "before": "53684dafbdbb4f40aa28ff66f4a769c6d5081ce465756557943dc4716772b56b",
+      "after": "fd5de1717e8216d29a03a9417b67ded766d645cbf740dee5e5e274b3694242d7"
+    },
+    "src/soutui_image/streaming_pipeline.py": {
+      "before": "37a689677241afcc3c066b47a74f3a28ca5d6433243c30e39b83ebb4db86b862",
+      "after": "ac3b3d384f7bf053a46694890b9eb347d30c1ca6c4d8767dbabde2bf7a36db04"
+    },
+    "src/soutui_image/update_config.py": {
+      "before": "c38af20e45f1997238c90b11b962b330ff5a2e3ce49a3c58b31c359cc3824201",
+      "after": "7181245ead4ad5f6b3895248e24f695b1150b3a9f70482946886ea9a32e60d96"
+    },
+    "src/soutui_image/workflow_options.py": {
+      "before": "60d8521ce3e9b1fe8aac0171a1e36130a4553445cd5713ebe458270d5ac7667d",
+      "after": "8965f4f3653df72722ed2def825ab0dd52198acdb164941a175f21f4f907297d"
+    },
+    "tests/test_streaming_pipeline.py": {
+      "before": "8690a71220f572a58d9aacad9a958aabc5bb5c2004349f758f318d747cfbd466",
+      "after": "78e64cc47908dbfb111045ebd868913981fca09aa2deb3a63df8e9396e492b3b"
+    },
+    "tests/test_workbench_options.py": {
+      "before": "e0453591c81dc74fe8a8d4647fafdb5f394a31400aa403b279be99cf1d575229",
+      "after": "e2fd4382921f669f697dbc63be3689120763260f554bccaead26137e408d7024"
+    },
+    "run_pipeline.py": {
+      "before": "7fab4a066d47aa8fb2fab77d032714eb35ed44b69fb212369e53af72a88e371f",
+      "after": "70c2538deb8a6ab2a232de3d1dd6082056766ccec708d28a4e98cda05914067b"
+    },
+    "pyproject.toml": {
+      "before": "507b3e410ee12936bae7dc24328e608123cb422e18fa53db19474cd44a102b79",
+      "after": "39afd337b6bf3b3e1d00a8118b30fd4d8355ebc67b71583905f75e6dfeef5e18"
+    }
+  },
+  "new_files": {
+    "src/soutui_image/generation_settings.py": "d5447f6a73b216f91b8fb610bb4e63b3e03321abae54d1bfc5662f41459b28bd",
+    "tests/test_generation_resolution.py": "0c7ab249b18a6b8b0b3d895c5a5d78bafa02fd7c0d04c5218a5d5d0c3ff0ea80",
+    "tests/test_resolution_pipeline.py": "84bc76b0954909bf3031f13f5ac3d9e209a896b8c34215abfe1d408ed7a4a75b"
+  },
+  "unchanged_review_and_transport_files": {
+    "src/soutui_image/codex_runtime.py": "2d30a69443f75bcb2360d2b524d5db682ab6a6a72ef22326cdf50cbabcb51e0d",
+    "src/soutui_image/codex_clothing.py": "e4492bb0e075420e3b69d9811c0e3b8f0d1dbd9b502632c69d80877a4bef54a5",
+    "src/soutui_image/review_profiles.py": "910bb08d5f2d73a6a419b1ddd111cb6dfea54c662ed6c85762bd53586fae619b",
+    "src/soutui_image/stage_e_codex_review.py": "14e1c60ed68c4c82f0118c534a8497d32049479743b00e1162a4825221ab841e",
+    "src/soutui_image/review_detail_locator.py": "f765f536d5091159aabe3dc5a0368452964e3939765cf48233b6f1e3777c08af",
+    "src/soutui_image/review_button_edges.py": "c60933403623f0c75a30e1ec8b829abbe908f582ea7f5de54c769225d90f59d9",
+    "src/soutui_image/saved_review.py": "723645f31e8aa2815dfdbdf3528d9db6b7ea715158d2ed81d6c3d3a9a56b6158"
+  },
+  "business_integrity": {
+    "existing_task_and_review_files_unchanged": 8300,
+    "original_and_saved_images_unchanged": 53
+  },
+  "baseline": {
+    "frozen_manifest_replaced": false,
+    "frozen_unique_files": 123,
+    "known_028_differences": 22,
+    "current_authorized_frozen_differences": {
+      "pyproject.toml": {
+        "frozen": "7373e02029e78421c89be5d0571a46ee62ea75bb3de647d4d99f659c1d1c1497",
+        "current": "39afd337b6bf3b3e1d00a8118b30fd4d8355ebc67b71583905f75e6dfeef5e18"
+      },
+      "src/soutui_image/codex_runtime.py": {
+        "frozen": "d6685981508d982facfabe9918d03ab8c2418804f2d99a8ca7968bed862cfba1",
+        "current": "2d30a69443f75bcb2360d2b524d5db682ab6a6a72ef22326cdf50cbabcb51e0d"
+      },
+      "src/soutui_image/review_button_edges.py": {
+        "frozen": "737388e64aef69d87f3adff3102569b7f4a478a8736cdf3750b5aa220b68fa9c",
+        "current": "c60933403623f0c75a30e1ec8b829abbe908f582ea7f5de54c769225d90f59d9"
+      },
+      "src/soutui_image/review_detail_locator.py": {
+        "frozen": "a4e205d011c55620231e0051d5e238e0776ded48db007f41f69ffdea39a697f6",
+        "current": "f765f536d5091159aabe3dc5a0368452964e3939765cf48233b6f1e3777c08af"
+      },
+      "src/soutui_image/stage_d_web_generation.py": {
+        "frozen": "c6caa8c0f4ace6d0638d5207da8e92d04d0310de3c04f3c12b8524247e0f7c9e",
+        "current": "fd5de1717e8216d29a03a9417b67ded766d645cbf740dee5e5e274b3694242d7"
+      },
+      "src/soutui_image/stage_e_codex_review.py": {
+        "frozen": "759e4377e3ace3c036bfe79e10129fd188bca6b5d8b23471aa099cd4334f80a8",
+        "current": "14e1c60ed68c4c82f0118c534a8497d32049479743b00e1162a4825221ab841e"
+      },
+      "tests/test_quality_bridge.py": {
+        "frozen": "d278e4566583a4079d267632e1df88613d6fd3bb994b888b47ad2fe3d2220b05",
+        "current": "e1deacc5eb104b592bfbf8081a31437ff709946c73a0aa3acd3be4c5c31e4d0a"
+      },
+      "src/soutui_image/quality_upgrade.py": {
+        "frozen": "3014eba24736346135317cf1e1f83ff080bd10efd1fe0b61a3b302bcec7814f4",
+        "current": "0919c1bd2171fdc875b1212d8665904421a2243433297b50c2c598675a3a0e74"
+      },
+      "src/soutui_image/review_group_state.py": {
+        "frozen": "5c86dbc2770de7ceeb856d1c4048312a5a68636ddb79d56b900057465ff13052",
+        "current": "13b4d25ef70db03b63192817168d217e2672a40f9403df573f131c35f79aaf72"
+      },
+      "src/soutui_image/review_revision.py": {
+        "frozen": "a1ab700f541a4baeb1104832ee4797fa02a14384bb1fa9212462fde8098388cf",
+        "current": "a35597adc3b6b306ba803bc319abb993019a9af0e5e61fafb5c5105145889105"
+      },
+      "src/soutui_image/stage_f_output_revision.py": {
+        "frozen": "0894f06e9c37cb0b396d7986f199d170f8c683adc891f8096cfe55e794e31a8b",
+        "current": "36dc9d7dd0dff147dd0dee45db5184be223ccd762d5b4cd6a9fef01f5ee1449a"
+      },
+      "tests/test_review_revision.py": {
+        "frozen": "f8ceaf3a59e970103e08b447c6c2f60217e3f25562042974676d6f0ef852383c",
+        "current": "517858220d2a13232b44e022981a4c482599b4710860999bd096bc2bbad7c943"
+      },
+      "src/soutui_image/stage_f_outputs.py": {
+        "frozen": "ded2bfd3f74bbabbf2dc40f4825dceb05243faea67669deba9bb803409f1b92d",
+        "current": "5d1d776e4869e9f6aaf94691a43d297c31ae4190fbdc8a04314eb83da6477bf6"
+      },
+      "tests/test_output_revision.py": {
+        "frozen": "b369489b2cbf7c2909b47db2368926ef6a0f2d043a00195a98427b3b55ec615d",
+        "current": "476c63365716c77b1ccf5f355c8b6f63cb874b27897e4a30e6985a65827d677f"
+      },
+      "run_pipeline.py": {
+        "frozen": "8a711a6dbfb08ee0d6357913a180f8303d9bf48a96814624c6b4478606e3a04b",
+        "current": "70c2538deb8a6ab2a232de3d1dd6082056766ccec708d28a4e98cda05914067b"
+      },
+      "src/soutui_image/pipeline.py": {
+        "frozen": "d0717e04db45afecc33e0ff2b2dbab2ee7201f855d4f4e0a5503fba14fc0b83c",
+        "current": "8f59b6684d89456d6990e87ed68d8e1dbf886b478967fe366dfda0b06c838ae9"
+      },
+      "src/soutui_image/desktop_app.py": {
+        "frozen": "3db93896bcb851e22208613b2da86b430939ca46a8c28665c5ca3553237e8cfe",
+        "current": "85bce4b4ab88ff96bb897fa18a7552a71807eb1385052ffd914eb17ba506518d"
+      },
+      "src/soutui_image/update_config.py": {
+        "frozen": "fadfd1d2fd327d8097bd1386c99a9eaa5cb0d4f71f87524be1116e72c40eedcc",
+        "current": "7181245ead4ad5f6b3895248e24f695b1150b3a9f70482946886ea9a32e60d96"
+      },
+      "tests/test_codex_runtime.py": {
+        "frozen": "256fc826ccca2c381098297dcaa403f606fe49441b1a289952c1532afc52cb6b",
+        "current": "b955d8f2efe6e2dbee69f5f0652adeaa9ffac7abbd1c1e56da360c6a6d234cd4"
+      },
+      "tests/test_human_review.py": {
+        "frozen": "cf0f9e5d8933ff13e0a4b47588cb834828dc63f14d8ff2255c846890829d4d9d",
+        "current": "a95f9d8d3f447b5e8ed7c48e1977983142409d3c80f8f54f3361c218b6d910a6"
+      },
+      "src/soutui_image/streaming_pipeline.py": {
+        "frozen": "fd33d5753dd3a96b09decd6ec351441fed8dadd960691085eedbf4563515a7b4",
+        "current": "ac3b3d384f7bf053a46694890b9eb347d30c1ca6c4d8767dbabde2bf7a36db04"
+      },
+      "tests/test_streaming_pipeline.py": {
+        "frozen": "463f1a5807e8286f7f148bfd2bcc467d9b29f183c1538c23f953dc3d7774d343",
+        "current": "78e64cc47908dbfb111045ebd868913981fca09aa2deb3a63df8e9396e492b3b"
+      }
+    },
+    "scope": "保留0.2.8视觉部分验收限制；本轮未用控制测试替代4K真实生成验收。"
+  },
+  "cleanup": {
+    "files_removed": 6,
+    "bytes_removed": 57883,
+    "obsolete_installed_version_removed": "0.2.8",
+    "old_program_packages_found": 0
+  },
+  "limits": [
+    "No generation POST, image upload or model review this turn.",
+    "4K actual output and full-batch latency not measured.",
+    "0.2.8 Sol strict cuff result remains 6/7; unchanged this turn.",
+    "Native browser inspection stopped because Computer Use could not verify the current URL; no further UI control attempted. Existing user window was not restarted."
+  ]
+}

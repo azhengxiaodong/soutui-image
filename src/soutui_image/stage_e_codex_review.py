@@ -9,6 +9,7 @@ from __future__ import annotations
 import hashlib
 import json
 import subprocess
+from .codex_runtime import run_image_call
 import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -22,10 +23,12 @@ from .review_detail_views import prepare_detail_views, assert_detail_views_uncha
 from .review_detail_locator import locate_detail_regions
 from .review_button_edges import review_button_edges
 from .review_checkpoints import fingerprint, save_checkpoint, load_checkpoint, digest
+from .review_profiles import (current_profile, phase_profile_identity, reasoning_arguments,
+                              review_cache_key, validate_review_profile)
 from .stage_a_inputs import ProductInput, assert_source_unchanged
 
 
-POLICY_VERSION = "2026-11-03.3"
+POLICY_VERSION = "2026-11-04.1"
 LEGACY_FEATURES = ("颜色", "花纹与面料", "服装组成与版型", "领口与门襟", "袖子与袖口",
                    "上衣下摆", "裤子与裤脚", "口袋", "扣子与配件", "其他变化")
 FEATURES = (*LEGACY_FEATURES, "袖口边缘结构", "门襟层次与边线", "扣位边缘与凸片", "裤长与脚踝位置")
@@ -58,6 +61,7 @@ class ImageReview:
     visible_scope: str
     passes: tuple[dict, ...]
     evidence_directory: str
+    review_profile: dict | None = None
 
 
 def validate_review(data: dict, product_id: str, result_id: str) -> dict:
@@ -107,7 +111,8 @@ def _prompt(product: ProductInput, candidate: ReviewImage, *, verification=False
 
 
 def _audit_once(product, candidate, attempt: Path, *, codex_exe=None, model=None, verification=False, timeout=600, parallel_checks=True):
-    model = model or "gpt-6.1-sol"
+    chosen = current_profile(model)
+    model = chosen.model
     attempt.mkdir(parents=True, exist_ok=True)
     schema, response = attempt / "schema.json", attempt / "response.json"
     if schema.exists():
@@ -129,12 +134,12 @@ def _audit_once(product, candidate, attempt: Path, *, codex_exe=None, model=None
     identity = {"policy_version":current_policy(),"product_id":product.product_id,"result_id":candidate.result_id,
                 "source_sha256":product.sha256,"result_sha256":candidate.sha256,"model":model,
                 "verification":verification,"prompt":fingerprint(prompt),"schema":fingerprint(REVIEW_SCHEMA),
-                "views":[v["sha256"] for v in views]}
+                "views":[v["sha256"] for v in views], **phase_profile_identity(model=model)}
     checkpoint=attempt/"body_checkpoint.json"
     verdict=None
     if checkpoint.exists():
         verdict=validate_review(load_checkpoint(checkpoint,identity),product.product_id,candidate.result_id)
-    elif response.exists():
+    elif response.exists() and chosen.legacy:
         # 旧程序只有在整图响应校验成功后才进入下一阶段；目录存在与原日志共同证明它确实已完成。
         progressed=(any(attempt.glob("button_focus*")) if verification else (attempt.parent/"verification/schema.json").exists())
         log=attempt/"stderr.txt"
@@ -158,9 +163,10 @@ def _audit_once(product, candidate, attempt: Path, *, codex_exe=None, model=None
                      "--image",product.source_path,"--image",candidate.local_path]
             for view in views:
                 command += ["--image",view["path"]]
-            command += ["--output-schema",str(schema),"--output-last-message",str(response),"--model",model,"-"]
+            command += ["--output-schema",str(schema),"--output-last-message",str(response),"--model",model]
+            command += reasoning_arguments("body", model=model) + ["-"]
             try:
-                result=subprocess.run(command,input=prompt,text=True,encoding="utf-8",errors="replace",
+                result=run_image_call(command, stage="独立复核" if verification else "首次整图审核",input=prompt,text=True,encoding="utf-8",errors="replace",
                                       capture_output=True,cwd=call_directory,timeout=timeout,
                                       creationflags=getattr(subprocess,"CREATE_NO_WINDOW",0))
             except subprocess.TimeoutExpired:
@@ -236,18 +242,18 @@ def combine_button_check(verdict, check, product_id, result_id):
 def review_candidate(product: ProductInput, candidate: ReviewImage, directory, *, codex_exe=None, model=None):
     """每图单独审核；首次拟通过者必须独立复核也通过，缓存绑定两张图片哈希与规则版本。"""
     assert_source_unchanged(product)
-    model = model or "gpt-6.1-sol"
+    chosen = current_profile(model)
+    model = chosen.model
     assert_review_image_unchanged(candidate)
     if candidate.product_id != product.product_id:
         raise ValueError("结果图片不属于当前商品")
-    identity = "\0".join((current_policy(), product.product_id, candidate.result_id,
-                          product.sha256, candidate.sha256, model or "default"))
-    key = hashlib.sha256(identity.encode()).hexdigest()
+    key = review_cache_key(product, candidate, model=model)
     root = Path(directory).resolve() / key
     result_path = root / "review.json"
     if result_path.exists():
         raw = json.loads(result_path.read_text(encoding="utf-8"))
         report = ImageReview(**{**raw, "passes": tuple(raw["passes"])})
+        validate_review_profile(report, model=model)
         if (report.policy_version != current_policy() or report.product_id != product.product_id
                 or report.result_id != candidate.result_id or report.source_sha256 != product.sha256
                 or report.result_sha256 != candidate.sha256):
@@ -273,7 +279,8 @@ def review_candidate(product: ProductInput, candidate: ReviewImage, directory, *
         passes.append(_audit_once(product, candidate, run / "verification", codex_exe=codex_exe, model=model, verification=True))
     last = passes[-1]
     report = ImageReview(current_policy(), product.product_id, candidate.result_id, product.sha256,
-                         candidate.sha256, last["decision"], last["summary"], last["visible_scope"], tuple(passes), str(run))
+                         candidate.sha256, last["decision"], last["summary"], last["visible_scope"], tuple(passes), str(run),
+                         chosen.to_dict())
     with result_path.open("x", encoding="utf-8") as handle:
         json.dump(asdict(report), handle, ensure_ascii=False, indent=2)
     return report

@@ -7,7 +7,7 @@ from .rule_store import RuleStore,read
 from .rules_bundle import builtin_bundle
 
 
-APP_VERSION="0.2.2"
+APP_VERSION="0.2.11"
 
 
 def update_source():

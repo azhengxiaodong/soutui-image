@@ -15,11 +15,13 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from urllib.parse import urlsplit
 
+from .atomic_json import atomic_write_json
 from .stage_a_inputs import ProductInput, assert_source_unchanged
 from .stage_b_web_upload import WebUploadReceipt, validate_upload_urls
 from .stage_c_web_plan import GroupAssignment, ProductReferencePlan
 from .web_transport import RequestOutcomeUnknown, WebTransport
 from .rule_runtime import current_policy
+from .generation_settings import validate_resolution, job_resolution, existing_resolution
 
 
 PROMPT = "如提供了模特图，让模特图中的模特穿上服装实拍图中的衣服；并按照参考图中的人一样在相同的场景中摆出一样的姿势"
@@ -56,8 +58,9 @@ def decide_next_round(rounds: list[dict], approved_sha256: list[str], reviewed_r
     return GenerationDecision("generate", max(indices) + 1, approved, "本组累计合格不足三张，沿用原来的五张参考图")
 
 
-def quote_balanced_2k(response: dict) -> int:
+def quote_balanced(response: dict, resolution="2K") -> int:
     """从网站实际模式报价取得单张积分；不自行假定或修改后台费用。"""
+    resolution = validate_resolution(resolution)
     if response.get("success") is not True or not response.get("enabled"):
         raise ValueError("网站图像模式配置不可用")
     if "model-dressing" not in response.get("features", []):
@@ -66,18 +69,24 @@ def quote_balanced_2k(response: dict) -> int:
     if len(choices) != 1:
         raise ValueError("无法唯一确定均衡模式")
     tier = choices[0]
-    if not tier.get("available") or "2K" not in tier.get("availableResolutions", []):
-        raise ValueError("当前账号不能使用均衡模式 2K")
-    price = tier.get("prices", {}).get("2K")
+    if not tier.get("available") or resolution not in tier.get("availableResolutions", []):
+        raise ValueError(f"当前账号不能使用均衡模式 {resolution}")
+    price = tier.get("prices", {}).get(resolution)
     if type(price) is not int or price <= 0:
-        raise ValueError("网站没有给出有效的均衡 2K 单价")
+        raise ValueError(f"网站没有给出有效的均衡 {resolution} 单价")
     return price
 
 
+def quote_balanced_2k(response: dict) -> int:
+    """保留原独立入口的 2K 报价兼容，不影响新界面的尺寸选择。"""
+    return quote_balanced(response, "2K")
+
+
 def build_payload(product: ProductInput, upload: WebUploadReceipt, group: GroupAssignment,
-                  client_task_id: str, unit_price: int):
+                  client_task_id: str, unit_price: int, *, resolution="2K"):
     """保持与网页批量模特换衣相同的字段：原图一张、参考五张、每张一份、立即提交。"""
     assert_source_unchanged(product)
+    resolution = validate_resolution(resolution)
     if (upload.product_id != product.product_id or upload.source_sha256 != product.sha256
             or upload.remote_sha256 != product.sha256 or upload.category not in {"套装", "上装", "下装"}):
         raise ValueError("上传回执与当前原图不符")
@@ -94,7 +103,7 @@ def build_payload(product: ProductInput, upload: WebUploadReceipt, group: GroupA
             "isSensitive": "false", "resultsPerReference": "1", "selectedPoseCount": "5", "hasModel": "no",
             "headSubMode": "face-hair", "garmentType": upload.category}
     params = {"imageUrls": [upload.image_url, *references], "prompt": PROMPT,
-              "extraParams": {**form, "imageTier": "balanced"}, "resolution": "2K", "aspectRatio": "3:4",
+              "extraParams": {**form, "imageTier": "balanced"}, "resolution": resolution, "aspectRatio": "3:4",
               "inputImageUrls": [upload.image_url], "inputImageUrls2": references,
               "inputSnapshot": {"kind": "model-dressing", "clothingImageUrls": [upload.image_url],
                                 "referenceImageUrls": references, "formParams": form},
@@ -103,9 +112,7 @@ def build_payload(product: ProductInput, upload: WebUploadReceipt, group: GroupA
 
 
 def _save(path: Path, record: dict):
-    temporary = path.with_suffix(".tmp")
-    temporary.write_text(json.dumps(record, ensure_ascii=False, indent=2), encoding="utf-8")
-    temporary.replace(path)
+    atomic_write_json(path, record)
 
 
 def _group_directory(directory, product_id, row):
@@ -132,13 +139,25 @@ def group_decision(directory, product: ProductInput, group: GroupAssignment):
         # D：旧审核汇总不能继续声称达标，也不能据旧数补生；原轮次全部保留，先完成新版审核。
         if review.get("policy_version") == current_policy():
             approved, reviewed = review["approved_sha256"], review["reviewed_rounds"]
+            # 独立审图明确撤下的结果不再计为合格；不改原始审核报告及补生轮次。
+            from .saved_images import review_overrides
+            overrides = review_overrides(product, directory, group.row)
+            approved = [sha for sha in approved if overrides.get(sha, "pass") == "pass"]
     return decide_next_round(rounds, approved, reviewed)
 
 
 def prepare_job(product: ProductInput, upload: WebUploadReceipt, plan: ProductReferencePlan,
-                row: int, directory, transport: WebTransport) -> tuple[Path, dict]:
+                row: int, directory, transport: WebTransport, *, resolution="2K") -> tuple[Path, dict]:
     """准备允许的下一轮，保存固定任务号与完整参数；没有通过补生判断就不新建轮次。"""
     assert_source_unchanged(product)
+    resolution = validate_resolution(resolution)
+    prior_resolution = existing_resolution(product, directory)
+    if prior_resolution is not None and prior_resolution != resolution:
+        raise ValueError("当前尺寸与已有任务固定分辨率不一致，未改变旧轮次或新建任务")
+    from .workflow_options import read_options
+    options = read_options(product, directory)
+    if options is not None and options["resolution"] != resolution:
+        raise ValueError("当前尺寸与商品任务配置不一致，未新建生成任务")
     if plan.product_id != product.product_id or plan.source_sha256 != product.sha256:
         raise ValueError("九组计划与当前商品不对应")
     groups = [g for g in plan.assignments if g.row == row]
@@ -155,9 +174,9 @@ def prepare_job(product: ProductInput, upload: WebUploadReceipt, plan: ProductRe
         round_index = decision.next_round
     else:
         round_index = 0
-    price = quote_balanced_2k(transport.request_json("GET", "/api/web/image-tiers"))
+    price = quote_balanced(transport.request_json("GET", "/api/web/image-tiers"), resolution)
     client_id = "mdtask-" + uuid.uuid4().hex
-    payload = build_payload(product, upload, group, client_id, price)
+    payload = build_payload(product, upload, group, client_id, price, resolution=resolution)
     record = {"schema_version": 1, "product_id": product.product_id, "source_sha256": product.sha256,
               "row": row, "folder_id": group.folder_id, "group_name": group.group_name,
               "reference_ids": [r.image_id for r in group.references], "round_index": round_index,
@@ -173,6 +192,7 @@ def prepare_job(product: ProductInput, upload: WebUploadReceipt, plan: ProductRe
 def _verify_task_parameters(task, record):
     """服务器回显的参数必须属于当前任务；不依靠时间或列表位置关联结果。"""
     params = record["payload"]["params"]
+    job_resolution(record)
     if task.get("featureType") != "model-dressing" or task.get("expectedResultCount") != 5:
         raise ValueError("服务器任务类型或结果数量不符合当前组")
     for key in ("resolution", "aspectRatio", "inputImageUrls", "inputImageUrls2"):
@@ -199,7 +219,7 @@ def _apply_task(path: Path, record: dict, task: dict):
         raise ValueError("服务器没有返回五个逐张结果槽位，不能确认参考图对应关系")
     if {s.get("referenceIndex") for s in slots} != set(range(5)):
         raise ValueError("结果没有逐一对应原组的五张参考图")
-    if len({s.get("id") for s in slots}) != 5:
+    if any(not isinstance(s.get("id"), str) or not s["id"] for s in slots) or len({s.get("id") for s in slots}) != 5:
         raise ValueError("结果槽位 ID 重复")
     results = []
     for slot in slots:
@@ -210,6 +230,14 @@ def _apply_task(path: Path, record: dict, task: dict):
         results.append({"result_id": task_id + "/" + str(slot["id"]), "slot_id": slot["id"],
                         "reference_index": index, "reference_id": record["reference_ids"][index],
                         "status": slot.get("status"), "image_url": url if slot.get("status") == "done" else None})
+    # 逐张完成后可能已开始审核甚至保存；后续查询不能把同一槽位换成另一张图。
+    previous = {r["reference_index"]: r for r in record.get("results", [])}
+    for result in results:
+        old = previous.get(result["reference_index"])
+        if old and (old["result_id"] != result["result_id"] or old["reference_id"] != result["reference_id"]):
+            raise ValueError("服务器结果槽位身份变化，保留原记录，停止逐图审核")
+        if old and old["status"] == "done" and (result["status"] != "done" or old["image_url"] != result["image_url"]):
+            raise ValueError("已完成图片状态或链接变化，保留原记录，不能替换已审核图片")
     record["results"] = results
     record["successful_results"] = sum(r["status"] == "done" for r in results)
     record["failed_results"] = sum(r["status"] == "error" for r in results)
@@ -226,6 +254,7 @@ def _apply_task(path: Path, record: dict, task: dict):
 def submit_job(path: Path, transport: WebTransport):
     """只允许 prepared → 单次 POST；未知结果和已提交状态均转入只读查询。"""
     record = json.loads(path.read_text(encoding="utf-8"))
+    job_resolution(record)
     if record["state"] != "prepared":
         return query_job(path, transport)
     record["state"] = "submitting"

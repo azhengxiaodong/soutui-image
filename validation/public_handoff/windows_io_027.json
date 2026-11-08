@@ -1,0 +1,110 @@
+{
+  "date": "2026-11-04",
+  "version": "0.2.7",
+  "scope": "修复Windows短暂文件占用导致任务/审核报告/组汇总/输出清单原子替换失败；只读恢复当前已提交补生任务。",
+  "tests": {
+    "tests_run": 164,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "success": true,
+    "scope": "现有模块规则和编排控制检查；真实网站与图片审核另见联调证据"
+  },
+  "new_atomic_tests": 8,
+  "real_windows_handle_tests": 5,
+  "local_replace_retry_seconds": 3,
+  "local_replace_retry_interval": 0.05,
+  "retry_winerrors": [
+    5,
+    32,
+    33
+  ],
+  "business_post_retry_added": false,
+  "actual_recovery": {
+    "status": "recovered_existing_task",
+    "round_index": 1,
+    "state": "awaiting_audit",
+    "successful_results": 5,
+    "next_action": "audit",
+    "round_records_before": 12,
+    "round_records_after": 12,
+    "completed_review_images_preserved": 21,
+    "all_other_business_files_unchanged": 4050,
+    "obsolete_legacy_tmp_removed": true,
+    "new_generation_submissions": 0,
+    "new_model_calls": 0
+  },
+  "gui": {
+    "app_version": "0.2.7",
+    "window_created": true,
+    "connected": true,
+    "current_saved": 2,
+    "generation_started": false,
+    "persistent_workbench_reopened": true
+  },
+  "model_quality_transport_unchanged": true,
+  "policy_version": "2026-11-04.1",
+  "installed_version": "0.2.7",
+  "changed_files": {
+    "pyproject.toml": {
+      "before": "cb3ef83ce4d28aa4ad65e13dbc41801d41abebb5e381dac35847dfa1719a310f",
+      "after": "7373e02029e78421c89be5d0571a46ee62ea75bb3de647d4d99f659c1d1c1497"
+    },
+    "src/soutui_image/stage_d_web_generation.py": {
+      "before": "46e5bcddd8c3c2eb8e07dd3721acd1b01690933997774dd06d34e3c77f523b06",
+      "after": "c6caa8c0f4ace6d0638d5207da8e92d04d0310de3c04f3c12b8524247e0f7c9e"
+    },
+    "tests/test_stage_d_generation.py": {
+      "before": "8c3b56a956dc9fed4bacffec0c0b654be3378b422bf32d8ab777d31013b3c810",
+      "after": "480ebe60a2449bc2ab87dcf505ca3d4987025bfa4ec871a3511d8a1834663aca"
+    },
+    "src/soutui_image/review_group_state.py": {
+      "before": "31d1443658c9a487bbc0ab86d45e4af9cd699c5697ed26f53dae4326e3b24366",
+      "after": "5c86dbc2770de7ceeb856d1c4048312a5a68636ddb79d56b900057465ff13052"
+    },
+    "src/soutui_image/stage_f_outputs.py": {
+      "before": "094abebd5ac8decc24de822f98a0a2116d9c04cf2771104a099eae5181b5aee2",
+      "after": "ded2bfd3f74bbabbf2dc40f4825dceb05243faea67669deba9bb803409f1b92d"
+    },
+    "src/soutui_image/pipeline.py": {
+      "before": "8d5e5432d125f3442983a869d0c515d9c4c1ae4f41f5628077bb55ba333955c7",
+      "after": "d0717e04db45afecc33e0ff2b2dbab2ee7201f855d4f4e0a5503fba14fc0b83c"
+    },
+    "src/soutui_image/update_config.py": {
+      "before": "7acecb44b96a948c63e9e1d3a031b5e8a1431ac6c467d56be5608e4647b89671",
+      "after": "fadfd1d2fd327d8097bd1386c99a9eaa5cb0d4f71f87524be1116e72c40eedcc"
+    }
+  },
+  "new_files": {
+    "src/soutui_image/atomic_json.py": "21962eb17f9ee7a1f5760ed9f3a8c40b43db8d9923ca036662631bba336a72f1",
+    "tests/test_atomic_json.py": "e63033925002cc094f7c208b434f7b6b6c0eaccc0554ee4d88007f5b9c7b8097"
+  },
+  "cleanup": {
+    "files": 6,
+    "bytes": 39934,
+    "old_install_removed": "0.2.6",
+    "legacy_recovery_tmp_removed": true
+  },
+  "limits": [
+    "异常日志无法确定具体持锁进程；GUI及审核读取是可复现的触发条件，安全软件亦可能造成短时占用。",
+    "3秒内只重试本地文件替换；永久权限或持续占用仍会报错并保留原件及候选，不能无限等待。",
+    "本轮不改变或重验视觉准确率，不承诺模型审核耗时或整批提速比例。",
+    "本机源码交付，未发布EXE/ZIP或GitHub Release。"
+  ],
+  "local_evidence": [
+    "validation/windows_io_027/actual_recovery.json",
+    "validation/windows_io_027/existing_server_task.json",
+    "validation/windows_io_027/gui/smoke.json"
+  ],
+  "resumption": {
+    "status": "running",
+    "started_at_local": "2026-11-04T15:16:47.352267",
+    "review_images_started": 4,
+    "review_stage_events": 4,
+    "completed_review_ids_checked": 21,
+    "duplicate_completed_images_started": 0,
+    "errors_observed": 0,
+    "submissions_since_resume": 0,
+    "current_round_files": 12
+  }
+}

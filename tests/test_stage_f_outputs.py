@@ -50,13 +50,67 @@ class OutputTests(unittest.TestCase):
                                        "reference_id": group.references[slot].image_id, "reference_index": slot})
         jobs = self.state / "001" / "group_01"; jobs.mkdir(parents=True, exist_ok=True)
         job = {"task_id": task_id, "source_sha256": self.product.sha256, "folder_id": "1",
-               "reference_ids": report["reference_ids"], "results": [
+               "state": "awaiting_audit", "reference_ids": report["reference_ids"], "results": [
                    {"result_id": item["candidate"]["result_id"], "status": "done"} for item in report["outcomes"]]}
         (jobs / f"round_{index:02}.json").write_text(json.dumps(job), encoding="utf-8")
         return report
 
     def save(self, reports):
         return save_approved_reports(self.product, self.plan, reports, self.cache, self.state)
+
+    def save_partial(self, reports):
+        return save_approved_reports(self.product, self.plan, reports, self.cache, self.state, allow_partial=True)
+
+    def test_partial_saves_only_fully_reviewed_images_then_full_deduplicates(self):
+        full = self.report(decisions=("pass",) * 5)
+        partial = copy.deepcopy(full)
+        partial.update(status="reviewing", all_successful_images_reviewed=False, outcomes=partial["outcomes"][:2])
+        self.assertEqual(self.save_partial([partial])["total_saved"], 2)
+        self.assertEqual(self.save([full])["total_saved"], 5)
+        self.assertEqual(self.save([full])["saved_new"], 0)
+
+    def test_partial_still_requires_double_audit_and_task_membership(self):
+        full = self.report(decisions=("pass",) * 5)
+        for invalid in ("one_audit", "foreign_task", "duplicate", "fake_complete"):
+            partial = copy.deepcopy(full)
+            partial.update(status="reviewing", all_successful_images_reviewed=False, outcomes=partial["outcomes"][:1])
+            if invalid == "one_audit": partial["outcomes"][0]["review"]["passes"].pop()
+            if invalid == "foreign_task": partial["outcomes"][0]["candidate"]["result_id"] = "foreign/slot-0"
+            if invalid == "duplicate": partial["outcomes"] *= 2
+            if invalid == "fake_complete": partial.update(status="reviewed", all_successful_images_reviewed=True)
+            with self.subTest(invalid=invalid), self.assertRaises(ValueError): self.save_partial([partial])
+        self.assertFalse(self.output.exists())
+
+    def test_streaming_partial_saves_before_generation_finishes_but_cannot_be_complete(self):
+        report = self.report(decisions=("pass",))
+        path = self.state / "001" / "group_01" / "round_00.json"
+        job = json.loads(path.read_text(encoding="utf-8"))
+        job["state"] = "generating"
+        job["results"].append({"result_id": "task-0/slot-1", "status": "generating"})
+        path.write_text(json.dumps(job), encoding="utf-8")
+        # outcomes 正好覆盖当前 done 集合，仍不可声称整轮已完成。
+        with self.assertRaisesRegex(ValueError, "生成轮次尚未结束"):
+            self.save_partial([report])
+        self.assertFalse(self.output.exists())
+        partial = copy.deepcopy(report)
+        partial.update(status="reviewing", all_successful_images_reviewed=False)
+        self.assertEqual(self.save_partial([partial])["total_saved"], 1)
+        job["state"] = "awaiting_audit"
+        job["results"][-1]["status"] = "error"
+        path.write_text(json.dumps(job), encoding="utf-8")
+        self.assertEqual(self.save([report])["saved_new"], 0)
+
+    def test_complete_requires_terminal_job_and_every_slot_terminal(self):
+        report = self.report(decisions=("pass",))
+        path = self.state / "001" / "group_01" / "round_00.json"
+        original = json.loads(path.read_text(encoding="utf-8"))
+        for state, pending in (("generating", False), ("awaiting_audit", True)):
+            job = copy.deepcopy(original); job["state"] = state
+            if pending: job["results"].append({"result_id": "task-0/slot-1", "status": "pending"})
+            path.write_text(json.dumps(job), encoding="utf-8")
+            with self.subTest(state=state, pending=pending), self.assertRaisesRegex(ValueError, "生成轮次尚未结束"):
+                self.save([report])
+        self.assertFalse(self.output.exists())
 
     def test_only_pass_saved_and_nine_group_directories_created(self):
         report = self.report()

@@ -65,5 +65,22 @@
     "validation/public_handoff/current_state.json"
   ],
   "handoff_document": "docs/换机继续开发.md",
-  "next_action": "Prepare own images and logins on the new computer; run freeze/control checks, then start a user-requested fresh test. Never restore the ended historical batch."
+  "next_action": "Prepare own images and logins on the new computer; run freeze/control checks, then start a user-requested fresh test. Never restore the ended historical batch.",
+  "current_local_development": {
+    "as_of": "2026-11-04",
+    "program_version": "0.2.11",
+    "policy_version": "2026-11-04.1",
+    "report": "validation/public_handoff/regenerate_0211.json",
+    "status": "control_gui_and_real_readonly_verified_live_regeneration_pending",
+    "frozen_baseline_replaced": false,
+    "note": "上层0.2.2字段是公开源码初次换机历史记录。当前业务资料保留，不恢复早已结束旧批次。",
+    "label_patch": "validation/public_handoff/label_0211.json"
+  },
+  "current_publication": {
+    "as_of": "2026-11-08",
+    "program_version": "0.2.11",
+    "policy_version": "2026-11-04.1",
+    "report": "validation/public_handoff/publication_0211.json",
+    "note": "Top-level 0.2.2 fields and source_manifest.json describe the initial publication; keep them as historical evidence."
+  }
 }

@@ -3,12 +3,16 @@
 import copy
 import json
 import unittest
+from types import SimpleNamespace
 
 import test_review_group_state as fixtures
 from soutui_image.review_group_state import write_group_review_summary
 from soutui_image.stage_c_web_plan import GroupAssignment, ReferenceImage
 from soutui_image.stage_d_web_generation import group_decision
 from soutui_image.stage_e_codex_review import POLICY_VERSION
+from soutui_image.quality_upgrade import needs_upgrade
+from soutui_image.output_store import read_manifest, save_manifest, manifest_path, MANIFEST_NAME
+import test_stage_f_outputs as output_fixtures
 
 
 class QualitySummaryTests(unittest.TestCase):
@@ -62,3 +66,41 @@ class QualitySummaryTests(unittest.TestCase):
         summary.write_text(json.dumps(data),encoding="utf-8")
         self.assertEqual(group_decision(self.state,self.product,group).action,"paused")
         self.assertEqual(len(list(self.jobs.glob("round_*.json"))),4)
+
+
+class OutputUpgradeDetectionTests(unittest.TestCase):
+    setUp=output_fixtures.OutputTests.setUp
+    report=output_fixtures.OutputTests.report
+    save=output_fixtures.OutputTests.save
+
+    def paths(self):
+        return SimpleNamespace(tasks=self.state,cache=self.cache)
+
+    def test_internal_manifest_detects_old_policy_without_changing_photos(self):
+        self.save([self.report()])
+        self.assertFalse(needs_upgrade(self.product,self.paths()))
+        record=read_manifest(self.output,self.state,self.product)
+        record["groups"][0]["saved"][0]["policy_version"]="old-rule"
+        save_manifest(self.output,self.state,record)
+        before={p:p.read_bytes() for p in self.output.rglob("*.png")}
+        self.assertTrue(needs_upgrade(self.product,self.paths()))
+        self.assertTrue(all(p.read_bytes()==raw for p,raw in before.items()))
+
+    def test_unreviewed_saved_photo_does_not_trigger_rule_upgrade(self):
+        self.save([self.report()])
+        record=read_manifest(self.output,self.state,self.product)
+        record["groups"][0]["saved"][0].update(review_status="unreviewed",policy_version=None)
+        save_manifest(self.output,self.state,record)
+        self.assertFalse(needs_upgrade(self.product,self.paths()))
+
+    def test_legacy_detection_remains_read_only(self):
+        self.save([self.report()])
+        internal=manifest_path(self.output,self.state)
+        record=read_manifest(self.output,self.state,self.product); record.pop("output_directory")
+        record["groups"][0]["saved"][0]["policy_version"]="old-rule"
+        legacy=self.output/MANIFEST_NAME
+        legacy.write_text(json.dumps(record),encoding="utf-8"); internal.unlink()
+        before=legacy.read_bytes()
+        self.assertTrue(needs_upgrade(self.product,self.paths()))
+        self.assertEqual(legacy.read_bytes(),before)
+        self.assertFalse(internal.exists())

@@ -1,0 +1,160 @@
+{
+  "date": "2026-11-04",
+  "version": "0.2.10",
+  "policy_version": "2026-11-04.1",
+  "status": "startup_reset_verified_prior_quality_limits_unchanged",
+  "behavior": {
+    "restore_previous_directory": false,
+    "automatic_old_product_scan": false,
+    "review_enabled": false,
+    "model": "gpt-6.1-sol",
+    "resolution": "2K",
+    "session_selection_preserved": true,
+    "explicit_cli_input_supported": true,
+    "automatic_browser_connection_unchanged": true
+  },
+  "tests": {
+    "tests_run": 258,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "success": true,
+    "scope": "现有模块规则和编排控制检查；真实网站与图片审核另见联调证据"
+  },
+  "desktop_tests": 18,
+  "isolated_gui": {
+    "scope": "actual isolated Tk window; no network/model/background work",
+    "input_path_empty": true,
+    "product_rows": 0,
+    "group_rows": [
+      [
+        "01",
+        "待读取",
+        "尚未开始",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "02",
+        "待读取",
+        "尚未开始",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "03",
+        "待读取",
+        "尚未开始",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "04",
+        "待读取",
+        "尚未开始",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "05",
+        "待读取",
+        "尚未开始",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "06",
+        "待读取",
+        "尚未开始",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "07",
+        "待读取",
+        "尚未开始",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "08",
+        "待读取",
+        "尚未开始",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "09",
+        "待读取",
+        "尚未开始",
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    ],
+    "log_empty": true,
+    "review_enabled": false,
+    "model": "gpt-6.1-sol",
+    "resolution": "2K",
+    "busy": false
+  },
+  "changed_from_029": {
+    "src/soutui_image/desktop_app.py": {
+      "before": "85bce4b4ab88ff96bb897fa18a7552a71807eb1385052ffd914eb17ba506518d",
+      "after": "8beed73ec67a310352a9af3b59f5283f2acea9d0f5dc06c79f8faceabf2311db"
+    },
+    "src/soutui_image/update_config.py": {
+      "before": "7181245ead4ad5f6b3895248e24f695b1150b3a9f70482946886ea9a32e60d96",
+      "after": "60a9d5abe2b240b61bf1d1c20fca864f66100f9bbe74f638906cb517c9ab844d"
+    },
+    "tests/test_workbench_options.py": {
+      "before": "e2fd4382921f669f697dbc63be3689120763260f554bccaead26137e408d7024",
+      "after": "a65f76f73a4ebb017ef11bf699d37549a0bb7b440d6c20188405110056386e42"
+    },
+    "pyproject.toml": {
+      "before": "39afd337b6bf3b3e1d00a8118b30fd4d8355ebc67b71583905f75e6dfeef5e18",
+      "after": "c27ff186b3db40f71bf730791a3c1c53adf00a8f8adc0f7ed4fe258ecace82a6"
+    }
+  },
+  "baseline": {
+    "frozen_manifest_replaced": false,
+    "frozen_manifest_sha256": "d4ab09aec4d56c76d011ba4c96a6157e6dc19a4fab35387e9e4d7a6b736d3a2b",
+    "previous_candidate_report": "validation/public_handoff/workbench_029.json",
+    "previous_candidate_report_sha256": "4a5d72cd41aaf37fd2aac032475a0276a4d7ec04f8b49607ffe24abb2e02cdbd",
+    "unrelated_source_files_unchanged": 89
+  },
+  "business_integrity": {
+    "existing_task_and_review_files_unchanged": 8300,
+    "original_and_saved_images_unchanged": 53
+  },
+  "cleanup": {
+    "files_removed": 6,
+    "bytes_removed": 58668,
+    "old_installed_metadata_removed": "0.2.9",
+    "current_installed_version": "0.2.10",
+    "old_program_packages_found": 0
+  },
+  "limits": [
+    "No website generation, upload or model call this turn.",
+    "Browser auto-connection control tests passed; no new live login test.",
+    "Prior Sol sleeve limitation and actual 4K generation pending scope are unchanged.",
+    "Existing user window not restarted; changes apply on next launch."
+  ]
+}

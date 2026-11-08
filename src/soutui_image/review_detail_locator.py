@@ -2,6 +2,7 @@
 
 import json
 import subprocess
+from .codex_runtime import run_image_call
 from pathlib import Path
 
 from .rule_runtime import active_rules, current_policy
@@ -9,6 +10,8 @@ from .rule_runtime import active_rules, current_policy
 from .codex_clothing import find_codex
 from .review_images import assert_review_image_unchanged
 from .stage_a_inputs import assert_source_unchanged
+from .review_checkpoints import fingerprint
+from .review_profiles import current_profile, phase_profile_identity, reasoning_arguments
 
 
 PARTS = ("左侧袖口", "右侧袖口", "门襟与扣列", "裤腿与下肢")
@@ -47,10 +50,16 @@ def validate_regions(data):
 
 def locate_detail_regions(product, candidate, directory, *, codex_exe=None, model=None, timeout=600):
     """仅通过整图定位；同一审核的两次质检共用裁剪坐标，不共享质检结论。"""
+    chosen = current_profile(model)
+    model = chosen.model
     root = Path(directory)
     root.mkdir(parents=True, exist_ok=True)
     cached = root / "located.json"
-    identity = {"source_sha256": product.sha256, "result_sha256": candidate.sha256, "model": model or "default"}
+    prompt = active_rules().render("locator")
+    identity = {"source_sha256": product.sha256, "result_sha256": candidate.sha256, "model": model}
+    if not chosen.legacy:
+        identity.update(policy_version=current_policy(), prompt=fingerprint(prompt), schema=fingerprint(SCHEMA),
+                        **phase_profile_identity(model=model))
     if cached.exists():
         data = json.loads(cached.read_text(encoding="utf-8"))
         if any(data.get(k) != v for k, v in identity.items()):
@@ -58,15 +67,15 @@ def locate_detail_regions(product, candidate, directory, *, codex_exe=None, mode
         return validate_regions({"regions": data["regions"]})
     schema, response = root / "schema.json", root / "response.json"
     schema.write_text(json.dumps(SCHEMA, ensure_ascii=False), encoding="utf-8")
-    prompt = active_rules().render("locator")
     command = [str(find_codex(codex_exe)), "exec", "--ephemeral", "--sandbox", "read-only", "--skip-git-repo-check",
                "--image", product.source_path, "--image", candidate.local_path,
                "--output-schema", str(schema), "--output-last-message", str(response)]
     if model:
         command += ["--model", model]
+    command += reasoning_arguments("locator", model=model)
     command.append("-")
     try:
-        result = subprocess.run(command, input=prompt, text=True, encoding="utf-8", errors="replace",
+        result = run_image_call(command, stage="局部定位", input=prompt, text=True, encoding="utf-8", errors="replace",
                                 capture_output=True, cwd=root, timeout=timeout,
                                 creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
     except subprocess.TimeoutExpired:

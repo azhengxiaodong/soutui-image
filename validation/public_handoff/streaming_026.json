@@ -1,0 +1,127 @@
+{
+  "date": "2026-11-04",
+  "version": "0.2.6",
+  "scope": "用户新增出图即审授权：网站查询与全局逐图审核池并行；单线程落盘、终态整轮补生门禁。",
+  "verification_status": "controls_and_actual_cache_replay_passed_live_batch_timing_pending",
+  "default_review_workers": 4,
+  "tests": {
+    "tests_run": 156,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "success": true,
+    "scope": "现有模块规则和编排控制检查；真实网站与图片审核另见联调证据"
+  },
+  "website_read_only_existing_tasks": 11,
+  "historical_partial_generation_events": 5,
+  "real_image_cache_replay": {
+    "status": "verified_replay",
+    "live_get_tasks": 11,
+    "actual_images": 10,
+    "saved": 6,
+    "human_overrides_preserved": true,
+    "saved_before_group_generation_terminal": true,
+    "queries_during_review": 2,
+    "repeat_new_reviews": 0,
+    "new_generation_submissions": 0,
+    "new_model_calls": 0
+  },
+  "gui": {
+    "window_created": true,
+    "app_version": "0.2.6",
+    "connected": true,
+    "current_total": 21,
+    "generation_started": false,
+    "persistent_workbench_reopened": true,
+    "responding": true
+  },
+  "current_counts": [
+    1,
+    3,
+    2,
+    3,
+    3,
+    1,
+    1,
+    6,
+    1
+  ],
+  "protected_business_files_unchanged": 3154,
+  "old_task_identity_preserved": true,
+  "quality_and_transport_modules_unchanged": true,
+  "model": "gpt-6.1-sol",
+  "reasoning": "xhigh",
+  "transport": "openai_https",
+  "policy_version": "2026-11-04.1",
+  "existing_task_policy_version": "2026-11-03.3",
+  "complete_double_review_and_button_specialty_preserved": true,
+  "limits": [
+    "网站本轮仅只读回查11个已有任务；旧运行日志确认生成中会提供单张完成结果。",
+    "真实10张结果图和原模型缓存用于隔离回放，图片可用时序受控；不是新生成整批或四路云端吞吐量实测。",
+    "没有新模型调用、质量准确率复验或新生图，不承诺整批固定提速比例。",
+    "仅交付本机源码工作台，未构建或发布新的EXE/ZIP或GitHub Release。"
+  ],
+  "changed_files": {
+    "pyproject.toml": {
+      "before": "3c31f2f4067843702ce4133adc69e03a5de7ff07380d5062c2bf374bc3947d7e",
+      "after": "cb3ef83ce4d28aa4ad65e13dbc41801d41abebb5e381dac35847dfa1719a310f"
+    },
+    "src/soutui_image/stage_d_web_generation.py": {
+      "before": "7d6657b4529ed430e2a7df46199f41b83cf28ba2f04b82169ecbc40c7fcbcb19",
+      "after": "46e5bcddd8c3c2eb8e07dd3721acd1b01690933997774dd06d34e3c77f523b06"
+    },
+    "src/soutui_image/review_group_state.py": {
+      "before": "76a5cab07d4730a5112ff6a4c458785fb1ead3520eb012fb5c00a7395f2efeb7",
+      "after": "31d1443658c9a487bbc0ab86d45e4af9cd699c5697ed26f53dae4326e3b24366"
+    },
+    "tests/test_review_group_state.py": {
+      "before": "f8ebb923d503d8096dff89ef68051ee2a9e2792af62bda372ed0b868f9d36487",
+      "after": "8f06361354af076b44f6254eeaab7a4600e2012a9d9fb66154ad6ed6e16725c2"
+    },
+    "src/soutui_image/stage_f_outputs.py": {
+      "before": "332be451de9b1f5e07dd1f69b6d917c6321bba82faba52c5b92a6522498f914d",
+      "after": "094abebd5ac8decc24de822f98a0a2116d9c04cf2771104a099eae5181b5aee2"
+    },
+    "tests/test_stage_f_outputs.py": {
+      "before": "5ee6fb54b4526899e77474fc7700bf9728c4689ba000663b4d5a67cb90d60382",
+      "after": "da3d4e17cb7b2025a7141b942975955f06820999de3b95f68b7ec1f625b59a36"
+    },
+    "src/soutui_image/pipeline.py": {
+      "before": "4237529e2804df170326365c7e6e9a519c1097346ee50e332ab24403a2207a4b",
+      "after": "8d5e5432d125f3442983a869d0c515d9c4c1ae4f41f5628077bb55ba333955c7"
+    },
+    "src/soutui_image/desktop_app.py": {
+      "before": "b11869ae0c0b9f6e6abf3a54241680030fab4a0e00ad037707ffd4a9794301a0",
+      "after": "3db93896bcb851e22208613b2da86b430939ca46a8c28665c5ca3553237e8cfe"
+    },
+    "src/soutui_image/update_config.py": {
+      "before": "731a1bb7f04bab2b6b93de908a103199147c121db93a5a2f8c2b44f42d8d85d2",
+      "after": "7acecb44b96a948c63e9e1d3a031b5e8a1431ac6c467d56be5608e4647b89671"
+    }
+  },
+  "new_files": {
+    "src/soutui_image/streaming_pipeline.py": "fd33d5753dd3a96b09decd6ec351441fed8dadd960691085eedbf4563515a7b4",
+    "tests/test_streaming_pipeline.py": "463f1a5807e8286f7f148bfd2bcc467d9b29f183c1538c23f953dc3d7774d343",
+    "tests/test_generation_stream_identity.py": "512ea7192acea5876adaa2a5341f0ce79ca1901b11560925448a46ff17f5292c"
+  },
+  "cleanup": {
+    "replay_files_removed": 92,
+    "replay_bytes_removed": 27874155,
+    "maintenance_files_removed": 7,
+    "maintenance_bytes_removed": 62033,
+    "old_installed_version_removed": "0.2.5",
+    "current_installed_version": "0.2.6",
+    "active_historical_rule_preserved": true,
+    "isolated_replay_runs_cleaned": 2
+  },
+  "local_evidence": [
+    "validation/streaming_026/scope_checks.json",
+    "validation/streaming_026/live_task_snapshots.json",
+    "validation/streaming_026/historical_partial_events.json",
+    "validation/streaming_026/real_replay_result.json",
+    "validation/streaming_026/gui/smoke.json",
+    "validation/streaming_026/replay_cleanup.json"
+  ],
+  "installed_version": "0.2.6",
+  "notification_failure_protection": "进度日志/通知失败后停止新增工作，排空已在途审核并保存；保留首个业务错误，四个异常分支检查通过。"
+}

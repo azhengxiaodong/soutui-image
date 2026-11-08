@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-05",
+  "version": "0.2.11",
+  "scope": "仅将按钮继续审图改为单独审图，原回调和业务逻辑不变",
+  "file": "src/soutui_image/desktop_app.py",
+  "before_sha256": "fe25c0b745133dc225cf4969a1df722f90b6db004ff997c071b0d29e129c15ef",
+  "after_sha256": "96869e2b0529f42fcd138eda47a8fd11ac844f5018a24f5536c37535da6bbed0",
+  "actual_tk_label_verified": true,
+  "callback_unchanged": true,
+  "website_or_model_calls": 0,
+  "temporary_workspace_removed": true,
+  "prior_acceptance_limits_unchanged": true
+}

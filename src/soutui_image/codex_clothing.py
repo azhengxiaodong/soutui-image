@@ -10,6 +10,7 @@ import json
 import os
 import shutil
 import subprocess
+from .codex_runtime import run_image_call
 import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -104,7 +105,7 @@ visible_garments 用中文列出图中可见的服装，reason 说明依据。
                "--output-last-message", str(response), "-"]
     start = time.monotonic()
     try:
-        completed = subprocess.run(command, input=prompt, text=True, encoding="utf-8", errors="replace",
+        completed = run_image_call(command, stage="服装分类", input=prompt, text=True, encoding="utf-8", errors="replace",
                                    capture_output=True, cwd=attempt, timeout=timeout,
                                    creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
     except subprocess.TimeoutExpired as error:

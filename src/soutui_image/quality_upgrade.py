@@ -10,8 +10,10 @@ from .review_group_state import write_group_review_summary
 from .stage_a_inputs import assert_source_unchanged
 from .stage_c_web_plan import load_plan
 from .rule_runtime import current_policy
-from .stage_f_outputs import MANIFEST_NAME, _qualified_items, save_approved_reports
+from .review_profiles import current_profile, profile_fingerprint, phase_profile_identity, validate_review_profile
+from .stage_f_outputs import _qualified_items, save_approved_reports
 from .stage_f_output_revision import withdraw_legacy_outputs
+from .output_store import read_manifest
 
 
 DEFAULT_REVIEW_MODEL = "gpt-6.1-sol"
@@ -27,11 +29,11 @@ def _sha(path):
 
 def needs_upgrade(product, paths):
     """只读检查旧通过、旧汇总或待复核保存状态；旧拒绝保留原版本但不反复触发升级。"""
-    output=Path(product.source_path).parent/product.product_id/MANIFEST_NAME
-    if output.exists():
-        record=_read(output)
-        if record["source_sha256"]!=product.sha256: raise ValueError("已有输出不属于当前原图")
-        if any(x.get("policy_version")!=current_policy() for g in record["groups"] for x in g["saved"]): return True
+    output=Path(product.source_path).parent/product.product_id
+    record=read_manifest(output,paths.tasks,product)
+    if record is not None:
+        if any(x.get("policy_version")!=current_policy() and x.get("review_status","pass") in ("pass","review")
+               for g in record["groups"] for x in g["saved"]): return True
         if any(x.get("review_status")=="pending" for x in record.get("withdrawn",[])): return True
     for path in (paths.cache/product.product_id).glob("group_*/round_*/round_review.json"):
         report=_read(path)
@@ -45,12 +47,15 @@ def needs_upgrade(product, paths):
 def recheck_saved_product(product, paths, *, model=DEFAULT_REVIEW_MODEL, workers=2, stop_event=None, on_event=None):
     """当前商品升级入口；只处理已有结果，所有生成任务和原三轮上限保持不变。"""
     emit=on_event or (lambda event:None)
+    chosen = current_profile(model)
     assert_source_unchanged(product)
     if not needs_upgrade(product,paths): return {"product_id":product.product_id,"status":"already_current","new_generation_submissions":0}
     plan=load_plan(paths.tasks/f"product_{product.product_id}_references.json")
-    operation=hashlib.sha256((current_policy()+product.product_id+product.sha256+model).encode()).hexdigest()[:24]
+    identity = current_policy()+product.product_id+product.sha256+model
+    if not chosen.legacy: identity += profile_fingerprint(chosen)
+    operation=hashlib.sha256(identity.encode()).hexdigest()[:24]
     root=paths.root/"quality_revisions"/operation; root.mkdir(parents=True,exist_ok=True)
-    withdrawn=withdraw_legacy_outputs(product,plan,paths.root/"quality_withdrawn")
+    withdrawn=withdraw_legacy_outputs(product,plan,paths.root/"quality_withdrawn",state_directory=paths.tasks)
     emit({"kind":"quality_withdrawn","message":"旧图已保留到本机待复核区，不计为新版合格",**withdrawn})
     staged_path=root/"result.json"
     staged=_read(staged_path) if staged_path.exists() else None
@@ -68,6 +73,7 @@ def recheck_saved_product(product, paths, *, model=DEFAULT_REVIEW_MODEL, workers
             raise RuntimeError("旧图重审尚未完成，已保留进度，未生新图；"+str(error))
     if staged["policy_version"]!=current_policy() or staged["model"]!=model:
         raise ValueError("复核阶段结果属于其他规则或模型")
+    validate_review_profile(staged, model=model)
     revision_plan=_read(root/"plan.json")
     # 全部预检通过后才改正式报告；原任务文件只读，任何变动都先停止。
     for item in revision_plan["inputs"]:
@@ -102,6 +108,7 @@ def recheck_saved_product(product, paths, *, model=DEFAULT_REVIEW_MODEL, workers
             summaries.append(write_group_review_summary(product,paths.tasks,paths.cache,group.row,allow_policy_revision=True))
     assert_source_unchanged(product)
     result={"product_id":product.product_id,"status":"rechecked","policy_version":current_policy(),"model":model,
+            **phase_profile_identity(model=model),
             "reviewed_old_passes":staged["total"],"saved":saved,"group_counts":{s["row"]:s["approved_count"] for s in summaries},
             "original_rounds_preserved":True,"new_generation_submissions":0}
     (root/"apply_result.json").write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding="utf-8")

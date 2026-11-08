@@ -12,6 +12,7 @@ from soutui_image.review_images import ReviewImage
 from soutui_image.review_revision import execute_revision, plan_revision
 from soutui_image.stage_a_inputs import ProductInput
 from soutui_image.stage_e_codex_review import POLICY_VERSION, ImageReview
+from soutui_image.output_store import manifest_path, save_manifest, MANIFEST_NAME
 
 
 class RevisionBoundaryTests(unittest.TestCase):
@@ -39,10 +40,13 @@ class RevisionBoundaryTests(unittest.TestCase):
         self.report_path.write_text(json.dumps(self.report), encoding="utf-8")
         output = self.root / "001/组01"; output.mkdir(parents=True)
         self.output_photo = output / "old.jpg"; self.output_photo.write_bytes(b"result")
-        self.manifest = output.parent / ".搜推生图.json"
-        self.manifest.write_text(json.dumps({"product_id": "001", "source_sha256": self.product.sha256,
-            "groups": [{"row": 1, "directory": "组01", "folder_id": "folder", "reference_ids": self.job["reference_ids"],
-                        "saved": [{"filename": "old.jpg", "sha256": self.candidate.sha256}]}]}), encoding="utf-8")
+        self.manifest = manifest_path(output.parent, self.tasks)
+        save_manifest(output.parent, self.tasks, {"app": "soutui-image", "schema_version": 1,
+            "product_id": "001", "source_sha256": self.product.sha256,
+            "groups": [{"row": row, "directory": f"组{row:02}", "folder_id": "folder",
+                        "reference_ids": self.job["reference_ids"],
+                        "saved": [{"filename": "old.jpg", "sha256": self.candidate.sha256}] if row == 1 else []}
+                       for row in range(1, 10)]})
 
     def plan(self):
         return plan_revision([self.product], self.tasks, self.cache)
@@ -65,6 +69,17 @@ class RevisionBoundaryTests(unittest.TestCase):
     def test_saved_content_change_blocks_plan(self):
         self.output_photo.write_bytes(b"changed")
         with self.assertRaises(ValueError): self.plan()
+
+    def test_legacy_manifest_planning_is_read_only_and_uses_photo_output_root(self):
+        record=json.loads(self.manifest.read_text(encoding="utf-8")); record.pop("output_directory")
+        legacy=self.output_photo.parent.parent/MANIFEST_NAME
+        legacy.write_text(json.dumps(record),encoding="utf-8"); self.manifest.unlink()
+        before=legacy.read_bytes()
+        plan=self.plan()
+        self.assertEqual(plan["candidate_count"],1)
+        self.assertEqual(legacy.read_bytes(),before)
+        self.assertFalse(self.manifest.exists())
+        self.assertEqual([x["path"] for x in plan["inputs"] if x.get("output_manifest")],[str(legacy)])
 
     def test_old_record_change_blocks_before_any_model_call(self):
         plan = self.plan(); self.report_path.write_bytes(b"changed")

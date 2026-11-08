@@ -25,7 +25,7 @@ class GroupReviewTests(unittest.TestCase):
         result_id = task_id + "/slot-0"
         job = {"product_id": "001", "source_sha256": self.product.sha256, "folder_id": "17", "row": 1,
                "reference_ids": list("01234"), "round_index": index, "task_id": task_id,
-               "results": [{"result_id": result_id, "status": "done"}]}
+               "state": "awaiting_audit", "results": [{"result_id": result_id, "status": "done"}]}
         (self.jobs / f"round_{index:02}.json").write_text(json.dumps(job), encoding="utf-8")
         verdict = {"product_id": "001", "result_id": result_id, "decision": "pass", "visible_scope": "可见上衣",
                    "unshown_parts": [], "summary": "可见部分一致", "checks": [
@@ -52,6 +52,31 @@ class GroupReviewTests(unittest.TestCase):
         result = write_group_review_summary(self.product, self.state, self.cache, 1)
         self.assertEqual(result["approved_count"], 0)
         self.assertEqual(result["reviewed_rounds"], [])
+
+    def test_premature_complete_report_does_not_replace_last_valid_summary(self):
+        self.fixture(0)
+        write_group_review_summary(self.product, self.state, self.cache, 1)
+        target = self.jobs / "review_summary.json"; before = target.read_bytes()
+        self.fixture(1, content_hash="c" * 64)
+        path = self.jobs / "round_01.json"
+        original = json.loads(path.read_text(encoding="utf-8"))
+        for state, pending in (("generating", False), ("awaiting_audit", True)):
+            job = json.loads(json.dumps(original)); job["state"] = state
+            if pending: job["results"].append({"result_id": "task-1/slot-1", "status": "generating"})
+            path.write_text(json.dumps(job), encoding="utf-8")
+            with self.subTest(state=state, pending=pending), self.assertRaisesRegex(ValueError, "生成轮次尚未结束"):
+                write_group_review_summary(self.product, self.state, self.cache, 1)
+            self.assertEqual(target.read_bytes(), before)
+
+    def test_terminal_failed_slot_does_not_block_completed_successful_subset(self):
+        self.fixture(0)
+        path = self.jobs / "round_00.json"
+        job = json.loads(path.read_text(encoding="utf-8"))
+        job["results"].append({"result_id": "task-0/slot-1", "status": "error"})
+        path.write_text(json.dumps(job), encoding="utf-8")
+        result = write_group_review_summary(self.product, self.state, self.cache, 1)
+        self.assertEqual(result["approved_count"], 1)
+        self.assertEqual(result["reviewed_rounds"], [0])
 
     def test_missing_success_or_wrong_source_in_report_is_rejected(self):
         path, report = self.fixture(0)

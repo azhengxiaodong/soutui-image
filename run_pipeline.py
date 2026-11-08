@@ -24,10 +24,12 @@ def main():
     parser.add_argument("--product-id", action="append", help="仅处理指定商品；可重复传入")
     parser.add_argument("--rows", default="1,2,3,4,5,6,7,8,9", help="联调可缩小组号，默认全部九组")
     parser.add_argument("--data-dir", type=Path, default=default_data_directory())
-    parser.add_argument("--workers", type=int, choices=(1, 2, 4), default=2)
-    parser.add_argument("--model", help="当前账号已支持的 Codex 模型；默认 gpt-6.1-sol")
+    parser.add_argument("--workers", type=int, choices=(1, 2, 4), default=4)
+    parser.add_argument("--model", choices=("gpt-6.1-sol", "gpt-6.1-terra"), help="审图模型；默认 gpt-6.1-sol")
+    parser.add_argument("--review", action="store_true", help="开启生成结果审核；新商品默认只生图保存全部成功结果")
+    parser.add_argument("--resolution", choices=("2K", "4K"), default="2K", help="新任务出图尺寸；开始后随任务固定")
     parser.add_argument("--run", action="store_true", help="实际执行生图，使用网站积分")
-    parser.add_argument("--recheck-saved", action="store_true", help="只按新版规则复核旧输出，不生成新图")
+    parser.add_argument("--recheck-saved", action="store_true", help="单独审核已保存图片，删除明确不合格图，不生成新图")
     parser.add_argument("--self-test", action="store_true", help="只检查依赖，不联网、不生成")
     parser.add_argument("--connect-existing", action="store_true", help="仅连接已有生图浏览器会话，不生成")
     parser.add_argument("--ui-smoke-output", type=Path, help=argparse.SUPPRESS)
@@ -118,7 +120,8 @@ def main():
             with events.open("a", encoding="utf-8") as handle:
                 handle.write(json.dumps(event, ensure_ascii=False) + "\n")
         with pipeline_lock(paths.root):
-            runner = Pipeline(paths, on_event=notify, review_workers=args.workers, model=args.model)
+            runner = Pipeline(paths, on_event=notify, review_workers=args.workers, model=args.model,
+                              review_enabled=args.review, resolution=args.resolution)
             result = (runner.recheck_saved(args.input,product_ids=args.product_id,upgrade_rules=args.upgrade_rules) if args.recheck_saved else
                       runner.run(args.input, product_ids=args.product_id, rows=rows))
         (paths.root / "last_run_result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")

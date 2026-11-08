@@ -24,15 +24,21 @@
         "validation/updates/U_H/actual_gui_021/smoke.json",
         "validation/updates/U_H/portable_021/result.json",
         "validation/updates/U_PROGRAM_021/result.json",
-        "validation/updates/published_client_021/result.json"
+        "validation/updates/published_client_021/result.json",
+        "validation/public_handoff/runtime_repair_023.json",
+        "validation/public_handoff/human_feedback_024.json",
+        "validation/public_handoff/quality_rules_025.json",
+        "validation/public_handoff/streaming_026.json",
+        "validation/public_handoff/windows_io_027.json"
       ],
       "files": {
         "src/soutui_image/browser_ui.py": "b023aa3bb59e8a525ae30a29b057b5cc4f9d241aa32352ae9a046418a6696faa",
-        "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+        "src/soutui_image/codex_clothing.py": "e4492bb0e075420e3b69d9811c0e3b8f0d1dbd9b502632c69d80877a4bef54a5",
         "src/soutui_image/stage_b_projects.py": "5215104147c09d88f82b98a3efb881130f8c9834c29cca444bc5238667d27e3c",
         "run_stage_b.py": "77eae7a6ac79866b0bddfe88712c63e5735acfd9c2c21abefd9e6c363dc16832",
         "tests/test_stage_b_projects.py": "472e56bd5bd3aa642c8d665de8b84bf54ded1bb7979630f362366365f669ad5a",
-        "pyproject.toml": "bac4a7088e6029e3b417ca0e473bc8ee897e029825558e7e57ef64dcb7fe8716"
+        "pyproject.toml": "7373e02029e78421c89be5d0571a46ee62ea75bb3de647d4d99f659c1d1c1497",
+        "src/soutui_image/codex_runtime.py": "d6685981508d982facfabe9918d03ab8c2418804f2d99a8ca7968bed862cfba1"
       },
       "revisions": [
         {
@@ -54,6 +60,81 @@
             "validation/updates/published_client_021/result.json"
           ],
           "prior_baseline": "validation\\updates\\final_frozen_before.json"
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户要求处理当前审核报错和慢；不改变模型、推理设置、图片、审核规则及生图轮次。",
+          "scope": "同一失败图真实断点续审、无连接重试；第二组五张真实缓存逐图保存、去重、任务不变；工作台启动和130项控制检查。",
+          "limitations": [
+            "不是人工标注正反例准确率重测",
+            "四路模型并发的完整九组吞吐量尚未实测，不能承诺固定提速比例",
+            "本轮未制作或发布Windows打包版本；当前交付为本机源码工作台"
+          ],
+          "previous_files": {
+            "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+            "pyproject.toml": "bac4a7088e6029e3b417ca0e473bc8ee897e029825558e7e57ef64dcb7fe8716"
+          },
+          "evidence": [
+            "validation/public_handoff/runtime_repair_023.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确人工保留3张并撤下22张门襟问题图；已确认按文件名排序定位。速度仅分析，不改代码。",
+          "scope": "人工裁定的身份绑定、保存及计数覆盖、实际25张纠正、重复保存不恢复否决图、GUI和135项控制检查。",
+          "limitations": [
+            "没有新增模型审核或生图，没有调整速度/推理/图片/提示词",
+            "当前模型的袖口误杀和门襟漏判已由用户证实；本次人工修正不能当作自动审核准确率已修复"
+          ],
+          "previous_files": {
+            "pyproject.toml": "86961ab914954e55ed5e695ff0fc29679e13dab9a3176bb70c65e86d6c318954"
+          },
+          "evidence": [
+            "validation/public_handoff/human_feedback_024.json"
+          ]
+        },
+        {
+          "reason": "用户新增自然垂坠及门襟多线标准，7张同款实图复验；保留旧任务规则身份，速度实现不变。",
+          "previous_files": {
+            "pyproject.toml": "d21839d98a15ae8783f4d949ed521049717c476955cc9c0cbe184c5687f9e0b5"
+          },
+          "evidence": [
+            "validation/public_handoff/quality_rules_025.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确新增后台单张出图即审、生成审核并行授权；不改变模型和审核质量标准。",
+          "scope": "156项控制检查、历史逐张完成日志、本次11任务只读回查、10张真实图/原缓存隔离回放及0.2.6 GUI；新批次实测耗时待验证。",
+          "previous_files": {
+            "pyproject.toml": "3c31f2f4067843702ce4133adc69e03a5de7ff07380d5062c2bf374bc3947d7e"
+          },
+          "evidence": [
+            "validation/public_handoff/streaming_026.json"
+          ],
+          "limitations": [
+            "网站本轮仅只读回查11个已有任务；旧运行日志确认生成中会提供单张完成结果。",
+            "真实10张结果图和原模型缓存用于隔离回放，图片可用时序受控；不是新生成整批或四路云端吞吐量实测。",
+            "没有新模型调用、质量准确率复验或新生图，不承诺整批固定提速比例。",
+            "仅交付本机源码工作台，未构建或发布新的EXE/ZIP或GitHub Release。"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户截图报WinError5并要求处理；本地记录保存可恢复，不重复提交后台任务。",
+          "scope": "164项检查含5项真实Win32文件占用测试；现场既有任务GET核对及记录恢复、0.2.7 GUI。",
+          "previous_files": {
+            "pyproject.toml": "cb3ef83ce4d28aa4ad65e13dbc41801d41abebb5e381dac35847dfa1719a310f"
+          },
+          "evidence": [
+            "validation/public_handoff/windows_io_027.json"
+          ],
+          "limitations": [
+            "异常日志无法确定具体持锁进程；GUI及审核读取是可复现的触发条件，安全软件亦可能造成短时占用。",
+            "3秒内只重试本地文件替换；永久权限或持续占用仍会报错并保留原件及候选，不能无限等待。",
+            "本轮不改变或重验视觉准确率，不承诺模型审核耗时或整批提速比例。",
+            "本机源码交付，未发布EXE/ZIP或GitHub Release。"
+          ]
         }
       ],
       "revision_limits": "仅pyproject版本和签名依赖声明变化，B源码字节不变；依赖打包与exe导入通过，本轮未重复网站上传验证",
@@ -103,24 +184,29 @@
         "validation/quality_v2/g_prefix_live/result.json",
         "validation/integration/code_checks.json",
         "validation/updates/U_PIPELINE/prefix/result.json",
-        "validation/updates/U_PIPELINE/actual_batch/result.json"
+        "validation/updates/U_PIPELINE/actual_batch/result.json",
+        "validation/public_handoff/runtime_repair_023.json",
+        "validation/public_handoff/quality_rules_025.json",
+        "validation/public_handoff/streaming_026.json",
+        "validation/public_handoff/windows_io_027.json"
       ],
       "files": {
         "run_stage_d.py": "be84e36b4ca99479cf6ed5f083517a07d08d26d34d2f2d2ab5417f327d789801",
-        "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
-        "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+        "src/soutui_image/codex_clothing.py": "e4492bb0e075420e3b69d9811c0e3b8f0d1dbd9b502632c69d80877a4bef54a5",
+        "src/soutui_image/review_button_edges.py": "737388e64aef69d87f3adff3102569b7f4a478a8736cdf3750b5aa220b68fa9c",
         "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
-        "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+        "src/soutui_image/review_detail_locator.py": "a4e205d011c55620231e0051d5e238e0776ded48db007f41f69ffdea39a697f6",
         "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
         "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
         "src/soutui_image/review_record_validation.py": "818b30a8cfcfe41d3f0274743634b8fe75aa30ecd2d097a6f6971eb1fa24e763",
-        "src/soutui_image/stage_d_web_generation.py": "7d6657b4529ed430e2a7df46199f41b83cf28ba2f04b82169ecbc40c7fcbcb19",
-        "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+        "src/soutui_image/stage_d_web_generation.py": "c6caa8c0f4ace6d0638d5207da8e92d04d0310de3c04f3c12b8524247e0f7c9e",
+        "src/soutui_image/stage_e_codex_review.py": "759e4377e3ace3c036bfe79e10129fd188bca6b5d8b23471aa099cd4334f80a8",
         "tests/test_quality_bridge.py": "d278e4566583a4079d267632e1df88613d6fd3bb994b888b47ad2fe3d2220b05",
-        "tests/test_stage_d_generation.py": "8c3b56a956dc9fed4bacffec0c0b654be3378b422bf32d8ab777d31013b3c810",
+        "tests/test_stage_d_generation.py": "480ebe60a2449bc2ab87dcf505ca3d4987025bfa4ec871a3511d8a1834663aca",
         "tools/validate_quality_batch.py": "bf071705d6904f7c562ae9c0f8af2dc7ad8c85280cb0c4523b66274c0715e89b",
         "src/soutui_image/review_schedule.py": "a07be55d4ed948be16ac73489ae6c983b94adef1d61c957dc959496658f9631f",
-        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69"
+        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69",
+        "src/soutui_image/codex_runtime.py": "d6685981508d982facfabe9918d03ab8c2418804f2d99a8ca7968bed862cfba1"
       },
       "revisions": [
         {
@@ -159,6 +245,69 @@
             "validation/updates/U_PIPELINE/prefix/result.json",
             "validation/updates/U_PIPELINE/actual_batch/result.json"
           ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户要求处理当前审核报错和慢；不改变模型、推理设置、图片、审核规则及生图轮次。",
+          "scope": "同一失败图真实断点续审、无连接重试；第二组五张真实缓存逐图保存、去重、任务不变；工作台启动和130项控制检查。",
+          "limitations": [
+            "不是人工标注正反例准确率重测",
+            "四路模型并发的完整九组吞吐量尚未实测，不能承诺固定提速比例",
+            "本轮未制作或发布Windows打包版本；当前交付为本机源码工作台"
+          ],
+          "previous_files": {
+            "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+            "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+            "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+            "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450"
+          },
+          "evidence": [
+            "validation/public_handoff/runtime_repair_023.json"
+          ]
+        },
+        {
+          "reason": "用户新增自然垂坠及门襟多线标准，7张同款实图复验；保留旧任务规则身份，速度实现不变。",
+          "previous_files": {
+            "src/soutui_image/stage_e_codex_review.py": "f328afdd77a7d6a3eb46abcfb8b01d6b26d0b391acf6517c8e79ff7a4d34701b"
+          },
+          "evidence": [
+            "validation/public_handoff/quality_rules_025.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确新增后台单张出图即审、生成审核并行授权；不改变模型和审核质量标准。",
+          "scope": "156项控制检查、历史逐张完成日志、本次11任务只读回查、10张真实图/原缓存隔离回放及0.2.6 GUI；新批次实测耗时待验证。",
+          "previous_files": {
+            "src/soutui_image/stage_d_web_generation.py": "7d6657b4529ed430e2a7df46199f41b83cf28ba2f04b82169ecbc40c7fcbcb19"
+          },
+          "evidence": [
+            "validation/public_handoff/streaming_026.json"
+          ],
+          "limitations": [
+            "网站本轮仅只读回查11个已有任务；旧运行日志确认生成中会提供单张完成结果。",
+            "真实10张结果图和原模型缓存用于隔离回放，图片可用时序受控；不是新生成整批或四路云端吞吐量实测。",
+            "没有新模型调用、质量准确率复验或新生图，不承诺整批固定提速比例。",
+            "仅交付本机源码工作台，未构建或发布新的EXE/ZIP或GitHub Release。"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户截图报WinError5并要求处理；本地记录保存可恢复，不重复提交后台任务。",
+          "scope": "164项检查含5项真实Win32文件占用测试；现场既有任务GET核对及记录恢复、0.2.7 GUI。",
+          "previous_files": {
+            "src/soutui_image/stage_d_web_generation.py": "46e5bcddd8c3c2eb8e07dd3721acd1b01690933997774dd06d34e3c77f523b06",
+            "tests/test_stage_d_generation.py": "8c3b56a956dc9fed4bacffec0c0b654be3378b422bf32d8ab777d31013b3c810"
+          },
+          "evidence": [
+            "validation/public_handoff/windows_io_027.json"
+          ],
+          "limitations": [
+            "异常日志无法确定具体持锁进程；GUI及审核读取是可复现的触发条件，安全软件亦可能造成短时占用。",
+            "3秒内只重试本地文件替换；永久权限或持续占用仍会报错并保留原件及候选，不能无限等待。",
+            "本轮不改变或重验视觉准确率，不承诺模型审核耗时或整批提速比例。",
+            "本机源码交付，未发布EXE/ZIP或GitHub Release。"
+          ]
         }
       ],
       "accepted_at": "2026-10-29T13:27:07.351815+00:00",
@@ -186,26 +335,31 @@
         "validation/integration/code_checks.json",
         "validation/updates/U_E_RUNTIME/result.json",
         "validation/updates/U_PIPELINE/prefix/result.json",
-        "validation/updates/U_PIPELINE/actual_batch/result.json"
+        "validation/updates/U_PIPELINE/actual_batch/result.json",
+        "validation/public_handoff/runtime_repair_023.json",
+        "validation/public_handoff/human_feedback_024.json",
+        "validation/public_handoff/quality_rules_025.json",
+        "validation/public_handoff/streaming_026.json",
+        "validation/public_handoff/windows_io_027.json"
       ],
       "files": {
         "run_stage_e.py": "f26b6e15cacc2730eaca62d6b91e83312a35dcdb57d843bf944959a801fd8e7f",
-        "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+        "src/soutui_image/codex_clothing.py": "e4492bb0e075420e3b69d9811c0e3b8f0d1dbd9b502632c69d80877a4bef54a5",
         "src/soutui_image/quality_upgrade.py": "3014eba24736346135317cf1e1f83ff080bd10efd1fe0b61a3b302bcec7814f4",
-        "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+        "src/soutui_image/review_button_edges.py": "737388e64aef69d87f3adff3102569b7f4a478a8736cdf3750b5aa220b68fa9c",
         "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
-        "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+        "src/soutui_image/review_detail_locator.py": "a4e205d011c55620231e0051d5e238e0776ded48db007f41f69ffdea39a697f6",
         "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
-        "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+        "src/soutui_image/review_group_state.py": "5c86dbc2770de7ceeb856d1c4048312a5a68636ddb79d56b900057465ff13052",
         "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
         "src/soutui_image/review_record_validation.py": "818b30a8cfcfe41d3f0274743634b8fe75aa30ecd2d097a6f6971eb1fa24e763",
         "src/soutui_image/review_revision.py": "a1ab700f541a4baeb1104832ee4797fa02a14384bb1fa9212462fde8098388cf",
-        "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+        "src/soutui_image/stage_e_codex_review.py": "759e4377e3ace3c036bfe79e10129fd188bca6b5d8b23471aa099cd4334f80a8",
         "src/soutui_image/stage_f_output_revision.py": "0894f06e9c37cb0b396d7986f199d170f8c683adc891f8096cfe55e794e31a8b",
         "tests/test_quality_bridge.py": "d278e4566583a4079d267632e1df88613d6fd3bb994b888b47ad2fe3d2220b05",
         "tests/test_quality_v2.py": "4573f1f4993808c81fbcd170c016a7d30a67b9ab0bf9fde97a3cb8847610000a",
         "tests/test_review_checkpoints.py": "195e9a0e041414c5eb9f18cb5c9349d776d882d2fb105ecf091b70b10973c14b",
-        "tests/test_review_group_state.py": "f8ebb923d503d8096dff89ef68051ee2a9e2792af62bda372ed0b868f9d36487",
+        "tests/test_review_group_state.py": "8f06361354af076b44f6254eeaab7a4600e2012a9d9fb66154ad6ed6e16725c2",
         "tests/test_review_record_validation.py": "797f5427877d5e6597444a66fed7a78ec6e0e2544403227920452c1a3545591d",
         "tests/test_review_revision.py": "f8ceaf3a59e970103e08b447c6c2f60217e3f25562042974676d6f0ef852383c",
         "tests/test_stage_e_review.py": "0e799278919c8ae0b661762d95ece910ee96d7a977c0ba6713f09ae56914754f",
@@ -222,7 +376,9 @@
         "src/soutui_image/rule_runtime.py": "aa416a3c76c9d8806ea4acf766847d132d76f4873930656acb319926933374f5",
         "tools/validate_external_rule_runtime.py": "94e82d3bcc1e384bf4de41616b2ee549d7069e9b1c5a8754ba92098cbf66d1d5",
         "src/soutui_image/review_schedule.py": "a07be55d4ed948be16ac73489ae6c983b94adef1d61c957dc959496658f9631f",
-        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69"
+        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69",
+        "src/soutui_image/codex_runtime.py": "d6685981508d982facfabe9918d03ab8c2418804f2d99a8ca7968bed862cfba1",
+        "src/soutui_image/human_review.py": "e4483d238016e58fcfd1b62072cbf9c01a868b08ec53418c83d36d6767a72d40"
       },
       "revisions": [
         {
@@ -369,6 +525,84 @@
             "validation/updates/U_PIPELINE/prefix/result.json",
             "validation/updates/U_PIPELINE/actual_batch/result.json"
           ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户要求处理当前审核报错和慢；不改变模型、推理设置、图片、审核规则及生图轮次。",
+          "scope": "同一失败图真实断点续审、无连接重试；第二组五张真实缓存逐图保存、去重、任务不变；工作台启动和130项控制检查。",
+          "limitations": [
+            "不是人工标注正反例准确率重测",
+            "四路模型并发的完整九组吞吐量尚未实测，不能承诺固定提速比例",
+            "本轮未制作或发布Windows打包版本；当前交付为本机源码工作台"
+          ],
+          "previous_files": {
+            "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+            "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+            "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+            "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450"
+          },
+          "evidence": [
+            "validation/public_handoff/runtime_repair_023.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确人工保留3张并撤下22张门襟问题图；已确认按文件名排序定位。速度仅分析，不改代码。",
+          "scope": "人工裁定的身份绑定、保存及计数覆盖、实际25张纠正、重复保存不恢复否决图、GUI和135项控制检查。",
+          "limitations": [
+            "没有新增模型审核或生图，没有调整速度/推理/图片/提示词",
+            "当前模型的袖口误杀和门襟漏判已由用户证实；本次人工修正不能当作自动审核准确率已修复"
+          ],
+          "previous_files": {
+            "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d"
+          },
+          "evidence": [
+            "validation/public_handoff/human_feedback_024.json"
+          ]
+        },
+        {
+          "reason": "用户新增自然垂坠及门襟多线标准，7张同款实图复验；保留旧任务规则身份，速度实现不变。",
+          "previous_files": {
+            "src/soutui_image/stage_e_codex_review.py": "f328afdd77a7d6a3eb46abcfb8b01d6b26d0b391acf6517c8e79ff7a4d34701b"
+          },
+          "evidence": [
+            "validation/public_handoff/quality_rules_025.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确新增后台单张出图即审、生成审核并行授权；不改变模型和审核质量标准。",
+          "scope": "156项控制检查、历史逐张完成日志、本次11任务只读回查、10张真实图/原缓存隔离回放及0.2.6 GUI；新批次实测耗时待验证。",
+          "previous_files": {
+            "src/soutui_image/review_group_state.py": "76a5cab07d4730a5112ff6a4c458785fb1ead3520eb012fb5c00a7395f2efeb7",
+            "tests/test_review_group_state.py": "f8ebb923d503d8096dff89ef68051ee2a9e2792af62bda372ed0b868f9d36487"
+          },
+          "evidence": [
+            "validation/public_handoff/streaming_026.json"
+          ],
+          "limitations": [
+            "网站本轮仅只读回查11个已有任务；旧运行日志确认生成中会提供单张完成结果。",
+            "真实10张结果图和原模型缓存用于隔离回放，图片可用时序受控；不是新生成整批或四路云端吞吐量实测。",
+            "没有新模型调用、质量准确率复验或新生图，不承诺整批固定提速比例。",
+            "仅交付本机源码工作台，未构建或发布新的EXE/ZIP或GitHub Release。"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户截图报WinError5并要求处理；本地记录保存可恢复，不重复提交后台任务。",
+          "scope": "164项检查含5项真实Win32文件占用测试；现场既有任务GET核对及记录恢复、0.2.7 GUI。",
+          "previous_files": {
+            "src/soutui_image/review_group_state.py": "31d1443658c9a487bbc0ab86d45e4af9cd699c5697ed26f53dae4326e3b24366"
+          },
+          "evidence": [
+            "validation/public_handoff/windows_io_027.json"
+          ],
+          "limitations": [
+            "异常日志无法确定具体持锁进程；GUI及审核读取是可复现的触发条件，安全软件亦可能造成短时占用。",
+            "3秒内只重试本地文件替换；永久权限或持续占用仍会报错并保留原件及候选，不能无限等待。",
+            "本轮不改变或重验视觉准确率，不承诺模型审核耗时或整批提速比例。",
+            "本机源码交付，未发布EXE/ZIP或GitHub Release。"
+          ]
         }
       ],
       "quality_scope": {
@@ -397,30 +631,37 @@
         "validation/quality_v2/batch_verified/result.json",
         "validation/integration/code_checks.json",
         "validation/updates/U_PIPELINE/prefix/result.json",
-        "validation/updates/U_PIPELINE/actual_batch/result.json"
+        "validation/updates/U_PIPELINE/actual_batch/result.json",
+        "validation/public_handoff/runtime_repair_023.json",
+        "validation/public_handoff/human_feedback_024.json",
+        "validation/public_handoff/quality_rules_025.json",
+        "validation/public_handoff/streaming_026.json",
+        "validation/public_handoff/windows_io_027.json"
       ],
       "files": {
         "run_stage_f.py": "97ed1004c9a682a02ca944c6793f59c9174f18733f8933d36684085755838b4c",
-        "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+        "src/soutui_image/codex_clothing.py": "e4492bb0e075420e3b69d9811c0e3b8f0d1dbd9b502632c69d80877a4bef54a5",
         "src/soutui_image/quality_upgrade.py": "3014eba24736346135317cf1e1f83ff080bd10efd1fe0b61a3b302bcec7814f4",
-        "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+        "src/soutui_image/review_button_edges.py": "737388e64aef69d87f3adff3102569b7f4a478a8736cdf3750b5aa220b68fa9c",
         "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
-        "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+        "src/soutui_image/review_detail_locator.py": "a4e205d011c55620231e0051d5e238e0776ded48db007f41f69ffdea39a697f6",
         "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
-        "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+        "src/soutui_image/review_group_state.py": "5c86dbc2770de7ceeb856d1c4048312a5a68636ddb79d56b900057465ff13052",
         "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
         "src/soutui_image/review_record_validation.py": "818b30a8cfcfe41d3f0274743634b8fe75aa30ecd2d097a6f6971eb1fa24e763",
         "src/soutui_image/review_revision.py": "a1ab700f541a4baeb1104832ee4797fa02a14384bb1fa9212462fde8098388cf",
-        "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+        "src/soutui_image/stage_e_codex_review.py": "759e4377e3ace3c036bfe79e10129fd188bca6b5d8b23471aa099cd4334f80a8",
         "src/soutui_image/stage_f_output_revision.py": "0894f06e9c37cb0b396d7986f199d170f8c683adc891f8096cfe55e794e31a8b",
-        "src/soutui_image/stage_f_outputs.py": "cb93121563c1fd6bf3b54bbb2d81cdb9d8eace6c949c03f14549d1bf8bb90d17",
+        "src/soutui_image/stage_f_outputs.py": "ded2bfd3f74bbabbf2dc40f4825dceb05243faea67669deba9bb803409f1b92d",
         "tests/test_output_revision.py": "b369489b2cbf7c2909b47db2368926ef6a0f2d043a00195a98427b3b55ec615d",
-        "tests/test_stage_f_outputs.py": "65cc1ed11e3574e77e194bb740862c62af69b6e70f4481bfe7e69c8f6f81426b",
+        "tests/test_stage_f_outputs.py": "da3d4e17cb7b2025a7141b942975955f06820999de3b95f68b7ec1f625b59a36",
         "tools/register_output_revision.py": "58982220a12d772d20e5d9775d0331186e285ce36388e498c4a4ad4bb2a49306",
         "tools/validate_output_withdrawal.py": "95870429d010aab99e401012ff1c95ad08a33bcfeba517e00758ff1781541226",
         "tools/validate_quality_batch.py": "bf071705d6904f7c562ae9c0f8af2dc7ad8c85280cb0c4523b66274c0715e89b",
         "src/soutui_image/review_schedule.py": "a07be55d4ed948be16ac73489ae6c983b94adef1d61c957dc959496658f9631f",
-        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69"
+        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69",
+        "src/soutui_image/codex_runtime.py": "d6685981508d982facfabe9918d03ab8c2418804f2d99a8ca7968bed862cfba1",
+        "src/soutui_image/human_review.py": "e4483d238016e58fcfd1b62072cbf9c01a868b08ec53418c83d36d6767a72d40"
       },
       "revisions": [
         {
@@ -481,6 +722,89 @@
             "validation/updates/U_PIPELINE/prefix/result.json",
             "validation/updates/U_PIPELINE/actual_batch/result.json"
           ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户要求处理当前审核报错和慢；不改变模型、推理设置、图片、审核规则及生图轮次。",
+          "scope": "同一失败图真实断点续审、无连接重试；第二组五张真实缓存逐图保存、去重、任务不变；工作台启动和130项控制检查。",
+          "limitations": [
+            "不是人工标注正反例准确率重测",
+            "四路模型并发的完整九组吞吐量尚未实测，不能承诺固定提速比例",
+            "本轮未制作或发布Windows打包版本；当前交付为本机源码工作台"
+          ],
+          "previous_files": {
+            "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+            "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+            "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+            "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+            "src/soutui_image/stage_f_outputs.py": "cb93121563c1fd6bf3b54bbb2d81cdb9d8eace6c949c03f14549d1bf8bb90d17",
+            "tests/test_stage_f_outputs.py": "65cc1ed11e3574e77e194bb740862c62af69b6e70f4481bfe7e69c8f6f81426b"
+          },
+          "evidence": [
+            "validation/public_handoff/runtime_repair_023.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确人工保留3张并撤下22张门襟问题图；已确认按文件名排序定位。速度仅分析，不改代码。",
+          "scope": "人工裁定的身份绑定、保存及计数覆盖、实际25张纠正、重复保存不恢复否决图、GUI和135项控制检查。",
+          "limitations": [
+            "没有新增模型审核或生图，没有调整速度/推理/图片/提示词",
+            "当前模型的袖口误杀和门襟漏判已由用户证实；本次人工修正不能当作自动审核准确率已修复"
+          ],
+          "previous_files": {
+            "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+            "src/soutui_image/stage_f_outputs.py": "ef4a2e7e397f6b1e4d0963a04f76df378b70b32653f0f454081a1ccfab232e31"
+          },
+          "evidence": [
+            "validation/public_handoff/human_feedback_024.json"
+          ]
+        },
+        {
+          "reason": "用户新增自然垂坠及门襟多线标准，7张同款实图复验；保留旧任务规则身份，速度实现不变。",
+          "previous_files": {
+            "src/soutui_image/stage_e_codex_review.py": "f328afdd77a7d6a3eb46abcfb8b01d6b26d0b391acf6517c8e79ff7a4d34701b"
+          },
+          "evidence": [
+            "validation/public_handoff/quality_rules_025.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确新增后台单张出图即审、生成审核并行授权；不改变模型和审核质量标准。",
+          "scope": "156项控制检查、历史逐张完成日志、本次11任务只读回查、10张真实图/原缓存隔离回放及0.2.6 GUI；新批次实测耗时待验证。",
+          "previous_files": {
+            "src/soutui_image/review_group_state.py": "76a5cab07d4730a5112ff6a4c458785fb1ead3520eb012fb5c00a7395f2efeb7",
+            "src/soutui_image/stage_f_outputs.py": "332be451de9b1f5e07dd1f69b6d917c6321bba82faba52c5b92a6522498f914d",
+            "tests/test_stage_f_outputs.py": "5ee6fb54b4526899e77474fc7700bf9728c4689ba000663b4d5a67cb90d60382"
+          },
+          "evidence": [
+            "validation/public_handoff/streaming_026.json"
+          ],
+          "limitations": [
+            "网站本轮仅只读回查11个已有任务；旧运行日志确认生成中会提供单张完成结果。",
+            "真实10张结果图和原模型缓存用于隔离回放，图片可用时序受控；不是新生成整批或四路云端吞吐量实测。",
+            "没有新模型调用、质量准确率复验或新生图，不承诺整批固定提速比例。",
+            "仅交付本机源码工作台，未构建或发布新的EXE/ZIP或GitHub Release。"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户截图报WinError5并要求处理；本地记录保存可恢复，不重复提交后台任务。",
+          "scope": "164项检查含5项真实Win32文件占用测试；现场既有任务GET核对及记录恢复、0.2.7 GUI。",
+          "previous_files": {
+            "src/soutui_image/review_group_state.py": "31d1443658c9a487bbc0ab86d45e4af9cd699c5697ed26f53dae4326e3b24366",
+            "src/soutui_image/stage_f_outputs.py": "094abebd5ac8decc24de822f98a0a2116d9c04cf2771104a099eae5181b5aee2"
+          },
+          "evidence": [
+            "validation/public_handoff/windows_io_027.json"
+          ],
+          "limitations": [
+            "异常日志无法确定具体持锁进程；GUI及审核读取是可复现的触发条件，安全软件亦可能造成短时占用。",
+            "3秒内只重试本地文件替换；永久权限或持续占用仍会报错并保留原件及候选，不能无限等待。",
+            "本轮不改变或重验视觉准确率，不承诺模型审核耗时或整批提速比例。",
+            "本机源码交付，未发布EXE/ZIP或GitHub Release。"
+          ]
         }
       ],
       "revision_scope": {
@@ -535,20 +859,25 @@
         "validation/updates/U_H/actual_gui_021/smoke.json",
         "validation/updates/U_H/portable_021/result.json",
         "validation/updates/U_PROGRAM_021/result.json",
-        "validation/updates/published_client_021/result.json"
+        "validation/updates/published_client_021/result.json",
+        "validation/public_handoff/runtime_repair_023.json",
+        "validation/public_handoff/human_feedback_024.json",
+        "validation/public_handoff/quality_rules_025.json",
+        "validation/public_handoff/streaming_026.json",
+        "validation/public_handoff/windows_io_027.json"
       ],
       "files": {
         "main.py": "5f52ace85a6d1652f31bea6604ae06dacf88be37ed74580f6f8e611cf2da32d7",
-        "run_pipeline.py": "8e5da4cafec658fef44710dc446ae2f58c15762f817cb3a9f5eb7655937c85a0",
+        "run_pipeline.py": "8a711a6dbfb08ee0d6357913a180f8303d9bf48a96814624c6b4478606e3a04b",
         "src/soutui_image/__init__.py": "4808d1ec7517efe9992394dbd82e2c03a017c9b7353542ef65ee24e3e96a0cb8",
-        "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
-        "src/soutui_image/pipeline.py": "0111c422645b3e27f305e1a410a5b0b4e76bfd4cf677002b41fa15afa346fcbb",
+        "src/soutui_image/codex_clothing.py": "e4492bb0e075420e3b69d9811c0e3b8f0d1dbd9b502632c69d80877a4bef54a5",
+        "src/soutui_image/pipeline.py": "d0717e04db45afecc33e0ff2b2dbab2ee7201f855d4f4e0a5503fba14fc0b83c",
         "src/soutui_image/quality_upgrade.py": "3014eba24736346135317cf1e1f83ff080bd10efd1fe0b61a3b302bcec7814f4",
-        "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+        "src/soutui_image/review_button_edges.py": "737388e64aef69d87f3adff3102569b7f4a478a8736cdf3750b5aa220b68fa9c",
         "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
-        "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+        "src/soutui_image/review_detail_locator.py": "a4e205d011c55620231e0051d5e238e0776ded48db007f41f69ffdea39a697f6",
         "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
-        "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+        "src/soutui_image/review_group_state.py": "5c86dbc2770de7ceeb856d1c4048312a5a68636ddb79d56b900057465ff13052",
         "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
         "src/soutui_image/review_record_validation.py": "818b30a8cfcfe41d3f0274743634b8fe75aa30ecd2d097a6f6971eb1fa24e763",
         "src/soutui_image/review_revision.py": "a1ab700f541a4baeb1104832ee4797fa02a14384bb1fa9212462fde8098388cf",
@@ -556,13 +885,13 @@
         "src/soutui_image/stage_a_inputs.py": "b6c4859d3a88294207f45610e719a05d33f3cea684170a044eeffc8d88e6141c",
         "src/soutui_image/stage_b_web_upload.py": "3b36058417ae61cd99ee0618d36bbd37ee20afd0013e31b5674c2491f4b158c5",
         "src/soutui_image/stage_c_web_plan.py": "c2f6b833e8c647ae3d0625ef6080714ad58f2cc914df5ca66176b01fe136ffff",
-        "src/soutui_image/stage_d_web_generation.py": "7d6657b4529ed430e2a7df46199f41b83cf28ba2f04b82169ecbc40c7fcbcb19",
-        "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+        "src/soutui_image/stage_d_web_generation.py": "c6caa8c0f4ace6d0638d5207da8e92d04d0310de3c04f3c12b8524247e0f7c9e",
+        "src/soutui_image/stage_e_codex_review.py": "759e4377e3ace3c036bfe79e10129fd188bca6b5d8b23471aa099cd4334f80a8",
         "src/soutui_image/stage_f_output_revision.py": "0894f06e9c37cb0b396d7986f199d170f8c683adc891f8096cfe55e794e31a8b",
-        "src/soutui_image/stage_f_outputs.py": "cb93121563c1fd6bf3b54bbb2d81cdb9d8eace6c949c03f14549d1bf8bb90d17",
+        "src/soutui_image/stage_f_outputs.py": "ded2bfd3f74bbabbf2dc40f4825dceb05243faea67669deba9bb803409f1b92d",
         "src/soutui_image/web_session.py": "88871cb3cce72bc3f9f81370c19c309aea5d87f4f932b34422cbaaa263776d41",
         "src/soutui_image/web_transport.py": "3e743c3f4b85b2a5985f5c1ebbf243ec32252e035111e71b96254f6c14edce20",
-        "tests/test_pipeline_controls.py": "e949278daff672ba50619d2c0dbd4fc8496fda1582fc05acd0edf635bfc53ad0",
+        "tests/test_pipeline_controls.py": "73cd2276a51a0409960be8e2fb22c4c2179eaba4e3378a57aa2709f09aef548c",
         "tools/freeze_g_h.py": "44e70058684299dd4f7892e6fea622dffaec8661affb03a9831b7015a3cd9707",
         "tools/register_quality_release.py": "dc946f78edae25d36cdad48f427c3195883d6bf75e64a5b4a3868fac58f73541",
         "tools/run_checks.py": "53b0c384b6345f1c5e72d475965ec6686d09ee5ebb1cd4927ef54c4365b75d23",
@@ -571,7 +900,9 @@
         "tools/validate_quality_batch.py": "bf071705d6904f7c562ae9c0f8af2dc7ad8c85280cb0c4523b66274c0715e89b",
         "tools/validate_quality_prefix.py": "7964a29e7135a5d3826d92b1bd1394641ecc15593dceff3f7dac969651ede14e",
         "src/soutui_image/review_schedule.py": "a07be55d4ed948be16ac73489ae6c983b94adef1d61c957dc959496658f9631f",
-        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69"
+        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69",
+        "src/soutui_image/codex_runtime.py": "d6685981508d982facfabe9918d03ab8c2418804f2d99a8ca7968bed862cfba1",
+        "src/soutui_image/human_review.py": "e4483d238016e58fcfd1b62072cbf9c01a868b08ec53418c83d36d6767a72d40"
       },
       "revisions": [
         {
@@ -693,6 +1024,94 @@
             "validation/updates/published_client_021/result.json"
           ],
           "prior_baseline": "validation\\updates\\final_frozen_before.json"
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户要求处理当前审核报错和慢；不改变模型、推理设置、图片、审核规则及生图轮次。",
+          "scope": "同一失败图真实断点续审、无连接重试；第二组五张真实缓存逐图保存、去重、任务不变；工作台启动和130项控制检查。",
+          "limitations": [
+            "不是人工标注正反例准确率重测",
+            "四路模型并发的完整九组吞吐量尚未实测，不能承诺固定提速比例",
+            "本轮未制作或发布Windows打包版本；当前交付为本机源码工作台"
+          ],
+          "previous_files": {
+            "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+            "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+            "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+            "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+            "src/soutui_image/stage_f_outputs.py": "cb93121563c1fd6bf3b54bbb2d81cdb9d8eace6c949c03f14549d1bf8bb90d17",
+            "run_pipeline.py": "8e5da4cafec658fef44710dc446ae2f58c15762f817cb3a9f5eb7655937c85a0",
+            "src/soutui_image/pipeline.py": "0111c422645b3e27f305e1a410a5b0b4e76bfd4cf677002b41fa15afa346fcbb",
+            "tests/test_pipeline_controls.py": "e949278daff672ba50619d2c0dbd4fc8496fda1582fc05acd0edf635bfc53ad0"
+          },
+          "evidence": [
+            "validation/public_handoff/runtime_repair_023.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确人工保留3张并撤下22张门襟问题图；已确认按文件名排序定位。速度仅分析，不改代码。",
+          "scope": "人工裁定的身份绑定、保存及计数覆盖、实际25张纠正、重复保存不恢复否决图、GUI和135项控制检查。",
+          "limitations": [
+            "没有新增模型审核或生图，没有调整速度/推理/图片/提示词",
+            "当前模型的袖口误杀和门襟漏判已由用户证实；本次人工修正不能当作自动审核准确率已修复"
+          ],
+          "previous_files": {
+            "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+            "src/soutui_image/stage_f_outputs.py": "ef4a2e7e397f6b1e4d0963a04f76df378b70b32653f0f454081a1ccfab232e31"
+          },
+          "evidence": [
+            "validation/public_handoff/human_feedback_024.json"
+          ]
+        },
+        {
+          "reason": "用户新增自然垂坠及门襟多线标准，7张同款实图复验；保留旧任务规则身份，速度实现不变。",
+          "previous_files": {
+            "src/soutui_image/stage_e_codex_review.py": "f328afdd77a7d6a3eb46abcfb8b01d6b26d0b391acf6517c8e79ff7a4d34701b"
+          },
+          "evidence": [
+            "validation/public_handoff/quality_rules_025.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确新增后台单张出图即审、生成审核并行授权；不改变模型和审核质量标准。",
+          "scope": "156项控制检查、历史逐张完成日志、本次11任务只读回查、10张真实图/原缓存隔离回放及0.2.6 GUI；新批次实测耗时待验证。",
+          "previous_files": {
+            "src/soutui_image/pipeline.py": "4237529e2804df170326365c7e6e9a519c1097346ee50e332ab24403a2207a4b",
+            "src/soutui_image/review_group_state.py": "76a5cab07d4730a5112ff6a4c458785fb1ead3520eb012fb5c00a7395f2efeb7",
+            "src/soutui_image/stage_d_web_generation.py": "7d6657b4529ed430e2a7df46199f41b83cf28ba2f04b82169ecbc40c7fcbcb19",
+            "src/soutui_image/stage_f_outputs.py": "332be451de9b1f5e07dd1f69b6d917c6321bba82faba52c5b92a6522498f914d"
+          },
+          "evidence": [
+            "validation/public_handoff/streaming_026.json"
+          ],
+          "limitations": [
+            "网站本轮仅只读回查11个已有任务；旧运行日志确认生成中会提供单张完成结果。",
+            "真实10张结果图和原模型缓存用于隔离回放，图片可用时序受控；不是新生成整批或四路云端吞吐量实测。",
+            "没有新模型调用、质量准确率复验或新生图，不承诺整批固定提速比例。",
+            "仅交付本机源码工作台，未构建或发布新的EXE/ZIP或GitHub Release。"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户截图报WinError5并要求处理；本地记录保存可恢复，不重复提交后台任务。",
+          "scope": "164项检查含5项真实Win32文件占用测试；现场既有任务GET核对及记录恢复、0.2.7 GUI。",
+          "previous_files": {
+            "src/soutui_image/pipeline.py": "8d5e5432d125f3442983a869d0c515d9c4c1ae4f41f5628077bb55ba333955c7",
+            "src/soutui_image/review_group_state.py": "31d1443658c9a487bbc0ab86d45e4af9cd699c5697ed26f53dae4326e3b24366",
+            "src/soutui_image/stage_d_web_generation.py": "46e5bcddd8c3c2eb8e07dd3721acd1b01690933997774dd06d34e3c77f523b06",
+            "src/soutui_image/stage_f_outputs.py": "094abebd5ac8decc24de822f98a0a2116d9c04cf2771104a099eae5181b5aee2"
+          },
+          "evidence": [
+            "validation/public_handoff/windows_io_027.json"
+          ],
+          "limitations": [
+            "异常日志无法确定具体持锁进程；GUI及审核读取是可复现的触发条件，安全软件亦可能造成短时占用。",
+            "3秒内只重试本地文件替换；永久权限或持续占用仍会报错并保留原件及候选，不能无限等待。",
+            "本轮不改变或重验视觉准确率，不承诺模型审核耗时或整批提速比例。",
+            "本机源码交付，未发布EXE/ZIP或GitHub Release。"
+          ]
         }
       ],
       "revalidation_20261103": {
@@ -725,26 +1144,31 @@
         "validation/updates/U_H/actual_gui_021/smoke.json",
         "validation/updates/U_H/portable_021/result.json",
         "validation/updates/U_PROGRAM_021/result.json",
-        "validation/updates/published_client_021/result.json"
+        "validation/updates/published_client_021/result.json",
+        "validation/public_handoff/runtime_repair_023.json",
+        "validation/public_handoff/human_feedback_024.json",
+        "validation/public_handoff/quality_rules_025.json",
+        "validation/public_handoff/streaming_026.json",
+        "validation/public_handoff/windows_io_027.json"
       ],
       "files": {
         "main.py": "5f52ace85a6d1652f31bea6604ae06dacf88be37ed74580f6f8e611cf2da32d7",
-        "pyproject.toml": "bac4a7088e6029e3b417ca0e473bc8ee897e029825558e7e57ef64dcb7fe8716",
+        "pyproject.toml": "7373e02029e78421c89be5d0571a46ee62ea75bb3de647d4d99f659c1d1c1497",
         "requirements-build.txt": "a77cca27d95c735d9540e6b1b2112e640d03ad4be4f936b844617d7fb4f6eafd",
-        "run_pipeline.py": "8e5da4cafec658fef44710dc446ae2f58c15762f817cb3a9f5eb7655937c85a0",
+        "run_pipeline.py": "8a711a6dbfb08ee0d6357913a180f8303d9bf48a96814624c6b4478606e3a04b",
         "src/soutui_image/__init__.py": "4808d1ec7517efe9992394dbd82e2c03a017c9b7353542ef65ee24e3e96a0cb8",
         "src/soutui_image/browser_connection.py": "7a9c2fb8090e2222001eb2f1e2bd14088c5c19515dc485a8aea391659da7a968",
         "src/soutui_image/browser_ui.py": "b023aa3bb59e8a525ae30a29b057b5cc4f9d241aa32352ae9a046418a6696faa",
         "src/soutui_image/clipboard_transfer.py": "9d485d85d4ad77443145e1b1cca28076888cd9908df6162b471799a4eb2d78b9",
-        "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
-        "src/soutui_image/desktop_app.py": "d329d27120cbe3c0d0f6a37c08744a5d15eb36fc8a4c8a56d3cdbdf35d328c67",
-        "src/soutui_image/pipeline.py": "0111c422645b3e27f305e1a410a5b0b4e76bfd4cf677002b41fa15afa346fcbb",
+        "src/soutui_image/codex_clothing.py": "e4492bb0e075420e3b69d9811c0e3b8f0d1dbd9b502632c69d80877a4bef54a5",
+        "src/soutui_image/desktop_app.py": "3db93896bcb851e22208613b2da86b430939ca46a8c28665c5ca3553237e8cfe",
+        "src/soutui_image/pipeline.py": "d0717e04db45afecc33e0ff2b2dbab2ee7201f855d4f4e0a5503fba14fc0b83c",
         "src/soutui_image/quality_upgrade.py": "3014eba24736346135317cf1e1f83ff080bd10efd1fe0b61a3b302bcec7814f4",
-        "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+        "src/soutui_image/review_button_edges.py": "737388e64aef69d87f3adff3102569b7f4a478a8736cdf3750b5aa220b68fa9c",
         "src/soutui_image/review_checkpoints.py": "c61ccca8d373a2150cf9687c203aa0d6b4695d6f2846f5a8141025e293be147a",
-        "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+        "src/soutui_image/review_detail_locator.py": "a4e205d011c55620231e0051d5e238e0776ded48db007f41f69ffdea39a697f6",
         "src/soutui_image/review_detail_views.py": "93eb3bd07f9a998b24676c20f1bebeb789ebaa07602e32edb28d7a9da2be0e7f",
-        "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+        "src/soutui_image/review_group_state.py": "5c86dbc2770de7ceeb856d1c4048312a5a68636ddb79d56b900057465ff13052",
         "src/soutui_image/review_images.py": "333f57700730d7919ed9b2cc1546fcd3d1ccbdcf241496312a455af49f15818c",
         "src/soutui_image/review_record_validation.py": "818b30a8cfcfe41d3f0274743634b8fe75aa30ecd2d097a6f6971eb1fa24e763",
         "src/soutui_image/review_revision.py": "a1ab700f541a4baeb1104832ee4797fa02a14384bb1fa9212462fde8098388cf",
@@ -753,10 +1177,10 @@
         "src/soutui_image/stage_a_inputs.py": "b6c4859d3a88294207f45610e719a05d33f3cea684170a044eeffc8d88e6141c",
         "src/soutui_image/stage_b_web_upload.py": "3b36058417ae61cd99ee0618d36bbd37ee20afd0013e31b5674c2491f4b158c5",
         "src/soutui_image/stage_c_web_plan.py": "c2f6b833e8c647ae3d0625ef6080714ad58f2cc914df5ca66176b01fe136ffff",
-        "src/soutui_image/stage_d_web_generation.py": "7d6657b4529ed430e2a7df46199f41b83cf28ba2f04b82169ecbc40c7fcbcb19",
-        "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+        "src/soutui_image/stage_d_web_generation.py": "c6caa8c0f4ace6d0638d5207da8e92d04d0310de3c04f3c12b8524247e0f7c9e",
+        "src/soutui_image/stage_e_codex_review.py": "759e4377e3ace3c036bfe79e10129fd188bca6b5d8b23471aa099cd4334f80a8",
         "src/soutui_image/stage_f_output_revision.py": "0894f06e9c37cb0b396d7986f199d170f8c683adc891f8096cfe55e794e31a8b",
-        "src/soutui_image/stage_f_outputs.py": "cb93121563c1fd6bf3b54bbb2d81cdb9d8eace6c949c03f14549d1bf8bb90d17",
+        "src/soutui_image/stage_f_outputs.py": "ded2bfd3f74bbabbf2dc40f4825dceb05243faea67669deba9bb803409f1b92d",
         "src/soutui_image/web_session.py": "88871cb3cce72bc3f9f81370c19c309aea5d87f4f932b34422cbaaa263776d41",
         "src/soutui_image/web_transport.py": "3e743c3f4b85b2a5985f5c1ebbf243ec32252e035111e71b96254f6c14edce20",
         "src/soutui_image/window_capture.py": "c3f0e5c59ed93410c61e69be4990b9bbb0f435b715e15181f1befdd6baad3498",
@@ -770,24 +1194,26 @@
         "tools/validate_package_quality.py": "3eb0307793ad64352b815509476a88ea3a0d930510506debe0641f3dc0bc0ffd",
         "tools/validate_portable_quality.py": "8a1cc1689c0d2fc5f99fec39530f71fe4c357e171bbe118c76ac4d101f1d0def",
         "tools/validate_quality_prefix.py": "7964a29e7135a5d3826d92b1bd1394641ecc15593dceff3f7dac969651ede14e",
-        "src/soutui_image/rule_store.py": "4e1711d1d27a94152c531730ac0e1f0ec7e16f65857c49ee54719795cd9c4a4c",
-        "src/soutui_image/resources/review_rules.json": "c06f8853a8847de78124a3655bd639e7ada0ba52ec28cc95fda866f15ef6d5ab",
+        "src/soutui_image/rule_store.py": "48bd6efc805b368c5d1de224cb888c0c2ec04c23d607122da402de70c0e0c886",
+        "src/soutui_image/resources/review_rules.json": "942007e22643a8063f315685e08226b7df32e804f0c5ed99e5a185e0a8ff8681",
         "src/soutui_image/resources/update_source.json": "7e597601549cb4073ac7bc574317ee8134a983c6e15fb854403f882aee17a3cb",
         "tools/validate_published_private_release.py": "d43d307159b08f71011e8cc663d8e29cf227acae2bcd8be7230aeb54fd34268f",
         "src/soutui_image/update_dialog.py": "28c5a11616905544b424657dd788cd4aee3209634e044d614ad6221176a8b4a7",
-        "src/soutui_image/rules_bundle.py": "7863d677f1ff40cbe50c27600d7488573a7847bab99414723892f2a5f3e9fd11",
+        "src/soutui_image/rules_bundle.py": "8f71059427a2df9460b2de6e32c3a4fa4f71c117d377a3f41e627cc3c4649547",
         "src/soutui_image/update_service.py": "729861895d53f7ba35e489e3b1f88d26f1545c03da6d5dc4e29c825c1eabbc49",
         "tools/validate_program_replacement.py": "c4b906c99ea9bef169d4b4a1918fb797837ebbfe01931bcb41e903e8ce917bfe",
         "src/soutui_image/update_security.py": "3ebc9dd51cbdccc4cc052234c61e40d8f0b8a314fc52c8253f772632a0b1b65e",
         "tools/register_private_release.py": "5beb1067b25b5885caf7a1ee55f3f6b3b2dd8af47277341d3af02a5a6421d67d",
         "src/soutui_image/program_update.py": "7698ed6d44448097e0ca2d20a8da7935153ca0c099d4a9372549bc5dbd8e7c2f",
-        "src/soutui_image/update_config.py": "8d56b60bb1ddbe8ac98c9be496efc4c5b2c795edffeff8948b6a4e431e0ed0fa",
+        "src/soutui_image/update_config.py": "fadfd1d2fd327d8097bd1386c99a9eaa5cb0d4f71f87524be1116e72c40eedcc",
         "tests/test_program_updates.py": "a018fdfb362659c57d00069a01cf6e89d3458d8e63b94a6aa12789ddcaf13c38",
         "src/soutui_image/rule_runtime.py": "aa416a3c76c9d8806ea4acf766847d132d76f4873930656acb319926933374f5",
         "tools/private_update_panel.py": "0d4162b47d8d58eab1151b86a8134e4d4b1ce8bffa7c09787a4e01b8b3a2dff0",
         "src/soutui_image/github_updates.py": "9a588002452d27f0b38c9d72e2e31e549a880d8521265f0176c0cc18d1ab47de",
         "src/soutui_image/review_schedule.py": "a07be55d4ed948be16ac73489ae6c983b94adef1d61c957dc959496658f9631f",
-        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69"
+        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69",
+        "src/soutui_image/codex_runtime.py": "d6685981508d982facfabe9918d03ab8c2418804f2d99a8ca7968bed862cfba1",
+        "src/soutui_image/human_review.py": "e4483d238016e58fcfd1b62072cbf9c01a868b08ec53418c83d36d6767a72d40"
       },
       "revisions": [
         {
@@ -889,6 +1315,108 @@
             "validation/updates/published_client_021/result.json"
           ],
           "prior_baseline": "validation\\updates\\final_frozen_before.json"
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户要求处理当前审核报错和慢；不改变模型、推理设置、图片、审核规则及生图轮次。",
+          "scope": "同一失败图真实断点续审、无连接重试；第二组五张真实缓存逐图保存、去重、任务不变；工作台启动和130项控制检查。",
+          "limitations": [
+            "不是人工标注正反例准确率重测",
+            "四路模型并发的完整九组吞吐量尚未实测，不能承诺固定提速比例",
+            "本轮未制作或发布Windows打包版本；当前交付为本机源码工作台"
+          ],
+          "previous_files": {
+            "src/soutui_image/codex_clothing.py": "dba4027b59dee9fab89b1b91ae2d81cfdaab1d7d0edac94ee8c6e13bcba65ae7",
+            "pyproject.toml": "bac4a7088e6029e3b417ca0e473bc8ee897e029825558e7e57ef64dcb7fe8716",
+            "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+            "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+            "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+            "src/soutui_image/stage_f_outputs.py": "cb93121563c1fd6bf3b54bbb2d81cdb9d8eace6c949c03f14549d1bf8bb90d17",
+            "run_pipeline.py": "8e5da4cafec658fef44710dc446ae2f58c15762f817cb3a9f5eb7655937c85a0",
+            "src/soutui_image/pipeline.py": "0111c422645b3e27f305e1a410a5b0b4e76bfd4cf677002b41fa15afa346fcbb",
+            "src/soutui_image/desktop_app.py": "d329d27120cbe3c0d0f6a37c08744a5d15eb36fc8a4c8a56d3cdbdf35d328c67",
+            "src/soutui_image/update_config.py": "8d56b60bb1ddbe8ac98c9be496efc4c5b2c795edffeff8948b6a4e431e0ed0fa"
+          },
+          "evidence": [
+            "validation/public_handoff/runtime_repair_023.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确人工保留3张并撤下22张门襟问题图；已确认按文件名排序定位。速度仅分析，不改代码。",
+          "scope": "人工裁定的身份绑定、保存及计数覆盖、实际25张纠正、重复保存不恢复否决图、GUI和135项控制检查。",
+          "limitations": [
+            "没有新增模型审核或生图，没有调整速度/推理/图片/提示词",
+            "当前模型的袖口误杀和门襟漏判已由用户证实；本次人工修正不能当作自动审核准确率已修复"
+          ],
+          "previous_files": {
+            "pyproject.toml": "86961ab914954e55ed5e695ff0fc29679e13dab9a3176bb70c65e86d6c318954",
+            "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+            "src/soutui_image/stage_f_outputs.py": "ef4a2e7e397f6b1e4d0963a04f76df378b70b32653f0f454081a1ccfab232e31",
+            "src/soutui_image/update_config.py": "790a8f0fc49c1d5210f657e63605dba1994312d0e055aedf7e6e8834be7af030"
+          },
+          "evidence": [
+            "validation/public_handoff/human_feedback_024.json"
+          ]
+        },
+        {
+          "reason": "用户新增自然垂坠及门襟多线标准，7张同款实图复验；保留旧任务规则身份，速度实现不变。",
+          "previous_files": {
+            "pyproject.toml": "d21839d98a15ae8783f4d949ed521049717c476955cc9c0cbe184c5687f9e0b5",
+            "src/soutui_image/stage_e_codex_review.py": "f328afdd77a7d6a3eb46abcfb8b01d6b26d0b391acf6517c8e79ff7a4d34701b",
+            "src/soutui_image/rule_store.py": "4e1711d1d27a94152c531730ac0e1f0ec7e16f65857c49ee54719795cd9c4a4c",
+            "src/soutui_image/resources/review_rules.json": "c06f8853a8847de78124a3655bd639e7ada0ba52ec28cc95fda866f15ef6d5ab",
+            "src/soutui_image/rules_bundle.py": "7863d677f1ff40cbe50c27600d7488573a7847bab99414723892f2a5f3e9fd11",
+            "src/soutui_image/update_config.py": "0a4da94634bf33143f7f58b98e1ae42790fd6a5771afcfccd2f246f0026cb355"
+          },
+          "evidence": [
+            "validation/public_handoff/quality_rules_025.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确新增后台单张出图即审、生成审核并行授权；不改变模型和审核质量标准。",
+          "scope": "156项控制检查、历史逐张完成日志、本次11任务只读回查、10张真实图/原缓存隔离回放及0.2.6 GUI；新批次实测耗时待验证。",
+          "previous_files": {
+            "pyproject.toml": "3c31f2f4067843702ce4133adc69e03a5de7ff07380d5062c2bf374bc3947d7e",
+            "src/soutui_image/desktop_app.py": "b11869ae0c0b9f6e6abf3a54241680030fab4a0e00ad037707ffd4a9794301a0",
+            "src/soutui_image/pipeline.py": "4237529e2804df170326365c7e6e9a519c1097346ee50e332ab24403a2207a4b",
+            "src/soutui_image/review_group_state.py": "76a5cab07d4730a5112ff6a4c458785fb1ead3520eb012fb5c00a7395f2efeb7",
+            "src/soutui_image/stage_d_web_generation.py": "7d6657b4529ed430e2a7df46199f41b83cf28ba2f04b82169ecbc40c7fcbcb19",
+            "src/soutui_image/stage_f_outputs.py": "332be451de9b1f5e07dd1f69b6d917c6321bba82faba52c5b92a6522498f914d",
+            "src/soutui_image/update_config.py": "731a1bb7f04bab2b6b93de908a103199147c121db93a5a2f8c2b44f42d8d85d2"
+          },
+          "evidence": [
+            "validation/public_handoff/streaming_026.json"
+          ],
+          "limitations": [
+            "网站本轮仅只读回查11个已有任务；旧运行日志确认生成中会提供单张完成结果。",
+            "真实10张结果图和原模型缓存用于隔离回放，图片可用时序受控；不是新生成整批或四路云端吞吐量实测。",
+            "没有新模型调用、质量准确率复验或新生图，不承诺整批固定提速比例。",
+            "仅交付本机源码工作台，未构建或发布新的EXE/ZIP或GitHub Release。"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户截图报WinError5并要求处理；本地记录保存可恢复，不重复提交后台任务。",
+          "scope": "164项检查含5项真实Win32文件占用测试；现场既有任务GET核对及记录恢复、0.2.7 GUI。",
+          "previous_files": {
+            "pyproject.toml": "cb3ef83ce4d28aa4ad65e13dbc41801d41abebb5e381dac35847dfa1719a310f",
+            "src/soutui_image/pipeline.py": "8d5e5432d125f3442983a869d0c515d9c4c1ae4f41f5628077bb55ba333955c7",
+            "src/soutui_image/review_group_state.py": "31d1443658c9a487bbc0ab86d45e4af9cd699c5697ed26f53dae4326e3b24366",
+            "src/soutui_image/stage_d_web_generation.py": "46e5bcddd8c3c2eb8e07dd3721acd1b01690933997774dd06d34e3c77f523b06",
+            "src/soutui_image/stage_f_outputs.py": "094abebd5ac8decc24de822f98a0a2116d9c04cf2771104a099eae5181b5aee2",
+            "src/soutui_image/update_config.py": "7acecb44b96a948c63e9e1d3a031b5e8a1431ac6c467d56be5608e4647b89671"
+          },
+          "evidence": [
+            "validation/public_handoff/windows_io_027.json"
+          ],
+          "limitations": [
+            "异常日志无法确定具体持锁进程；GUI及审核读取是可复现的触发条件，安全软件亦可能造成短时占用。",
+            "3秒内只重试本地文件替换；永久权限或持续占用仍会报错并保留原件及候选，不能无限等待。",
+            "本轮不改变或重验视觉准确率，不承诺模型审核耗时或整批提速比例。",
+            "本机源码交付，未发布EXE/ZIP或GitHub Release。"
+          ]
         }
       ],
       "revalidation_20261103": {
@@ -901,11 +1429,12 @@
       "status": "verified",
       "scope": "无损外置规则：35张实际原图/结果、已完成整图提示词哈希及可用定位/扣位日志逐字一致；未新调用模型",
       "evidence": [
-        "validation/updates/U_RULES/result.json"
+        "validation/updates/U_RULES/result.json",
+        "validation/public_handoff/quality_rules_025.json"
       ],
       "files": {
-        "src/soutui_image/rules_bundle.py": "7863d677f1ff40cbe50c27600d7488573a7847bab99414723892f2a5f3e9fd11",
-        "src/soutui_image/resources/review_rules.json": "c06f8853a8847de78124a3655bd639e7ada0ba52ec28cc95fda866f15ef6d5ab",
+        "src/soutui_image/rules_bundle.py": "8f71059427a2df9460b2de6e32c3a4fa4f71c117d377a3f41e627cc3c4649547",
+        "src/soutui_image/resources/review_rules.json": "942007e22643a8063f315685e08226b7df32e804f0c5ed99e5a185e0a8ff8681",
         "tools/export_review_rules.py": "8c87e39b8ae0e971952b72b8f897e53fb4e42af3347f07f897490774261d369c",
         "tools/validate_rule_bundle.py": "8b8d772342ef33f1fd58154fa0a278787de2a7092101294486ceabfdceabf9f9",
         "tests/test_rules_bundle.py": "18e708cd18d6bb4560c26aea0144f5eb23f1fa8a6085f1a613fce17175750092"
@@ -914,7 +1443,19 @@
         "reason": "用户授权轻微差异、整体镜像、裁切裤长标准调整及独立检查并行",
         "scope": "最终规则图二通过/图三拒绝；前一阶段图一与两张历史人工回归另按原版本登记；控制检查118项及本机exe清零启动",
         "evidence": "validation/current_quality/release_acceptance.json"
-      }
+      },
+      "revisions": [
+        {
+          "reason": "用户新增自然垂坠及门襟多线标准，7张同款实图复验；保留旧任务规则身份，速度实现不变。",
+          "previous_files": {
+            "src/soutui_image/rules_bundle.py": "7863d677f1ff40cbe50c27600d7488573a7847bab99414723892f2a5f3e9fd11",
+            "src/soutui_image/resources/review_rules.json": "c06f8853a8847de78124a3655bd639e7ada0ba52ec28cc95fda866f15ef6d5ab"
+          },
+          "evidence": [
+            "validation/public_handoff/quality_rules_025.json"
+          ]
+        }
+      ]
     },
     "U_GITHUB": {
       "status": "verified",
@@ -922,7 +1463,7 @@
       "files": {
         "src/soutui_image/update_security.py": "3ebc9dd51cbdccc4cc052234c61e40d8f0b8a314fc52c8253f772632a0b1b65e",
         "src/soutui_image/github_updates.py": "9a588002452d27f0b38c9d72e2e31e549a880d8521265f0176c0cc18d1ab47de",
-        "src/soutui_image/rule_store.py": "4e1711d1d27a94152c531730ac0e1f0ec7e16f65857c49ee54719795cd9c4a4c",
+        "src/soutui_image/rule_store.py": "48bd6efc805b368c5d1de224cb888c0c2ec04c23d607122da402de70c0e0c886",
         "src/soutui_image/resources/update_source.json": "7e597601549cb4073ac7bc574317ee8134a983c6e15fb854403f882aee17a3cb",
         "run_updates.py": "28bd91a6298b0733d169978ae9febd9ae719d7280b5ad0acae5525f941549baf",
         "tests/test_private_updates.py": "4ed6877dcecbe998ce7db9d8cd3ebc6cdb7f4466423d018b2aace4a7e688aa8e",
@@ -935,7 +1476,8 @@
         "validation/updates/U_H/actual_gui_021/smoke.json",
         "validation/updates/U_H/portable_021/result.json",
         "validation/updates/U_PROGRAM_021/result.json",
-        "validation/updates/published_client_021/result.json"
+        "validation/updates/published_client_021/result.json",
+        "validation/public_handoff/quality_rules_025.json"
       ],
       "revisions": [
         {
@@ -958,6 +1500,15 @@
             "validation/updates/published_client_021/result.json"
           ],
           "prior_baseline": "validation\\updates\\final_frozen_before.json"
+        },
+        {
+          "reason": "用户新增自然垂坠及门襟多线标准，7张同款实图复验；保留旧任务规则身份，速度实现不变。",
+          "previous_files": {
+            "src/soutui_image/rule_store.py": "4e1711d1d27a94152c531730ac0e1f0ec7e16f65857c49ee54719795cd9c4a4c"
+          },
+          "evidence": [
+            "validation/public_handoff/quality_rules_025.json"
+          ]
         }
       ],
       "revalidation_20261103": {
@@ -972,16 +1523,19 @@
       "evidence": [
         "validation/updates/U_E_RUNTIME/result.json",
         "validation/updates/U_PIPELINE/prefix/result.json",
-        "validation/updates/U_PIPELINE/actual_batch/result.json"
+        "validation/updates/U_PIPELINE/actual_batch/result.json",
+        "validation/public_handoff/runtime_repair_023.json",
+        "validation/public_handoff/quality_rules_025.json"
       ],
       "files": {
-        "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
-        "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+        "src/soutui_image/review_button_edges.py": "737388e64aef69d87f3adff3102569b7f4a478a8736cdf3750b5aa220b68fa9c",
+        "src/soutui_image/review_detail_locator.py": "a4e205d011c55620231e0051d5e238e0776ded48db007f41f69ffdea39a697f6",
         "src/soutui_image/rule_runtime.py": "aa416a3c76c9d8806ea4acf766847d132d76f4873930656acb319926933374f5",
-        "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+        "src/soutui_image/stage_e_codex_review.py": "759e4377e3ace3c036bfe79e10129fd188bca6b5d8b23471aa099cd4334f80a8",
         "tools/validate_external_rule_runtime.py": "94e82d3bcc1e384bf4de41616b2ee549d7069e9b1c5a8754ba92098cbf66d1d5",
         "src/soutui_image/review_schedule.py": "a07be55d4ed948be16ac73489ae6c983b94adef1d61c957dc959496658f9631f",
-        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69"
+        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69",
+        "src/soutui_image/codex_runtime.py": "d6685981508d982facfabe9918d03ab8c2418804f2d99a8ca7968bed862cfba1"
       },
       "revisions": [
         {
@@ -997,6 +1551,33 @@
             "validation/updates/U_PIPELINE/prefix/result.json",
             "validation/updates/U_PIPELINE/actual_batch/result.json"
           ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户要求处理当前审核报错和慢；不改变模型、推理设置、图片、审核规则及生图轮次。",
+          "scope": "同一失败图真实断点续审、无连接重试；第二组五张真实缓存逐图保存、去重、任务不变；工作台启动和130项控制检查。",
+          "limitations": [
+            "不是人工标注正反例准确率重测",
+            "四路模型并发的完整九组吞吐量尚未实测，不能承诺固定提速比例",
+            "本轮未制作或发布Windows打包版本；当前交付为本机源码工作台"
+          ],
+          "previous_files": {
+            "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+            "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+            "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450"
+          },
+          "evidence": [
+            "validation/public_handoff/runtime_repair_023.json"
+          ]
+        },
+        {
+          "reason": "用户新增自然垂坠及门襟多线标准，7张同款实图复验；保留旧任务规则身份，速度实现不变。",
+          "previous_files": {
+            "src/soutui_image/stage_e_codex_review.py": "f328afdd77a7d6a3eb46abcfb8b01d6b26d0b391acf6517c8e79ff7a4d34701b"
+          },
+          "evidence": [
+            "validation/public_handoff/quality_rules_025.json"
+          ]
         }
       ],
       "revalidation_20261103": {
@@ -1009,21 +1590,23 @@
       "status": "verified",
       "scope": "实际历史前缀复核、保存去重、下一补生第2轮；真实35份当前图像记录与19个原生成任务不变；没有新增模型调用",
       "files": {
-        "src/soutui_image/pipeline.py": "0111c422645b3e27f305e1a410a5b0b4e76bfd4cf677002b41fa15afa346fcbb",
+        "src/soutui_image/pipeline.py": "d0717e04db45afecc33e0ff2b2dbab2ee7201f855d4f4e0a5503fba14fc0b83c",
         "src/soutui_image/quality_upgrade.py": "3014eba24736346135317cf1e1f83ff080bd10efd1fe0b61a3b302bcec7814f4",
-        "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
-        "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
-        "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+        "src/soutui_image/review_button_edges.py": "737388e64aef69d87f3adff3102569b7f4a478a8736cdf3750b5aa220b68fa9c",
+        "src/soutui_image/review_detail_locator.py": "a4e205d011c55620231e0051d5e238e0776ded48db007f41f69ffdea39a697f6",
+        "src/soutui_image/review_group_state.py": "5c86dbc2770de7ceeb856d1c4048312a5a68636ddb79d56b900057465ff13052",
         "src/soutui_image/review_record_validation.py": "818b30a8cfcfe41d3f0274743634b8fe75aa30ecd2d097a6f6971eb1fa24e763",
         "src/soutui_image/review_revision.py": "a1ab700f541a4baeb1104832ee4797fa02a14384bb1fa9212462fde8098388cf",
-        "src/soutui_image/stage_d_web_generation.py": "7d6657b4529ed430e2a7df46199f41b83cf28ba2f04b82169ecbc40c7fcbcb19",
-        "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+        "src/soutui_image/stage_d_web_generation.py": "c6caa8c0f4ace6d0638d5207da8e92d04d0310de3c04f3c12b8524247e0f7c9e",
+        "src/soutui_image/stage_e_codex_review.py": "759e4377e3ace3c036bfe79e10129fd188bca6b5d8b23471aa099cd4334f80a8",
         "src/soutui_image/stage_f_output_revision.py": "0894f06e9c37cb0b396d7986f199d170f8c683adc891f8096cfe55e794e31a8b",
-        "src/soutui_image/stage_f_outputs.py": "cb93121563c1fd6bf3b54bbb2d81cdb9d8eace6c949c03f14549d1bf8bb90d17",
-        "src/soutui_image/update_config.py": "8d56b60bb1ddbe8ac98c9be496efc4c5b2c795edffeff8948b6a4e431e0ed0fa",
+        "src/soutui_image/stage_f_outputs.py": "ded2bfd3f74bbabbf2dc40f4825dceb05243faea67669deba9bb803409f1b92d",
+        "src/soutui_image/update_config.py": "fadfd1d2fd327d8097bd1386c99a9eaa5cb0d4f71f87524be1116e72c40eedcc",
         "tools/register_private_core.py": "8159142b0e376ebe58943bc21a7a30280a0cf8935d79e849cf79d964bdae1e2e",
         "src/soutui_image/review_schedule.py": "a07be55d4ed948be16ac73489ae6c983b94adef1d61c957dc959496658f9631f",
-        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69"
+        "tests/test_review_schedule.py": "12ea67c192e61506c1f670b170d809634ad9e899498697bc84b88ac34a17dc69",
+        "src/soutui_image/codex_runtime.py": "d6685981508d982facfabe9918d03ab8c2418804f2d99a8ca7968bed862cfba1",
+        "src/soutui_image/human_review.py": "e4483d238016e58fcfd1b62072cbf9c01a868b08ec53418c83d36d6767a72d40"
       },
       "evidence": [
         "validation/updates/U_PIPELINE/prefix/result.json",
@@ -1033,7 +1616,12 @@
         "validation/updates/U_H/actual_gui_021/smoke.json",
         "validation/updates/U_H/portable_021/result.json",
         "validation/updates/U_PROGRAM_021/result.json",
-        "validation/updates/published_client_021/result.json"
+        "validation/updates/published_client_021/result.json",
+        "validation/public_handoff/runtime_repair_023.json",
+        "validation/public_handoff/human_feedback_024.json",
+        "validation/public_handoff/quality_rules_025.json",
+        "validation/public_handoff/streaming_026.json",
+        "validation/public_handoff/windows_io_027.json"
       ],
       "revisions": [
         {
@@ -1062,6 +1650,96 @@
             "validation/updates/published_client_021/result.json"
           ],
           "prior_baseline": "validation\\updates\\final_frozen_before.json"
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户要求处理当前审核报错和慢；不改变模型、推理设置、图片、审核规则及生图轮次。",
+          "scope": "同一失败图真实断点续审、无连接重试；第二组五张真实缓存逐图保存、去重、任务不变；工作台启动和130项控制检查。",
+          "limitations": [
+            "不是人工标注正反例准确率重测",
+            "四路模型并发的完整九组吞吐量尚未实测，不能承诺固定提速比例",
+            "本轮未制作或发布Windows打包版本；当前交付为本机源码工作台"
+          ],
+          "previous_files": {
+            "src/soutui_image/review_button_edges.py": "5d6500d0a3928011b210af933d60116fd92b553c28b24501bc8aa1682ce007c3",
+            "src/soutui_image/review_detail_locator.py": "f54691589b0cc8adde43767d71d577bca000e72106f67d251b7f2a97e8dcf5c0",
+            "src/soutui_image/stage_e_codex_review.py": "841ca4ef21b311e1a9d0d6d97883049781f7e79cab831b8b20a5a724f368d450",
+            "src/soutui_image/stage_f_outputs.py": "cb93121563c1fd6bf3b54bbb2d81cdb9d8eace6c949c03f14549d1bf8bb90d17",
+            "src/soutui_image/pipeline.py": "0111c422645b3e27f305e1a410a5b0b4e76bfd4cf677002b41fa15afa346fcbb",
+            "src/soutui_image/update_config.py": "8d56b60bb1ddbe8ac98c9be496efc4c5b2c795edffeff8948b6a4e431e0ed0fa"
+          },
+          "evidence": [
+            "validation/public_handoff/runtime_repair_023.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确人工保留3张并撤下22张门襟问题图；已确认按文件名排序定位。速度仅分析，不改代码。",
+          "scope": "人工裁定的身份绑定、保存及计数覆盖、实际25张纠正、重复保存不恢复否决图、GUI和135项控制检查。",
+          "limitations": [
+            "没有新增模型审核或生图，没有调整速度/推理/图片/提示词",
+            "当前模型的袖口误杀和门襟漏判已由用户证实；本次人工修正不能当作自动审核准确率已修复"
+          ],
+          "previous_files": {
+            "src/soutui_image/review_group_state.py": "24fb7af64f2e1f7be6d196d37386f797e321322f57695b9cffe6106b0a5bb59d",
+            "src/soutui_image/stage_f_outputs.py": "ef4a2e7e397f6b1e4d0963a04f76df378b70b32653f0f454081a1ccfab232e31",
+            "src/soutui_image/update_config.py": "790a8f0fc49c1d5210f657e63605dba1994312d0e055aedf7e6e8834be7af030"
+          },
+          "evidence": [
+            "validation/public_handoff/human_feedback_024.json"
+          ]
+        },
+        {
+          "reason": "用户新增自然垂坠及门襟多线标准，7张同款实图复验；保留旧任务规则身份，速度实现不变。",
+          "previous_files": {
+            "src/soutui_image/stage_e_codex_review.py": "f328afdd77a7d6a3eb46abcfb8b01d6b26d0b391acf6517c8e79ff7a4d34701b",
+            "src/soutui_image/update_config.py": "0a4da94634bf33143f7f58b98e1ae42790fd6a5771afcfccd2f246f0026cb355"
+          },
+          "evidence": [
+            "validation/public_handoff/quality_rules_025.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确新增后台单张出图即审、生成审核并行授权；不改变模型和审核质量标准。",
+          "scope": "156项控制检查、历史逐张完成日志、本次11任务只读回查、10张真实图/原缓存隔离回放及0.2.6 GUI；新批次实测耗时待验证。",
+          "previous_files": {
+            "src/soutui_image/pipeline.py": "4237529e2804df170326365c7e6e9a519c1097346ee50e332ab24403a2207a4b",
+            "src/soutui_image/review_group_state.py": "76a5cab07d4730a5112ff6a4c458785fb1ead3520eb012fb5c00a7395f2efeb7",
+            "src/soutui_image/stage_d_web_generation.py": "7d6657b4529ed430e2a7df46199f41b83cf28ba2f04b82169ecbc40c7fcbcb19",
+            "src/soutui_image/stage_f_outputs.py": "332be451de9b1f5e07dd1f69b6d917c6321bba82faba52c5b92a6522498f914d",
+            "src/soutui_image/update_config.py": "731a1bb7f04bab2b6b93de908a103199147c121db93a5a2f8c2b44f42d8d85d2"
+          },
+          "evidence": [
+            "validation/public_handoff/streaming_026.json"
+          ],
+          "limitations": [
+            "网站本轮仅只读回查11个已有任务；旧运行日志确认生成中会提供单张完成结果。",
+            "真实10张结果图和原模型缓存用于隔离回放，图片可用时序受控；不是新生成整批或四路云端吞吐量实测。",
+            "没有新模型调用、质量准确率复验或新生图，不承诺整批固定提速比例。",
+            "仅交付本机源码工作台，未构建或发布新的EXE/ZIP或GitHub Release。"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户截图报WinError5并要求处理；本地记录保存可恢复，不重复提交后台任务。",
+          "scope": "164项检查含5项真实Win32文件占用测试；现场既有任务GET核对及记录恢复、0.2.7 GUI。",
+          "previous_files": {
+            "src/soutui_image/pipeline.py": "8d5e5432d125f3442983a869d0c515d9c4c1ae4f41f5628077bb55ba333955c7",
+            "src/soutui_image/review_group_state.py": "31d1443658c9a487bbc0ab86d45e4af9cd699c5697ed26f53dae4326e3b24366",
+            "src/soutui_image/stage_d_web_generation.py": "46e5bcddd8c3c2eb8e07dd3721acd1b01690933997774dd06d34e3c77f523b06",
+            "src/soutui_image/stage_f_outputs.py": "094abebd5ac8decc24de822f98a0a2116d9c04cf2771104a099eae5181b5aee2",
+            "src/soutui_image/update_config.py": "7acecb44b96a948c63e9e1d3a031b5e8a1431ac6c467d56be5608e4647b89671"
+          },
+          "evidence": [
+            "validation/public_handoff/windows_io_027.json"
+          ],
+          "limitations": [
+            "异常日志无法确定具体持锁进程；GUI及审核读取是可复现的触发条件，安全软件亦可能造成短时占用。",
+            "3秒内只重试本地文件替换；永久权限或持续占用仍会报错并保留原件及候选，不能无限等待。",
+            "本轮不改变或重验视觉准确率，不承诺模型审核耗时或整批提速比例。",
+            "本机源码交付，未发布EXE/ZIP或GitHub Release。"
+          ]
         }
       ],
       "revalidation_20261103": {
@@ -1075,17 +1753,17 @@
       "scope": "本机私有规则下载、GUI复核暂停续跑、exe真实历史副本复核、ZIP迁移及新旧真实程序目录替换；任务规则固定",
       "limits": "另一台电脑及其只读令牌首次配置尚未实测；本轮没有新图生成或新模型审核，视觉质量标准未改变",
       "files": {
-        "pyproject.toml": "bac4a7088e6029e3b417ca0e473bc8ee897e029825558e7e57ef64dcb7fe8716",
-        "run_pipeline.py": "8e5da4cafec658fef44710dc446ae2f58c15762f817cb3a9f5eb7655937c85a0",
-        "src/soutui_image/desktop_app.py": "d329d27120cbe3c0d0f6a37c08744a5d15eb36fc8a4c8a56d3cdbdf35d328c67",
+        "pyproject.toml": "7373e02029e78421c89be5d0571a46ee62ea75bb3de647d4d99f659c1d1c1497",
+        "run_pipeline.py": "8a711a6dbfb08ee0d6357913a180f8303d9bf48a96814624c6b4478606e3a04b",
+        "src/soutui_image/desktop_app.py": "3db93896bcb851e22208613b2da86b430939ca46a8c28665c5ca3553237e8cfe",
         "src/soutui_image/github_updates.py": "9a588002452d27f0b38c9d72e2e31e549a880d8521265f0176c0cc18d1ab47de",
         "src/soutui_image/program_update.py": "7698ed6d44448097e0ca2d20a8da7935153ca0c099d4a9372549bc5dbd8e7c2f",
-        "src/soutui_image/resources/review_rules.json": "c06f8853a8847de78124a3655bd639e7ada0ba52ec28cc95fda866f15ef6d5ab",
+        "src/soutui_image/resources/review_rules.json": "942007e22643a8063f315685e08226b7df32e804f0c5ed99e5a185e0a8ff8681",
         "src/soutui_image/resources/update_source.json": "7e597601549cb4073ac7bc574317ee8134a983c6e15fb854403f882aee17a3cb",
         "src/soutui_image/rule_runtime.py": "aa416a3c76c9d8806ea4acf766847d132d76f4873930656acb319926933374f5",
-        "src/soutui_image/rule_store.py": "4e1711d1d27a94152c531730ac0e1f0ec7e16f65857c49ee54719795cd9c4a4c",
-        "src/soutui_image/rules_bundle.py": "7863d677f1ff40cbe50c27600d7488573a7847bab99414723892f2a5f3e9fd11",
-        "src/soutui_image/update_config.py": "8d56b60bb1ddbe8ac98c9be496efc4c5b2c795edffeff8948b6a4e431e0ed0fa",
+        "src/soutui_image/rule_store.py": "48bd6efc805b368c5d1de224cb888c0c2ec04c23d607122da402de70c0e0c886",
+        "src/soutui_image/rules_bundle.py": "8f71059427a2df9460b2de6e32c3a4fa4f71c117d377a3f41e627cc3c4649547",
+        "src/soutui_image/update_config.py": "fadfd1d2fd327d8097bd1386c99a9eaa5cb0d4f71f87524be1116e72c40eedcc",
         "src/soutui_image/update_dialog.py": "28c5a11616905544b424657dd788cd4aee3209634e044d614ad6221176a8b4a7",
         "src/soutui_image/update_security.py": "3ebc9dd51cbdccc4cc052234c61e40d8f0b8a314fc52c8253f772632a0b1b65e",
         "src/soutui_image/update_service.py": "729861895d53f7ba35e489e3b1f88d26f1545c03da6d5dc4e29c825c1eabbc49",
@@ -1095,7 +1773,8 @@
         "tools/private_update_panel.py": "0d4162b47d8d58eab1151b86a8134e4d4b1ce8bffa7c09787a4e01b8b3a2dff0",
         "tools/register_private_release.py": "5beb1067b25b5885caf7a1ee55f3f6b3b2dd8af47277341d3af02a5a6421d67d",
         "tools/validate_program_replacement.py": "c4b906c99ea9bef169d4b4a1918fb797837ebbfe01931bcb41e903e8ce917bfe",
-        "tools/validate_published_private_release.py": "d43d307159b08f71011e8cc663d8e29cf227acae2bcd8be7230aeb54fd34268f"
+        "tools/validate_published_private_release.py": "d43d307159b08f71011e8cc663d8e29cf227acae2bcd8be7230aeb54fd34268f",
+        "src/soutui_image/codex_runtime.py": "d6685981508d982facfabe9918d03ab8c2418804f2d99a8ca7968bed862cfba1"
       },
       "evidence": [
         "validation/updates/U_H/gui_resume/result.json",
@@ -1103,13 +1782,105 @@
         "validation/updates/U_H/actual_gui_021/smoke.json",
         "validation/updates/U_H/portable_021/result.json",
         "validation/updates/U_PROGRAM_021/result.json",
-        "validation/updates/published_client_021/result.json"
+        "validation/updates/published_client_021/result.json",
+        "validation/public_handoff/runtime_repair_023.json",
+        "validation/public_handoff/human_feedback_024.json",
+        "validation/public_handoff/quality_rules_025.json",
+        "validation/public_handoff/streaming_026.json",
+        "validation/public_handoff/windows_io_027.json"
       ],
       "revalidation_20261103": {
         "reason": "用户授权轻微差异、整体镜像、裁切裤长标准调整及独立检查并行",
         "scope": "最终规则图二通过/图三拒绝；前一阶段图一与两张历史人工回归另按原版本登记；控制检查118项及本机exe清零启动",
         "evidence": "validation/current_quality/release_acceptance.json"
-      }
+      },
+      "revisions": [
+        {
+          "date": "2026-11-04",
+          "reason": "用户要求处理当前审核报错和慢；不改变模型、推理设置、图片、审核规则及生图轮次。",
+          "scope": "同一失败图真实断点续审、无连接重试；第二组五张真实缓存逐图保存、去重、任务不变；工作台启动和130项控制检查。",
+          "limitations": [
+            "不是人工标注正反例准确率重测",
+            "四路模型并发的完整九组吞吐量尚未实测，不能承诺固定提速比例",
+            "本轮未制作或发布Windows打包版本；当前交付为本机源码工作台"
+          ],
+          "previous_files": {
+            "pyproject.toml": "bac4a7088e6029e3b417ca0e473bc8ee897e029825558e7e57ef64dcb7fe8716",
+            "run_pipeline.py": "8e5da4cafec658fef44710dc446ae2f58c15762f817cb3a9f5eb7655937c85a0",
+            "src/soutui_image/desktop_app.py": "d329d27120cbe3c0d0f6a37c08744a5d15eb36fc8a4c8a56d3cdbdf35d328c67",
+            "src/soutui_image/update_config.py": "8d56b60bb1ddbe8ac98c9be496efc4c5b2c795edffeff8948b6a4e431e0ed0fa"
+          },
+          "evidence": [
+            "validation/public_handoff/runtime_repair_023.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确人工保留3张并撤下22张门襟问题图；已确认按文件名排序定位。速度仅分析，不改代码。",
+          "scope": "人工裁定的身份绑定、保存及计数覆盖、实际25张纠正、重复保存不恢复否决图、GUI和135项控制检查。",
+          "limitations": [
+            "没有新增模型审核或生图，没有调整速度/推理/图片/提示词",
+            "当前模型的袖口误杀和门襟漏判已由用户证实；本次人工修正不能当作自动审核准确率已修复"
+          ],
+          "previous_files": {
+            "pyproject.toml": "86961ab914954e55ed5e695ff0fc29679e13dab9a3176bb70c65e86d6c318954",
+            "src/soutui_image/update_config.py": "790a8f0fc49c1d5210f657e63605dba1994312d0e055aedf7e6e8834be7af030"
+          },
+          "evidence": [
+            "validation/public_handoff/human_feedback_024.json"
+          ]
+        },
+        {
+          "reason": "用户新增自然垂坠及门襟多线标准，7张同款实图复验；保留旧任务规则身份，速度实现不变。",
+          "previous_files": {
+            "pyproject.toml": "d21839d98a15ae8783f4d949ed521049717c476955cc9c0cbe184c5687f9e0b5",
+            "src/soutui_image/resources/review_rules.json": "c06f8853a8847de78124a3655bd639e7ada0ba52ec28cc95fda866f15ef6d5ab",
+            "src/soutui_image/rule_store.py": "4e1711d1d27a94152c531730ac0e1f0ec7e16f65857c49ee54719795cd9c4a4c",
+            "src/soutui_image/rules_bundle.py": "7863d677f1ff40cbe50c27600d7488573a7847bab99414723892f2a5f3e9fd11",
+            "src/soutui_image/update_config.py": "0a4da94634bf33143f7f58b98e1ae42790fd6a5771afcfccd2f246f0026cb355"
+          },
+          "evidence": [
+            "validation/public_handoff/quality_rules_025.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确新增后台单张出图即审、生成审核并行授权；不改变模型和审核质量标准。",
+          "scope": "156项控制检查、历史逐张完成日志、本次11任务只读回查、10张真实图/原缓存隔离回放及0.2.6 GUI；新批次实测耗时待验证。",
+          "previous_files": {
+            "pyproject.toml": "3c31f2f4067843702ce4133adc69e03a5de7ff07380d5062c2bf374bc3947d7e",
+            "src/soutui_image/desktop_app.py": "b11869ae0c0b9f6e6abf3a54241680030fab4a0e00ad037707ffd4a9794301a0",
+            "src/soutui_image/update_config.py": "731a1bb7f04bab2b6b93de908a103199147c121db93a5a2f8c2b44f42d8d85d2"
+          },
+          "evidence": [
+            "validation/public_handoff/streaming_026.json"
+          ],
+          "limitations": [
+            "网站本轮仅只读回查11个已有任务；旧运行日志确认生成中会提供单张完成结果。",
+            "真实10张结果图和原模型缓存用于隔离回放，图片可用时序受控；不是新生成整批或四路云端吞吐量实测。",
+            "没有新模型调用、质量准确率复验或新生图，不承诺整批固定提速比例。",
+            "仅交付本机源码工作台，未构建或发布新的EXE/ZIP或GitHub Release。"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户截图报WinError5并要求处理；本地记录保存可恢复，不重复提交后台任务。",
+          "scope": "164项检查含5项真实Win32文件占用测试；现场既有任务GET核对及记录恢复、0.2.7 GUI。",
+          "previous_files": {
+            "pyproject.toml": "cb3ef83ce4d28aa4ad65e13dbc41801d41abebb5e381dac35847dfa1719a310f",
+            "src/soutui_image/update_config.py": "7acecb44b96a948c63e9e1d3a031b5e8a1431ac6c467d56be5608e4647b89671"
+          },
+          "evidence": [
+            "validation/public_handoff/windows_io_027.json"
+          ],
+          "limitations": [
+            "异常日志无法确定具体持锁进程；GUI及审核读取是可复现的触发条件，安全软件亦可能造成短时占用。",
+            "3秒内只重试本地文件替换；永久权限或持续占用仍会报错并保留原件及候选，不能无限等待。",
+            "本轮不改变或重验视觉准确率，不承诺模型审核耗时或整批提速比例。",
+            "本机源码交付，未发布EXE/ZIP或GitHub Release。"
+          ]
+        }
+      ]
     },
     "MAINTENANCE_RESET": {
       "status": "verified_scoped",
@@ -1118,6 +1889,319 @@
       "files": {
         "tools/reset_run_records.py": "28fd35fe6e298ebbe23dfa9bc41d107c09a4a6093dbcddcff283cfae32ba1c62",
         "tests/test_reset_records.py": "febff359e6a4b2ac131c1d6c3ec40dfd708a27b7e2ad328dfaa12aa165477cb1"
+      }
+    },
+    "RUNTIME_RECOVERY_023": {
+      "status": "verified",
+      "scope": "同一失败图真实断点续审、无连接重试；第二组五张真实缓存逐图保存、去重、任务不变；工作台启动和130项控制检查。",
+      "limitations": [
+        "不是人工标注正反例准确率重测",
+        "四路模型并发的完整九组吞吐量尚未实测，不能承诺固定提速比例",
+        "本轮未制作或发布Windows打包版本；当前交付为本机源码工作台"
+      ],
+      "evidence": [
+        "validation/public_handoff/runtime_repair_023.json",
+        "validation/public_handoff/human_feedback_024.json",
+        "validation/public_handoff/quality_rules_025.json",
+        "validation/public_handoff/streaming_026.json",
+        "validation/public_handoff/windows_io_027.json"
+      ],
+      "files": {
+        "src/soutui_image/codex_clothing.py": "e4492bb0e075420e3b69d9811c0e3b8f0d1dbd9b502632c69d80877a4bef54a5",
+        "pyproject.toml": "7373e02029e78421c89be5d0571a46ee62ea75bb3de647d4d99f659c1d1c1497",
+        "src/soutui_image/review_button_edges.py": "737388e64aef69d87f3adff3102569b7f4a478a8736cdf3750b5aa220b68fa9c",
+        "src/soutui_image/review_detail_locator.py": "a4e205d011c55620231e0051d5e238e0776ded48db007f41f69ffdea39a697f6",
+        "src/soutui_image/stage_e_codex_review.py": "759e4377e3ace3c036bfe79e10129fd188bca6b5d8b23471aa099cd4334f80a8",
+        "src/soutui_image/stage_f_outputs.py": "ded2bfd3f74bbabbf2dc40f4825dceb05243faea67669deba9bb803409f1b92d",
+        "tests/test_stage_f_outputs.py": "da3d4e17cb7b2025a7141b942975955f06820999de3b95f68b7ec1f625b59a36",
+        "run_pipeline.py": "8a711a6dbfb08ee0d6357913a180f8303d9bf48a96814624c6b4478606e3a04b",
+        "src/soutui_image/pipeline.py": "d0717e04db45afecc33e0ff2b2dbab2ee7201f855d4f4e0a5503fba14fc0b83c",
+        "tests/test_pipeline_controls.py": "73cd2276a51a0409960be8e2fb22c4c2179eaba4e3378a57aa2709f09aef548c",
+        "src/soutui_image/desktop_app.py": "3db93896bcb851e22208613b2da86b430939ca46a8c28665c5ca3553237e8cfe",
+        "src/soutui_image/update_config.py": "fadfd1d2fd327d8097bd1386c99a9eaa5cb0d4f71f87524be1116e72c40eedcc",
+        "src/soutui_image/codex_runtime.py": "d6685981508d982facfabe9918d03ab8c2418804f2d99a8ca7968bed862cfba1",
+        "tests/test_codex_runtime.py": "256fc826ccca2c381098297dcaa403f606fe49441b1a289952c1532afc52cb6b",
+        "src/soutui_image/human_review.py": "e4483d238016e58fcfd1b62072cbf9c01a868b08ec53418c83d36d6767a72d40"
+      },
+      "revisions": [
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确人工保留3张并撤下22张门襟问题图；已确认按文件名排序定位。速度仅分析，不改代码。",
+          "scope": "人工裁定的身份绑定、保存及计数覆盖、实际25张纠正、重复保存不恢复否决图、GUI和135项控制检查。",
+          "limitations": [
+            "没有新增模型审核或生图，没有调整速度/推理/图片/提示词",
+            "当前模型的袖口误杀和门襟漏判已由用户证实；本次人工修正不能当作自动审核准确率已修复"
+          ],
+          "previous_files": {
+            "pyproject.toml": "86961ab914954e55ed5e695ff0fc29679e13dab9a3176bb70c65e86d6c318954",
+            "src/soutui_image/stage_f_outputs.py": "ef4a2e7e397f6b1e4d0963a04f76df378b70b32653f0f454081a1ccfab232e31",
+            "src/soutui_image/update_config.py": "790a8f0fc49c1d5210f657e63605dba1994312d0e055aedf7e6e8834be7af030"
+          },
+          "evidence": [
+            "validation/public_handoff/human_feedback_024.json"
+          ]
+        },
+        {
+          "reason": "用户新增自然垂坠及门襟多线标准，7张同款实图复验；保留旧任务规则身份，速度实现不变。",
+          "previous_files": {
+            "pyproject.toml": "d21839d98a15ae8783f4d949ed521049717c476955cc9c0cbe184c5687f9e0b5",
+            "src/soutui_image/stage_e_codex_review.py": "f328afdd77a7d6a3eb46abcfb8b01d6b26d0b391acf6517c8e79ff7a4d34701b",
+            "src/soutui_image/update_config.py": "0a4da94634bf33143f7f58b98e1ae42790fd6a5771afcfccd2f246f0026cb355"
+          },
+          "evidence": [
+            "validation/public_handoff/quality_rules_025.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确新增后台单张出图即审、生成审核并行授权；不改变模型和审核质量标准。",
+          "scope": "156项控制检查、历史逐张完成日志、本次11任务只读回查、10张真实图/原缓存隔离回放及0.2.6 GUI；新批次实测耗时待验证。",
+          "previous_files": {
+            "pyproject.toml": "3c31f2f4067843702ce4133adc69e03a5de7ff07380d5062c2bf374bc3947d7e",
+            "src/soutui_image/stage_f_outputs.py": "332be451de9b1f5e07dd1f69b6d917c6321bba82faba52c5b92a6522498f914d",
+            "tests/test_stage_f_outputs.py": "5ee6fb54b4526899e77474fc7700bf9728c4689ba000663b4d5a67cb90d60382",
+            "src/soutui_image/pipeline.py": "4237529e2804df170326365c7e6e9a519c1097346ee50e332ab24403a2207a4b",
+            "src/soutui_image/desktop_app.py": "b11869ae0c0b9f6e6abf3a54241680030fab4a0e00ad037707ffd4a9794301a0",
+            "src/soutui_image/update_config.py": "731a1bb7f04bab2b6b93de908a103199147c121db93a5a2f8c2b44f42d8d85d2"
+          },
+          "evidence": [
+            "validation/public_handoff/streaming_026.json"
+          ],
+          "limitations": [
+            "网站本轮仅只读回查11个已有任务；旧运行日志确认生成中会提供单张完成结果。",
+            "真实10张结果图和原模型缓存用于隔离回放，图片可用时序受控；不是新生成整批或四路云端吞吐量实测。",
+            "没有新模型调用、质量准确率复验或新生图，不承诺整批固定提速比例。",
+            "仅交付本机源码工作台，未构建或发布新的EXE/ZIP或GitHub Release。"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户截图报WinError5并要求处理；本地记录保存可恢复，不重复提交后台任务。",
+          "scope": "164项检查含5项真实Win32文件占用测试；现场既有任务GET核对及记录恢复、0.2.7 GUI。",
+          "previous_files": {
+            "pyproject.toml": "cb3ef83ce4d28aa4ad65e13dbc41801d41abebb5e381dac35847dfa1719a310f",
+            "src/soutui_image/stage_f_outputs.py": "094abebd5ac8decc24de822f98a0a2116d9c04cf2771104a099eae5181b5aee2",
+            "src/soutui_image/pipeline.py": "8d5e5432d125f3442983a869d0c515d9c4c1ae4f41f5628077bb55ba333955c7",
+            "src/soutui_image/update_config.py": "7acecb44b96a948c63e9e1d3a031b5e8a1431ac6c467d56be5608e4647b89671"
+          },
+          "evidence": [
+            "validation/public_handoff/windows_io_027.json"
+          ],
+          "limitations": [
+            "异常日志无法确定具体持锁进程；GUI及审核读取是可复现的触发条件，安全软件亦可能造成短时占用。",
+            "3秒内只重试本地文件替换；永久权限或持续占用仍会报错并保留原件及候选，不能无限等待。",
+            "本轮不改变或重验视觉准确率，不承诺模型审核耗时或整批提速比例。",
+            "本机源码交付，未发布EXE/ZIP或GitHub Release。"
+          ]
+        }
+      ]
+    },
+    "HUMAN_FEEDBACK_024": {
+      "status": "verified",
+      "scope": "人工裁定的身份绑定、保存及计数覆盖、实际25张纠正、重复保存不恢复否决图、GUI和135项控制检查。",
+      "limitations": [
+        "没有新增模型审核或生图，没有调整速度/推理/图片/提示词",
+        "当前模型的袖口误杀和门襟漏判已由用户证实；本次人工修正不能当作自动审核准确率已修复"
+      ],
+      "evidence": [
+        "validation/public_handoff/human_feedback_024.json",
+        "validation/public_handoff/quality_rules_025.json",
+        "validation/public_handoff/streaming_026.json",
+        "validation/public_handoff/windows_io_027.json"
+      ],
+      "files": {
+        "pyproject.toml": "7373e02029e78421c89be5d0571a46ee62ea75bb3de647d4d99f659c1d1c1497",
+        "src/soutui_image/review_group_state.py": "5c86dbc2770de7ceeb856d1c4048312a5a68636ddb79d56b900057465ff13052",
+        "src/soutui_image/stage_f_outputs.py": "ded2bfd3f74bbabbf2dc40f4825dceb05243faea67669deba9bb803409f1b92d",
+        "src/soutui_image/update_config.py": "fadfd1d2fd327d8097bd1386c99a9eaa5cb0d4f71f87524be1116e72c40eedcc",
+        "src/soutui_image/human_review.py": "e4483d238016e58fcfd1b62072cbf9c01a868b08ec53418c83d36d6767a72d40",
+        "tests/test_human_review.py": "cf0f9e5d8933ff13e0a4b47588cb834828dc63f14d8ff2255c846890829d4d9d"
+      },
+      "revisions": [
+        {
+          "reason": "用户新增自然垂坠及门襟多线标准，7张同款实图复验；保留旧任务规则身份，速度实现不变。",
+          "previous_files": {
+            "pyproject.toml": "d21839d98a15ae8783f4d949ed521049717c476955cc9c0cbe184c5687f9e0b5",
+            "src/soutui_image/update_config.py": "0a4da94634bf33143f7f58b98e1ae42790fd6a5771afcfccd2f246f0026cb355"
+          },
+          "evidence": [
+            "validation/public_handoff/quality_rules_025.json"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确新增后台单张出图即审、生成审核并行授权；不改变模型和审核质量标准。",
+          "scope": "156项控制检查、历史逐张完成日志、本次11任务只读回查、10张真实图/原缓存隔离回放及0.2.6 GUI；新批次实测耗时待验证。",
+          "previous_files": {
+            "pyproject.toml": "3c31f2f4067843702ce4133adc69e03a5de7ff07380d5062c2bf374bc3947d7e",
+            "src/soutui_image/review_group_state.py": "76a5cab07d4730a5112ff6a4c458785fb1ead3520eb012fb5c00a7395f2efeb7",
+            "src/soutui_image/stage_f_outputs.py": "332be451de9b1f5e07dd1f69b6d917c6321bba82faba52c5b92a6522498f914d",
+            "src/soutui_image/update_config.py": "731a1bb7f04bab2b6b93de908a103199147c121db93a5a2f8c2b44f42d8d85d2"
+          },
+          "evidence": [
+            "validation/public_handoff/streaming_026.json"
+          ],
+          "limitations": [
+            "网站本轮仅只读回查11个已有任务；旧运行日志确认生成中会提供单张完成结果。",
+            "真实10张结果图和原模型缓存用于隔离回放，图片可用时序受控；不是新生成整批或四路云端吞吐量实测。",
+            "没有新模型调用、质量准确率复验或新生图，不承诺整批固定提速比例。",
+            "仅交付本机源码工作台，未构建或发布新的EXE/ZIP或GitHub Release。"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户截图报WinError5并要求处理；本地记录保存可恢复，不重复提交后台任务。",
+          "scope": "164项检查含5项真实Win32文件占用测试；现场既有任务GET核对及记录恢复、0.2.7 GUI。",
+          "previous_files": {
+            "pyproject.toml": "cb3ef83ce4d28aa4ad65e13dbc41801d41abebb5e381dac35847dfa1719a310f",
+            "src/soutui_image/review_group_state.py": "31d1443658c9a487bbc0ab86d45e4af9cd699c5697ed26f53dae4326e3b24366",
+            "src/soutui_image/stage_f_outputs.py": "094abebd5ac8decc24de822f98a0a2116d9c04cf2771104a099eae5181b5aee2",
+            "src/soutui_image/update_config.py": "7acecb44b96a948c63e9e1d3a031b5e8a1431ac6c467d56be5608e4647b89671"
+          },
+          "evidence": [
+            "validation/public_handoff/windows_io_027.json"
+          ],
+          "limitations": [
+            "异常日志无法确定具体持锁进程；GUI及审核读取是可复现的触发条件，安全软件亦可能造成短时占用。",
+            "3秒内只重试本地文件替换；永久权限或持续占用仍会报错并保留原件及候选，不能无限等待。",
+            "本轮不改变或重验视觉准确率，不承诺模型审核耗时或整批提速比例。",
+            "本机源码交付，未发布EXE/ZIP或GitHub Release。"
+          ]
+        }
+      ]
+    },
+    "QUALITY_RULES_025": {
+      "status": "verified",
+      "scope": "7张同款人工样本及规则升级兼容；不代表跨款准确率，无速度代码变更。",
+      "evidence": [
+        "validation/public_handoff/quality_rules_025.json",
+        "validation/public_handoff/streaming_026.json",
+        "validation/public_handoff/windows_io_027.json"
+      ],
+      "files": {
+        "pyproject.toml": "7373e02029e78421c89be5d0571a46ee62ea75bb3de647d4d99f659c1d1c1497",
+        "src/soutui_image/resources/review_rules.json": "942007e22643a8063f315685e08226b7df32e804f0c5ed99e5a185e0a8ff8681",
+        "src/soutui_image/resources/review_rules_2026-11-03.3.json": "c06f8853a8847de78124a3655bd639e7ada0ba52ec28cc95fda866f15ef6d5ab",
+        "src/soutui_image/rule_store.py": "48bd6efc805b368c5d1de224cb888c0c2ec04c23d607122da402de70c0e0c886",
+        "src/soutui_image/rules_bundle.py": "8f71059427a2df9460b2de6e32c3a4fa4f71c117d377a3f41e627cc3c4649547",
+        "src/soutui_image/stage_e_codex_review.py": "759e4377e3ace3c036bfe79e10129fd188bca6b5d8b23471aa099cd4334f80a8",
+        "src/soutui_image/update_config.py": "fadfd1d2fd327d8097bd1386c99a9eaa5cb0d4f71f87524be1116e72c40eedcc",
+        "tests/test_pinned_builtin_rules.py": "124f99764f735843cf276d833cb9cdf737c30de5fd357fc5ec33eda4210ffa6f"
+      },
+      "revisions": [
+        {
+          "date": "2026-11-04",
+          "reason": "用户明确新增后台单张出图即审、生成审核并行授权；不改变模型和审核质量标准。",
+          "scope": "156项控制检查、历史逐张完成日志、本次11任务只读回查、10张真实图/原缓存隔离回放及0.2.6 GUI；新批次实测耗时待验证。",
+          "previous_files": {
+            "pyproject.toml": "3c31f2f4067843702ce4133adc69e03a5de7ff07380d5062c2bf374bc3947d7e",
+            "src/soutui_image/update_config.py": "731a1bb7f04bab2b6b93de908a103199147c121db93a5a2f8c2b44f42d8d85d2"
+          },
+          "evidence": [
+            "validation/public_handoff/streaming_026.json"
+          ],
+          "limitations": [
+            "网站本轮仅只读回查11个已有任务；旧运行日志确认生成中会提供单张完成结果。",
+            "真实10张结果图和原模型缓存用于隔离回放，图片可用时序受控；不是新生成整批或四路云端吞吐量实测。",
+            "没有新模型调用、质量准确率复验或新生图，不承诺整批固定提速比例。",
+            "仅交付本机源码工作台，未构建或发布新的EXE/ZIP或GitHub Release。"
+          ]
+        },
+        {
+          "date": "2026-11-04",
+          "reason": "用户截图报WinError5并要求处理；本地记录保存可恢复，不重复提交后台任务。",
+          "scope": "164项检查含5项真实Win32文件占用测试；现场既有任务GET核对及记录恢复、0.2.7 GUI。",
+          "previous_files": {
+            "pyproject.toml": "cb3ef83ce4d28aa4ad65e13dbc41801d41abebb5e381dac35847dfa1719a310f",
+            "src/soutui_image/update_config.py": "7acecb44b96a948c63e9e1d3a031b5e8a1431ac6c467d56be5608e4647b89671"
+          },
+          "evidence": [
+            "validation/public_handoff/windows_io_027.json"
+          ],
+          "limitations": [
+            "异常日志无法确定具体持锁进程；GUI及审核读取是可复现的触发条件，安全软件亦可能造成短时占用。",
+            "3秒内只重试本地文件替换；永久权限或持续占用仍会报错并保留原件及候选，不能无限等待。",
+            "本轮不改变或重验视觉准确率，不承诺模型审核耗时或整批提速比例。",
+            "本机源码交付，未发布EXE/ZIP或GitHub Release。"
+          ]
+        }
+      ]
+    },
+    "STREAMING_026": {
+      "status": "controls_and_actual_cache_replay_verified_live_batch_pending",
+      "scope": "用户新增出图即审授权：网站查询与全局逐图审核池并行；单线程落盘、终态整轮补生门禁。 当前哈希用于保护已检查实现，不代表新批次整流程/速度已验收。",
+      "evidence": [
+        "validation/public_handoff/streaming_026.json",
+        "validation/public_handoff/windows_io_027.json"
+      ],
+      "limitations": [
+        "网站本轮仅只读回查11个已有任务；旧运行日志确认生成中会提供单张完成结果。",
+        "真实10张结果图和原模型缓存用于隔离回放，图片可用时序受控；不是新生成整批或四路云端吞吐量实测。",
+        "没有新模型调用、质量准确率复验或新生图，不承诺整批固定提速比例。",
+        "仅交付本机源码工作台，未构建或发布新的EXE/ZIP或GitHub Release。"
+      ],
+      "files": {
+        "pyproject.toml": "7373e02029e78421c89be5d0571a46ee62ea75bb3de647d4d99f659c1d1c1497",
+        "src/soutui_image/stage_d_web_generation.py": "c6caa8c0f4ace6d0638d5207da8e92d04d0310de3c04f3c12b8524247e0f7c9e",
+        "src/soutui_image/review_group_state.py": "5c86dbc2770de7ceeb856d1c4048312a5a68636ddb79d56b900057465ff13052",
+        "tests/test_review_group_state.py": "8f06361354af076b44f6254eeaab7a4600e2012a9d9fb66154ad6ed6e16725c2",
+        "src/soutui_image/stage_f_outputs.py": "ded2bfd3f74bbabbf2dc40f4825dceb05243faea67669deba9bb803409f1b92d",
+        "tests/test_stage_f_outputs.py": "da3d4e17cb7b2025a7141b942975955f06820999de3b95f68b7ec1f625b59a36",
+        "src/soutui_image/pipeline.py": "d0717e04db45afecc33e0ff2b2dbab2ee7201f855d4f4e0a5503fba14fc0b83c",
+        "src/soutui_image/desktop_app.py": "3db93896bcb851e22208613b2da86b430939ca46a8c28665c5ca3553237e8cfe",
+        "src/soutui_image/update_config.py": "fadfd1d2fd327d8097bd1386c99a9eaa5cb0d4f71f87524be1116e72c40eedcc",
+        "src/soutui_image/streaming_pipeline.py": "fd33d5753dd3a96b09decd6ec351441fed8dadd960691085eedbf4563515a7b4",
+        "tests/test_streaming_pipeline.py": "463f1a5807e8286f7f148bfd2bcc467d9b29f183c1538c23f953dc3d7774d343",
+        "tests/test_generation_stream_identity.py": "512ea7192acea5876adaa2a5341f0ce79ca1901b11560925448a46ff17f5292c"
+      },
+      "final_review_note": "进度日志/通知失败后停止新增工作，排空已在途审核并保存；保留首个业务错误，四个异常分支检查通过。",
+      "revisions": [
+        {
+          "date": "2026-11-04",
+          "reason": "用户截图报WinError5并要求处理；本地记录保存可恢复，不重复提交后台任务。",
+          "scope": "164项检查含5项真实Win32文件占用测试；现场既有任务GET核对及记录恢复、0.2.7 GUI。",
+          "previous_files": {
+            "pyproject.toml": "cb3ef83ce4d28aa4ad65e13dbc41801d41abebb5e381dac35847dfa1719a310f",
+            "src/soutui_image/stage_d_web_generation.py": "46e5bcddd8c3c2eb8e07dd3721acd1b01690933997774dd06d34e3c77f523b06",
+            "src/soutui_image/review_group_state.py": "31d1443658c9a487bbc0ab86d45e4af9cd699c5697ed26f53dae4326e3b24366",
+            "src/soutui_image/stage_f_outputs.py": "094abebd5ac8decc24de822f98a0a2116d9c04cf2771104a099eae5181b5aee2",
+            "src/soutui_image/pipeline.py": "8d5e5432d125f3442983a869d0c515d9c4c1ae4f41f5628077bb55ba333955c7",
+            "src/soutui_image/update_config.py": "7acecb44b96a948c63e9e1d3a031b5e8a1431ac6c467d56be5608e4647b89671"
+          },
+          "evidence": [
+            "validation/public_handoff/windows_io_027.json"
+          ],
+          "limitations": [
+            "异常日志无法确定具体持锁进程；GUI及审核读取是可复现的触发条件，安全软件亦可能造成短时占用。",
+            "3秒内只重试本地文件替换；永久权限或持续占用仍会报错并保留原件及候选，不能无限等待。",
+            "本轮不改变或重验视觉准确率，不承诺模型审核耗时或整批提速比例。",
+            "本机源码交付，未发布EXE/ZIP或GitHub Release。"
+          ]
+        }
+      ]
+    },
+    "WINDOWS_IO_027": {
+      "status": "verified_scoped",
+      "scope": "修复Windows短暂文件占用导致任务/审核报告/组汇总/输出清单原子替换失败；只读恢复当前已提交补生任务。",
+      "evidence": [
+        "validation/public_handoff/windows_io_027.json"
+      ],
+      "limitations": [
+        "异常日志无法确定具体持锁进程；GUI及审核读取是可复现的触发条件，安全软件亦可能造成短时占用。",
+        "3秒内只重试本地文件替换；永久权限或持续占用仍会报错并保留原件及候选，不能无限等待。",
+        "本轮不改变或重验视觉准确率，不承诺模型审核耗时或整批提速比例。",
+        "本机源码交付，未发布EXE/ZIP或GitHub Release。"
+      ],
+      "files": {
+        "pyproject.toml": "7373e02029e78421c89be5d0571a46ee62ea75bb3de647d4d99f659c1d1c1497",
+        "src/soutui_image/stage_d_web_generation.py": "c6caa8c0f4ace6d0638d5207da8e92d04d0310de3c04f3c12b8524247e0f7c9e",
+        "tests/test_stage_d_generation.py": "480ebe60a2449bc2ab87dcf505ca3d4987025bfa4ec871a3511d8a1834663aca",
+        "src/soutui_image/review_group_state.py": "5c86dbc2770de7ceeb856d1c4048312a5a68636ddb79d56b900057465ff13052",
+        "src/soutui_image/stage_f_outputs.py": "ded2bfd3f74bbabbf2dc40f4825dceb05243faea67669deba9bb803409f1b92d",
+        "src/soutui_image/pipeline.py": "d0717e04db45afecc33e0ff2b2dbab2ee7201f855d4f4e0a5503fba14fc0b83c",
+        "src/soutui_image/update_config.py": "fadfd1d2fd327d8097bd1386c99a9eaa5cb0d4f71f87524be1116e72c40eedcc",
+        "src/soutui_image/atomic_json.py": "21962eb17f9ee7a1f5760ed9f3a8c40b43db8d9923ca036662631bba336a72f1",
+        "tests/test_atomic_json.py": "e63033925002cc094f7c208b434f7b6b6c0eaccc0554ee4d88007f5b9c7b8097"
       }
     }
   },

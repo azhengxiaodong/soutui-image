@@ -1,0 +1,469 @@
+{
+  "status": "needs_review",
+  "policy_version": "2026-11-04.1",
+  "rules_sha256": "942007e22643a8063f315685e08226b7df32e804f0c5ed99e5a185e0a8ff8681",
+  "models": {
+    "gpt-6.1-sol": {
+      "profile": {
+        "schema_version": 1,
+        "model": "gpt-6.1-sol",
+        "locator_effort": "medium",
+        "body_effort": "high",
+        "button_effort": "high",
+        "legacy": false
+      },
+      "samples_finished": 7,
+      "matches": 7,
+      "verified": 6,
+      "by_stage": {
+        "locator": {
+          "attempts": 7,
+          "seconds_sum": 265.99,
+          "missing_timing_count": 0,
+          "tokens_used_sum": 150048,
+          "missing_token_count": 0
+        },
+        "first": {
+          "attempts": 7,
+          "seconds_sum": 581.12,
+          "missing_timing_count": 0,
+          "tokens_used_sum": 224558,
+          "missing_token_count": 0
+        },
+        "verification": {
+          "attempts": 3,
+          "seconds_sum": 252.67,
+          "missing_timing_count": 0,
+          "tokens_used_sum": 90273,
+          "missing_token_count": 0
+        },
+        "buttons": {
+          "attempts": 3,
+          "seconds_sum": 132.5,
+          "missing_timing_count": 0,
+          "tokens_used_sum": 80934,
+          "missing_token_count": 0
+        }
+      },
+      "cases": [
+        {
+          "case_id": "case_001",
+          "expected": "reject",
+          "actual": "reject",
+          "matched": true,
+          "verified": true,
+          "execution_seconds": 120.243,
+          "inputs_unchanged": true,
+          "configuration_verified": true,
+          "critical_comparisons": {
+            "袖口边缘结构": [
+              "match"
+            ],
+            "门襟层次与边线": [
+              "mismatch"
+            ],
+            "扣位边缘与凸片": [
+              "match"
+            ],
+            "裤长与脚踝位置": [
+              "match"
+            ]
+          }
+        },
+        {
+          "case_id": "case_002",
+          "expected": "reject",
+          "actual": "reject",
+          "matched": true,
+          "verified": true,
+          "execution_seconds": 133.957,
+          "inputs_unchanged": true,
+          "configuration_verified": true,
+          "critical_comparisons": {
+            "袖口边缘结构": [
+              "match"
+            ],
+            "门襟层次与边线": [
+              "mismatch"
+            ],
+            "扣位边缘与凸片": [
+              "match"
+            ],
+            "裤长与脚踝位置": [
+              "not_applicable"
+            ]
+          }
+        },
+        {
+          "case_id": "case_003",
+          "expected": "reject",
+          "actual": "reject",
+          "matched": true,
+          "verified": true,
+          "execution_seconds": 110.635,
+          "inputs_unchanged": true,
+          "configuration_verified": true,
+          "critical_comparisons": {
+            "袖口边缘结构": [
+              "match"
+            ],
+            "门襟层次与边线": [
+              "mismatch"
+            ],
+            "扣位边缘与凸片": [
+              "match"
+            ],
+            "裤长与脚踝位置": [
+              "match"
+            ]
+          }
+        },
+        {
+          "case_id": "case_004",
+          "expected": "pass",
+          "actual": "pass",
+          "matched": true,
+          "verified": true,
+          "execution_seconds": 184.259,
+          "inputs_unchanged": true,
+          "configuration_verified": true,
+          "critical_comparisons": {
+            "袖口边缘结构": [
+              "match",
+              "match"
+            ],
+            "门襟层次与边线": [
+              "match",
+              "match"
+            ],
+            "扣位边缘与凸片": [
+              "match",
+              "match"
+            ],
+            "裤长与脚踝位置": [
+              "match",
+              "match"
+            ]
+          }
+        },
+        {
+          "case_id": "case_005",
+          "expected": "reject",
+          "actual": "reject",
+          "matched": true,
+          "verified": false,
+          "execution_seconds": 131.899,
+          "inputs_unchanged": true,
+          "configuration_verified": true,
+          "critical_comparisons": {
+            "袖口边缘结构": [
+              "mismatch"
+            ],
+            "门襟层次与边线": [
+              "mismatch"
+            ],
+            "扣位边缘与凸片": [
+              "match"
+            ],
+            "裤长与脚踝位置": [
+              "not_applicable"
+            ]
+          }
+        },
+        {
+          "case_id": "case_006",
+          "expected": "pass",
+          "actual": "pass",
+          "matched": true,
+          "verified": true,
+          "execution_seconds": 216.043,
+          "inputs_unchanged": true,
+          "configuration_verified": true,
+          "critical_comparisons": {
+            "袖口边缘结构": [
+              "match",
+              "match"
+            ],
+            "门襟层次与边线": [
+              "match",
+              "match"
+            ],
+            "扣位边缘与凸片": [
+              "match",
+              "match"
+            ],
+            "裤长与脚踝位置": [
+              "not_applicable",
+              "not_applicable"
+            ]
+          }
+        },
+        {
+          "case_id": "case_007",
+          "expected": "pass",
+          "actual": "pass",
+          "matched": true,
+          "verified": true,
+          "execution_seconds": 207.853,
+          "inputs_unchanged": true,
+          "configuration_verified": true,
+          "critical_comparisons": {
+            "袖口边缘结构": [
+              "match",
+              "match"
+            ],
+            "门襟层次与边线": [
+              "match",
+              "match"
+            ],
+            "扣位边缘与凸片": [
+              "match",
+              "match"
+            ],
+            "裤长与脚踝位置": [
+              "not_applicable",
+              "not_applicable"
+            ]
+          }
+        }
+      ],
+      "logged_tokens_used_sum": 545813,
+      "missing_token_count": 0
+    },
+    "gpt-6.1-terra": {
+      "profile": {
+        "schema_version": 1,
+        "model": "gpt-6.1-terra",
+        "locator_effort": "medium",
+        "body_effort": "high",
+        "button_effort": "high",
+        "legacy": false
+      },
+      "samples_finished": 7,
+      "matches": 7,
+      "verified": 7,
+      "by_stage": {
+        "locator": {
+          "attempts": 7,
+          "seconds_sum": 134.29,
+          "missing_timing_count": 0,
+          "tokens_used_sum": 124026,
+          "missing_token_count": 0
+        },
+        "first": {
+          "attempts": 7,
+          "seconds_sum": 224.71,
+          "missing_timing_count": 0,
+          "tokens_used_sum": 180346,
+          "missing_token_count": 0
+        },
+        "verification": {
+          "attempts": 3,
+          "seconds_sum": 121.28,
+          "missing_timing_count": 0,
+          "tokens_used_sum": 87000,
+          "missing_token_count": 0
+        },
+        "buttons": {
+          "attempts": 3,
+          "seconds_sum": 84.84,
+          "missing_timing_count": 0,
+          "tokens_used_sum": 74467,
+          "missing_token_count": 0
+        }
+      },
+      "cases": [
+        {
+          "case_id": "case_001",
+          "expected": "reject",
+          "actual": "reject",
+          "matched": true,
+          "verified": true,
+          "execution_seconds": 51.331,
+          "inputs_unchanged": true,
+          "configuration_verified": true,
+          "critical_comparisons": {
+            "袖口边缘结构": [
+              "match"
+            ],
+            "门襟层次与边线": [
+              "mismatch"
+            ],
+            "扣位边缘与凸片": [
+              "match"
+            ],
+            "裤长与脚踝位置": [
+              "match"
+            ]
+          }
+        },
+        {
+          "case_id": "case_002",
+          "expected": "reject",
+          "actual": "reject",
+          "matched": true,
+          "verified": true,
+          "execution_seconds": 53.901,
+          "inputs_unchanged": true,
+          "configuration_verified": true,
+          "critical_comparisons": {
+            "袖口边缘结构": [
+              "match"
+            ],
+            "门襟层次与边线": [
+              "mismatch"
+            ],
+            "扣位边缘与凸片": [
+              "match"
+            ],
+            "裤长与脚踝位置": [
+              "not_applicable"
+            ]
+          }
+        },
+        {
+          "case_id": "case_003",
+          "expected": "reject",
+          "actual": "reject",
+          "matched": true,
+          "verified": true,
+          "execution_seconds": 55.185,
+          "inputs_unchanged": true,
+          "configuration_verified": true,
+          "critical_comparisons": {
+            "袖口边缘结构": [
+              "match"
+            ],
+            "门襟层次与边线": [
+              "mismatch"
+            ],
+            "扣位边缘与凸片": [
+              "match"
+            ],
+            "裤长与脚踝位置": [
+              "match"
+            ]
+          }
+        },
+        {
+          "case_id": "case_004",
+          "expected": "pass",
+          "actual": "pass",
+          "matched": true,
+          "verified": true,
+          "execution_seconds": 68.53,
+          "inputs_unchanged": true,
+          "configuration_verified": true,
+          "critical_comparisons": {
+            "袖口边缘结构": [
+              "match",
+              "match"
+            ],
+            "门襟层次与边线": [
+              "match",
+              "match"
+            ],
+            "扣位边缘与凸片": [
+              "match",
+              "match"
+            ],
+            "裤长与脚踝位置": [
+              "match",
+              "match"
+            ]
+          }
+        },
+        {
+          "case_id": "case_005",
+          "expected": "reject",
+          "actual": "reject",
+          "matched": true,
+          "verified": true,
+          "execution_seconds": 51.297,
+          "inputs_unchanged": true,
+          "configuration_verified": true,
+          "critical_comparisons": {
+            "袖口边缘结构": [
+              "match"
+            ],
+            "门襟层次与边线": [
+              "mismatch"
+            ],
+            "扣位边缘与凸片": [
+              "match"
+            ],
+            "裤长与脚踝位置": [
+              "not_applicable"
+            ]
+          }
+        },
+        {
+          "case_id": "case_006",
+          "expected": "pass",
+          "actual": "pass",
+          "matched": true,
+          "verified": true,
+          "execution_seconds": 101.247,
+          "inputs_unchanged": true,
+          "configuration_verified": true,
+          "critical_comparisons": {
+            "袖口边缘结构": [
+              "match",
+              "match"
+            ],
+            "门襟层次与边线": [
+              "match",
+              "match"
+            ],
+            "扣位边缘与凸片": [
+              "match",
+              "match"
+            ],
+            "裤长与脚踝位置": [
+              "not_applicable",
+              "not_applicable"
+            ]
+          }
+        },
+        {
+          "case_id": "case_007",
+          "expected": "pass",
+          "actual": "pass",
+          "matched": true,
+          "verified": true,
+          "execution_seconds": 104.288,
+          "inputs_unchanged": true,
+          "configuration_verified": true,
+          "critical_comparisons": {
+            "袖口边缘结构": [
+              "match",
+              "match"
+            ],
+            "门襟层次与边线": [
+              "match",
+              "match"
+            ],
+            "扣位边缘与凸片": [
+              "match",
+              "match"
+            ],
+            "裤长与脚踝位置": [
+              "not_applicable",
+              "not_applicable"
+            ]
+          }
+        }
+      ],
+      "logged_tokens_used_sum": 465839,
+      "missing_token_count": 0
+    }
+  },
+  "inputs_unchanged": true,
+  "new_generation_submissions": 0,
+  "token_note": "仅独立transport日志tokens used，不重复计上层副本；缺计数不按0；未细分输入/缓存/输出/推理，不等同账单或套餐额度。",
+  "scope": "仅所给人工样本的完整审核与真实调用测量；不代表跨款准确率，也不是新生图整批速度实测。",
+  "notes": [
+    "Sol整图7/7，但case_005袖口被误判，严格专项6/7，未完整视觉验收；不掩盖或用人工覆盖。",
+    "Terra本次同款7/7通过；不代表跨款准确率或完整新生图批次耗时。"
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "date": "2026-11-04",
+  "version": "0.2.11",
+  "policy_version": "2026-11-04.1",
+  "status": "control_gui_and_real_readonly_verified_live_regeneration_pending",
+  "authorized_behavior": {
+    "remove_header_and_old_options_row": true,
+    "large_checkmark_and_model_dropdown_between_start_and_saved_review": true,
+    "resolution_on_next_row": true,
+    "manual_regeneration_threshold": 3,
+    "threshold_uses_actual_valid_file_count": true,
+    "manual_regeneration_review_enabled": false,
+    "reuse_original_template_and_five_references": true,
+    "reuse_original_resolution": true,
+    "one_round_per_click": true,
+    "manual_regeneration_may_exceed_three": true,
+    "original_automatic_three_round_limit_unchanged": true,
+    "startup_defaults_unchanged": true
+  },
+  "tests": {
+    "tests_run": 272,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "success": true,
+    "scope": "现有模块规则和编排控制检查；真实网站与图片审核另见联调证据"
+  },
+  "targeted_checks": {
+    "inventory": 5,
+    "regeneration": 6,
+    "desktop": 21
+  },
+  "isolated_gui": {
+    "scope": "actual isolated Tk window; background/site/model actions disabled",
+    "header_block_removed": true,
+    "old_options_row_exists": false,
+    "control_x_positions": {
+      "start_button": 39,
+      "review_check": 183,
+      "model_button": 267,
+      "recheck_button": 411,
+      "regenerate_button": 538
+    },
+    "resolution_below_start": true,
+    "indicator_pixels": 26,
+    "checked": true,
+    "model": "gpt-6.1-terra",
+    "group9_bbox": [
+      2,
+      255,
+      581,
+      28
+    ],
+    "log_height": 169,
+    "generation_started": false,
+    "minimum_group9_visible": true,
+    "minimum_regenerate_visible": true
+  },
+  "real_read_only": {
+    "actual_site_get": true,
+    "products": [
+      {
+        "product_index": 1,
+        "resolution": "2K",
+        "counts": [
+          1,
+          3,
+          2,
+          3,
+          3,
+          1,
+          1,
+          6,
+          1
+        ],
+        "eligible_rows": [
+          1,
+          3,
+          6,
+          7,
+          9
+        ],
+        "drafts": 5,
+        "original_references_and_template_exact": true,
+        "remote_original_hash_verified": true
+      },
+      {
+        "product_index": 2,
+        "resolution": "2K",
+        "counts": [
+          0,
+          3,
+          3,
+          3,
+          4,
+          4,
+          5,
+          4,
+          4
+        ],
+        "eligible_rows": [
+          1
+        ],
+        "drafts": 1,
+        "original_references_and_template_exact": true,
+        "remote_original_hash_verified": true
+      }
+    ],
+    "generation_posts": 0,
+    "image_uploads": 0,
+    "model_calls": 0,
+    "business_files_unchanged": 8408,
+    "images_unchanged": 53,
+    "scope": "真实站点收藏/价格/原图GET核对、真实结果文件夹盘点与请求草稿；没有真实补生或新图产出验收"
+  },
+  "changed_from_0210": {
+    "src/soutui_image/desktop_app.py": {
+      "before": "8beed73ec67a310352a9af3b59f5283f2acea9d0f5dc06c79f8faceabf2311db",
+      "after": "fe25c0b745133dc225cf4969a1df722f90b6db004ff997c071b0d29e129c15ef"
+    },
+    "src/soutui_image/pipeline.py": {
+      "before": "8f59b6684d89456d6990e87ed68d8e1dbf886b478967fe366dfda0b06c838ae9",
+      "after": "6aedad9d8c9c3bc9bf047873b80d96bb21b08942d9cf59ff410e11b5977b8c63"
+    },
+    "src/soutui_image/saved_images.py": {
+      "before": "b7ea62b6153d550be6252986bde320185ec4bda31b5bada1ae74b83f15e08ce0",
+      "after": "cf1276b0a9739aaf065fa0e521cff1d6905062d426f622619f8eb3e6a9e249a6"
+    },
+    "src/soutui_image/update_config.py": {
+      "before": "60a9d5abe2b240b61bf1d1c20fca864f66100f9bbe74f638906cb517c9ab844d",
+      "after": "b040b3b91e1f1eea757486ddf3c735ac64512c1b1b09a5f6bd19a8bb6a17bf9d"
+    },
+    "tests/test_workbench_options.py": {
+      "before": "a65f76f73a4ebb017ef11bf699d37549a0bb7b440d6c20188405110056386e42",
+      "after": "81d0792dbeac1417c5f2d0fb499add9f83a32180d71b93ff194fd4c5ec88e4e5"
+    },
+    "pyproject.toml": {
+      "before": "c27ff186b3db40f71bf730791a3c1c53adf00a8f8adc0f7ed4fe258ecace82a6",
+      "after": "e2b2afb532963270d1e0f510bb1503aad3c6acd397e0b54244f045f6d5b48d5c"
+    }
+  },
+  "new_files": {
+    "src/soutui_image/manual_regeneration.py": "5f1c3406a21076137fa50ca0c7af64ab67ff2c63e76f58f12cb87f2bf814f3e1",
+    "src/soutui_image/regeneration_files.py": "73569668612e3007f4f073d32926cb102c5ab96274b5d1c9b413bf1f2e3d1dff",
+    "tests/test_manual_regeneration.py": "cb8de919544dae7ddac9ce595499b4c729e79a0857b2056e05230a18bf2b1383",
+    "tests/test_regeneration_files.py": "aa3dd1d21c8858e5c8a5e948a17d93d3da524c67e24637f2a018b0dd1e8af98a"
+  },
+  "baseline": {
+    "frozen_manifest_replaced": false,
+    "frozen_manifest_sha256": "d4ab09aec4d56c76d011ba4c96a6157e6dc19a4fab35387e9e4d7a6b736d3a2b",
+    "previous_candidate_report": "validation/public_handoff/startup_0210.json",
+    "previous_candidate_report_sha256": "29f9d25b758f0ab5e36456c1fc05238e0046c7294aa074d22d0c1f82a782c54d",
+    "unrelated_source_files_unchanged": 87
+  },
+  "business_integrity": {
+    "existing_task_and_review_output_files_unchanged": 8408,
+    "original_and_saved_images_unchanged": 53
+  },
+  "cleanup": {
+    "files_removed": 6,
+    "bytes_removed": 61755,
+    "old_installed_metadata_removed": "0.2.10",
+    "current_installed_version": "0.2.11",
+    "old_program_packages_found": 0
+  },
+  "limits": [
+    "No generation POST, image upload or model call this turn.",
+    "Actual website/read-only template, price, original hash and request draft verification is not live regeneration output acceptance.",
+    "Prior Sol sleeve limitation and actual 4K generation pending scope are unchanged.",
+    "Existing user window not restarted; changes apply on next launch."
+  ]
+}

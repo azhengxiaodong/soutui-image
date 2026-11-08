@@ -107,6 +107,9 @@ def main():
             preview.unlink()
         print(json.dumps({"status": "no_changes", "file_count": 0, "bytes": 0}))
         return
+    # 公开克隆不携带本机维护目录；先安全创建日志目录，预览和实际清理均可首次运行。
+    checked(output)
+    output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if args.apply:
         # 全部预检后再开始删除，数据文件和当前程序目录从不进入清理目标。

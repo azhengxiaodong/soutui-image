@@ -6,7 +6,8 @@ import tempfile
 import unittest
 from dataclasses import replace
 from pathlib import Path
-from unittest.mock import patch
+from types import SimpleNamespace
+from unittest.mock import Mock, patch
 
 from soutui_image.stage_a_inputs import ProductInput
 from soutui_image.stage_b_web_upload import OSS_HOST, WebUploadReceipt
@@ -100,7 +101,8 @@ class GenerationTaskTests(unittest.TestCase):
     def test_generation_watch_timeout_preserves_record_without_resubmission(self):
         item = {**self.record, "state": "generating"}
         with patch("soutui_image.stage_d_web_generation.query_job", return_value=item) as queried, \
-                patch("soutui_image.stage_d_web_generation.time.monotonic", side_effect=[0, 2]):
+                patch("soutui_image.stage_d_web_generation.time",
+                      SimpleNamespace(monotonic=Mock(side_effect=[0, 2]))):
             with self.assertRaises(TimeoutError):
                 watch_job(self.path, object(), timeout=1)
             self.assertEqual(queried.call_count, 1)
